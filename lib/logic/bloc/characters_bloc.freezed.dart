@@ -515,10 +515,10 @@ class __$$SuccessGetAllCharactersImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? list = freezed,
+    Object? list = null,
   }) {
     return _then(_$SuccessGetAllCharactersImpl(
-      freezed == list
+      null == list
           ? _value.list
           : list // ignore: cast_nullable_to_non_nullable
               as CharactersAllModel,
@@ -544,12 +544,11 @@ class _$SuccessGetAllCharactersImpl implements _SuccessGetAllCharacters {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessGetAllCharactersImpl &&
-            const DeepCollectionEquality().equals(other.list, list));
+            (identical(other.list, list) || other.list == list));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(list));
+  int get hashCode => Object.hash(runtimeType, list);
 
   /// Create a copy of CharactersState
   /// with the given fields replaced by the non-null parameter values.

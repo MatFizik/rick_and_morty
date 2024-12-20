@@ -36,7 +36,7 @@ class _CharactersService implements CharactersService {
     )
         .compose(
           _dio.options,
-          'characters',
+          'character',
           queryParameters: queryParameters,
           data: _data,
         )

@@ -13,7 +13,7 @@ part 'characters_state.dart';
 class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
   final CharactersRepository repository;
 
-  CharactersBloc(this.repository) : super(_Initial()) {
+  CharactersBloc(this.repository) : super(const _Initial()) {
     on<CharactersEvent>(_onEvent);
   }
 
