@@ -11,7 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-
+  shimmer: ^3.0.0
+  
   flutter_bloc: ^8.1.6
   dio: ^5.7.0
   retrofit: ^4.4.1
