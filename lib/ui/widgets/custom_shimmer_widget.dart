@@ -109,23 +109,17 @@ class ShimmerImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Shimmer.fromColors(
-          baseColor: AppColors.darkBgPrimary,
-          highlightColor: AppColors.darkBgSecondary,
-          child: Container(
-            height: height,
-            width: width,
-            margin: const EdgeInsets.symmetric(vertical: 8.0),
-            padding: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              color: AppColors.darkBgSecondary,
-              borderRadius: BorderRadius.circular(100),
-            ),
-          ),
+    return Shimmer.fromColors(
+      baseColor: AppColors.darkBgPrimary,
+      highlightColor: AppColors.darkBgSecondary,
+      child: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          color: AppColors.darkBgSecondary,
+          borderRadius: BorderRadius.circular(100),
         ),
-      ],
+      ),
     );
   }
 }

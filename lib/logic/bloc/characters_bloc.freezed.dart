@@ -16,19 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CharactersEvent {
+  int? get page => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getAllCharacters,
+    required TResult Function(int? page) getAllCharacters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAllCharacters,
+    TResult? Function(int? page)? getAllCharacters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getAllCharacters,
+    TResult Function(int? page)? getAllCharacters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +49,12 @@ mixin _$CharactersEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Create a copy of CharactersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $CharactersEventCopyWith<CharactersEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -55,6 +62,8 @@ abstract class $CharactersEventCopyWith<$Res> {
   factory $CharactersEventCopyWith(
           CharactersEvent value, $Res Function(CharactersEvent) then) =
       _$CharactersEventCopyWithImpl<$Res, CharactersEvent>;
+  @useResult
+  $Res call({int? page});
 }
 
 /// @nodoc
@@ -69,13 +78,29 @@ class _$CharactersEventCopyWithImpl<$Res, $Val extends CharactersEvent>
 
   /// Create a copy of CharactersEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = freezed,
+  }) {
+    return _then(_value.copyWith(
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$GetAllCharactersImplCopyWith<$Res> {
+abstract class _$$GetAllCharactersImplCopyWith<$Res>
+    implements $CharactersEventCopyWith<$Res> {
   factory _$$GetAllCharactersImplCopyWith(_$GetAllCharactersImpl value,
           $Res Function(_$GetAllCharactersImpl) then) =
       __$$GetAllCharactersImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? page});
 }
 
 /// @nodoc
@@ -88,51 +113,77 @@ class __$$GetAllCharactersImplCopyWithImpl<$Res>
 
   /// Create a copy of CharactersEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = freezed,
+  }) {
+    return _then(_$GetAllCharactersImpl(
+      freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetAllCharactersImpl implements _GetAllCharacters {
-  const _$GetAllCharactersImpl();
+  const _$GetAllCharactersImpl(this.page);
+
+  @override
+  final int? page;
 
   @override
   String toString() {
-    return 'CharactersEvent.getAllCharacters()';
+    return 'CharactersEvent.getAllCharacters(page: $page)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetAllCharactersImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$GetAllCharactersImpl &&
+            (identical(other.page, page) || other.page == page));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, page);
+
+  /// Create a copy of CharactersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetAllCharactersImplCopyWith<_$GetAllCharactersImpl> get copyWith =>
+      __$$GetAllCharactersImplCopyWithImpl<_$GetAllCharactersImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getAllCharacters,
+    required TResult Function(int? page) getAllCharacters,
   }) {
-    return getAllCharacters();
+    return getAllCharacters(page);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAllCharacters,
+    TResult? Function(int? page)? getAllCharacters,
   }) {
-    return getAllCharacters?.call();
+    return getAllCharacters?.call(page);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getAllCharacters,
+    TResult Function(int? page)? getAllCharacters,
     required TResult orElse(),
   }) {
     if (getAllCharacters != null) {
-      return getAllCharacters();
+      return getAllCharacters(page);
     }
     return orElse();
   }
@@ -167,7 +218,17 @@ class _$GetAllCharactersImpl implements _GetAllCharacters {
 }
 
 abstract class _GetAllCharacters implements CharactersEvent {
-  const factory _GetAllCharacters() = _$GetAllCharactersImpl;
+  const factory _GetAllCharacters(final int? page) = _$GetAllCharactersImpl;
+
+  @override
+  int? get page;
+
+  /// Create a copy of CharactersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetAllCharactersImplCopyWith<_$GetAllCharactersImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -178,6 +239,9 @@ mixin _$CharactersState {
     required TResult Function() loadingGetAllCharacters,
     required TResult Function(CharactersAllModel list) successGetAllCharacters,
     required TResult Function(dynamic err) errorGetAllCharacters,
+    required TResult Function() loadingGetMoreCharacters,
+    required TResult Function(CharactersAllModel list) successGetMoreCharacters,
+    required TResult Function(dynamic err) errorGetMoreCharacters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -186,6 +250,9 @@ mixin _$CharactersState {
     TResult? Function()? loadingGetAllCharacters,
     TResult? Function(CharactersAllModel list)? successGetAllCharacters,
     TResult? Function(dynamic err)? errorGetAllCharacters,
+    TResult? Function()? loadingGetMoreCharacters,
+    TResult? Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult? Function(dynamic err)? errorGetMoreCharacters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -194,34 +261,51 @@ mixin _$CharactersState {
     TResult Function()? loadingGetAllCharacters,
     TResult Function(CharactersAllModel list)? successGetAllCharacters,
     TResult Function(dynamic err)? errorGetAllCharacters,
+    TResult Function()? loadingGetMoreCharacters,
+    TResult Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult Function(dynamic err)? errorGetMoreCharacters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_LoadingGetAllCharactets value)
+    required TResult Function(_LoadingGetAllCharacters value)
         loadingGetAllCharacters,
     required TResult Function(_SuccessGetAllCharacters value)
         successGetAllCharacters,
     required TResult Function(_ErrorGetAllCharacters value)
         errorGetAllCharacters,
+    required TResult Function(_LoadingGetMoreCharactets value)
+        loadingGetMoreCharacters,
+    required TResult Function(_SuccessGetMoreCharacters value)
+        successGetMoreCharacters,
+    required TResult Function(_ErrorGetMoreCharacters value)
+        errorGetMoreCharacters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_LoadingGetAllCharactets value)? loadingGetAllCharacters,
+    TResult? Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
     TResult? Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
     TResult? Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult? Function(_LoadingGetMoreCharactets value)?
+        loadingGetMoreCharacters,
+    TResult? Function(_SuccessGetMoreCharacters value)?
+        successGetMoreCharacters,
+    TResult? Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_LoadingGetAllCharactets value)? loadingGetAllCharacters,
+    TResult Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
     TResult Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
     TResult Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreCharacters,
+    TResult Function(_SuccessGetMoreCharacters value)? successGetMoreCharacters,
+    TResult Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -293,6 +377,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loadingGetAllCharacters,
     required TResult Function(CharactersAllModel list) successGetAllCharacters,
     required TResult Function(dynamic err) errorGetAllCharacters,
+    required TResult Function() loadingGetMoreCharacters,
+    required TResult Function(CharactersAllModel list) successGetMoreCharacters,
+    required TResult Function(dynamic err) errorGetMoreCharacters,
   }) {
     return initial();
   }
@@ -304,6 +391,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loadingGetAllCharacters,
     TResult? Function(CharactersAllModel list)? successGetAllCharacters,
     TResult? Function(dynamic err)? errorGetAllCharacters,
+    TResult? Function()? loadingGetMoreCharacters,
+    TResult? Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult? Function(dynamic err)? errorGetMoreCharacters,
   }) {
     return initial?.call();
   }
@@ -315,6 +405,9 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loadingGetAllCharacters,
     TResult Function(CharactersAllModel list)? successGetAllCharacters,
     TResult Function(dynamic err)? errorGetAllCharacters,
+    TResult Function()? loadingGetMoreCharacters,
+    TResult Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult Function(dynamic err)? errorGetMoreCharacters,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -327,12 +420,18 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_LoadingGetAllCharactets value)
+    required TResult Function(_LoadingGetAllCharacters value)
         loadingGetAllCharacters,
     required TResult Function(_SuccessGetAllCharacters value)
         successGetAllCharacters,
     required TResult Function(_ErrorGetAllCharacters value)
         errorGetAllCharacters,
+    required TResult Function(_LoadingGetMoreCharactets value)
+        loadingGetMoreCharacters,
+    required TResult Function(_SuccessGetMoreCharacters value)
+        successGetMoreCharacters,
+    required TResult Function(_ErrorGetMoreCharacters value)
+        errorGetMoreCharacters,
   }) {
     return initial(this);
   }
@@ -341,9 +440,14 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_LoadingGetAllCharactets value)? loadingGetAllCharacters,
+    TResult? Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
     TResult? Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
     TResult? Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult? Function(_LoadingGetMoreCharactets value)?
+        loadingGetMoreCharacters,
+    TResult? Function(_SuccessGetMoreCharacters value)?
+        successGetMoreCharacters,
+    TResult? Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
   }) {
     return initial?.call(this);
   }
@@ -352,9 +456,12 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_LoadingGetAllCharactets value)? loadingGetAllCharacters,
+    TResult Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
     TResult Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
     TResult Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreCharacters,
+    TResult Function(_SuccessGetMoreCharacters value)? successGetMoreCharacters,
+    TResult Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -369,20 +476,20 @@ abstract class _Initial implements CharactersState {
 }
 
 /// @nodoc
-abstract class _$$LoadingGetAllCharactetsImplCopyWith<$Res> {
-  factory _$$LoadingGetAllCharactetsImplCopyWith(
-          _$LoadingGetAllCharactetsImpl value,
-          $Res Function(_$LoadingGetAllCharactetsImpl) then) =
-      __$$LoadingGetAllCharactetsImplCopyWithImpl<$Res>;
+abstract class _$$LoadingGetAllCharactersImplCopyWith<$Res> {
+  factory _$$LoadingGetAllCharactersImplCopyWith(
+          _$LoadingGetAllCharactersImpl value,
+          $Res Function(_$LoadingGetAllCharactersImpl) then) =
+      __$$LoadingGetAllCharactersImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingGetAllCharactetsImplCopyWithImpl<$Res>
-    extends _$CharactersStateCopyWithImpl<$Res, _$LoadingGetAllCharactetsImpl>
-    implements _$$LoadingGetAllCharactetsImplCopyWith<$Res> {
-  __$$LoadingGetAllCharactetsImplCopyWithImpl(
-      _$LoadingGetAllCharactetsImpl _value,
-      $Res Function(_$LoadingGetAllCharactetsImpl) _then)
+class __$$LoadingGetAllCharactersImplCopyWithImpl<$Res>
+    extends _$CharactersStateCopyWithImpl<$Res, _$LoadingGetAllCharactersImpl>
+    implements _$$LoadingGetAllCharactersImplCopyWith<$Res> {
+  __$$LoadingGetAllCharactersImplCopyWithImpl(
+      _$LoadingGetAllCharactersImpl _value,
+      $Res Function(_$LoadingGetAllCharactersImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of CharactersState
@@ -391,8 +498,8 @@ class __$$LoadingGetAllCharactetsImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingGetAllCharactetsImpl implements _LoadingGetAllCharactets {
-  const _$LoadingGetAllCharactetsImpl();
+class _$LoadingGetAllCharactersImpl implements _LoadingGetAllCharacters {
+  const _$LoadingGetAllCharactersImpl();
 
   @override
   String toString() {
@@ -403,7 +510,7 @@ class _$LoadingGetAllCharactetsImpl implements _LoadingGetAllCharactets {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadingGetAllCharactetsImpl);
+            other is _$LoadingGetAllCharactersImpl);
   }
 
   @override
@@ -416,6 +523,9 @@ class _$LoadingGetAllCharactetsImpl implements _LoadingGetAllCharactets {
     required TResult Function() loadingGetAllCharacters,
     required TResult Function(CharactersAllModel list) successGetAllCharacters,
     required TResult Function(dynamic err) errorGetAllCharacters,
+    required TResult Function() loadingGetMoreCharacters,
+    required TResult Function(CharactersAllModel list) successGetMoreCharacters,
+    required TResult Function(dynamic err) errorGetMoreCharacters,
   }) {
     return loadingGetAllCharacters();
   }
@@ -427,6 +537,9 @@ class _$LoadingGetAllCharactetsImpl implements _LoadingGetAllCharactets {
     TResult? Function()? loadingGetAllCharacters,
     TResult? Function(CharactersAllModel list)? successGetAllCharacters,
     TResult? Function(dynamic err)? errorGetAllCharacters,
+    TResult? Function()? loadingGetMoreCharacters,
+    TResult? Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult? Function(dynamic err)? errorGetMoreCharacters,
   }) {
     return loadingGetAllCharacters?.call();
   }
@@ -438,6 +551,9 @@ class _$LoadingGetAllCharactetsImpl implements _LoadingGetAllCharactets {
     TResult Function()? loadingGetAllCharacters,
     TResult Function(CharactersAllModel list)? successGetAllCharacters,
     TResult Function(dynamic err)? errorGetAllCharacters,
+    TResult Function()? loadingGetMoreCharacters,
+    TResult Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult Function(dynamic err)? errorGetMoreCharacters,
     required TResult orElse(),
   }) {
     if (loadingGetAllCharacters != null) {
@@ -450,12 +566,18 @@ class _$LoadingGetAllCharactetsImpl implements _LoadingGetAllCharactets {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_LoadingGetAllCharactets value)
+    required TResult Function(_LoadingGetAllCharacters value)
         loadingGetAllCharacters,
     required TResult Function(_SuccessGetAllCharacters value)
         successGetAllCharacters,
     required TResult Function(_ErrorGetAllCharacters value)
         errorGetAllCharacters,
+    required TResult Function(_LoadingGetMoreCharactets value)
+        loadingGetMoreCharacters,
+    required TResult Function(_SuccessGetMoreCharacters value)
+        successGetMoreCharacters,
+    required TResult Function(_ErrorGetMoreCharacters value)
+        errorGetMoreCharacters,
   }) {
     return loadingGetAllCharacters(this);
   }
@@ -464,9 +586,14 @@ class _$LoadingGetAllCharactetsImpl implements _LoadingGetAllCharactets {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_LoadingGetAllCharactets value)? loadingGetAllCharacters,
+    TResult? Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
     TResult? Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
     TResult? Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult? Function(_LoadingGetMoreCharactets value)?
+        loadingGetMoreCharacters,
+    TResult? Function(_SuccessGetMoreCharacters value)?
+        successGetMoreCharacters,
+    TResult? Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
   }) {
     return loadingGetAllCharacters?.call(this);
   }
@@ -475,9 +602,12 @@ class _$LoadingGetAllCharactetsImpl implements _LoadingGetAllCharactets {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_LoadingGetAllCharactets value)? loadingGetAllCharacters,
+    TResult Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
     TResult Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
     TResult Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreCharacters,
+    TResult Function(_SuccessGetMoreCharacters value)? successGetMoreCharacters,
+    TResult Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
     required TResult orElse(),
   }) {
     if (loadingGetAllCharacters != null) {
@@ -487,8 +617,8 @@ class _$LoadingGetAllCharactetsImpl implements _LoadingGetAllCharactets {
   }
 }
 
-abstract class _LoadingGetAllCharactets implements CharactersState {
-  const factory _LoadingGetAllCharactets() = _$LoadingGetAllCharactetsImpl;
+abstract class _LoadingGetAllCharacters implements CharactersState {
+  const factory _LoadingGetAllCharacters() = _$LoadingGetAllCharactersImpl;
 }
 
 /// @nodoc
@@ -566,6 +696,9 @@ class _$SuccessGetAllCharactersImpl implements _SuccessGetAllCharacters {
     required TResult Function() loadingGetAllCharacters,
     required TResult Function(CharactersAllModel list) successGetAllCharacters,
     required TResult Function(dynamic err) errorGetAllCharacters,
+    required TResult Function() loadingGetMoreCharacters,
+    required TResult Function(CharactersAllModel list) successGetMoreCharacters,
+    required TResult Function(dynamic err) errorGetMoreCharacters,
   }) {
     return successGetAllCharacters(list);
   }
@@ -577,6 +710,9 @@ class _$SuccessGetAllCharactersImpl implements _SuccessGetAllCharacters {
     TResult? Function()? loadingGetAllCharacters,
     TResult? Function(CharactersAllModel list)? successGetAllCharacters,
     TResult? Function(dynamic err)? errorGetAllCharacters,
+    TResult? Function()? loadingGetMoreCharacters,
+    TResult? Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult? Function(dynamic err)? errorGetMoreCharacters,
   }) {
     return successGetAllCharacters?.call(list);
   }
@@ -588,6 +724,9 @@ class _$SuccessGetAllCharactersImpl implements _SuccessGetAllCharacters {
     TResult Function()? loadingGetAllCharacters,
     TResult Function(CharactersAllModel list)? successGetAllCharacters,
     TResult Function(dynamic err)? errorGetAllCharacters,
+    TResult Function()? loadingGetMoreCharacters,
+    TResult Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult Function(dynamic err)? errorGetMoreCharacters,
     required TResult orElse(),
   }) {
     if (successGetAllCharacters != null) {
@@ -600,12 +739,18 @@ class _$SuccessGetAllCharactersImpl implements _SuccessGetAllCharacters {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_LoadingGetAllCharactets value)
+    required TResult Function(_LoadingGetAllCharacters value)
         loadingGetAllCharacters,
     required TResult Function(_SuccessGetAllCharacters value)
         successGetAllCharacters,
     required TResult Function(_ErrorGetAllCharacters value)
         errorGetAllCharacters,
+    required TResult Function(_LoadingGetMoreCharactets value)
+        loadingGetMoreCharacters,
+    required TResult Function(_SuccessGetMoreCharacters value)
+        successGetMoreCharacters,
+    required TResult Function(_ErrorGetMoreCharacters value)
+        errorGetMoreCharacters,
   }) {
     return successGetAllCharacters(this);
   }
@@ -614,9 +759,14 @@ class _$SuccessGetAllCharactersImpl implements _SuccessGetAllCharacters {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_LoadingGetAllCharactets value)? loadingGetAllCharacters,
+    TResult? Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
     TResult? Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
     TResult? Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult? Function(_LoadingGetMoreCharactets value)?
+        loadingGetMoreCharacters,
+    TResult? Function(_SuccessGetMoreCharacters value)?
+        successGetMoreCharacters,
+    TResult? Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
   }) {
     return successGetAllCharacters?.call(this);
   }
@@ -625,9 +775,12 @@ class _$SuccessGetAllCharactersImpl implements _SuccessGetAllCharacters {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_LoadingGetAllCharactets value)? loadingGetAllCharacters,
+    TResult Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
     TResult Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
     TResult Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreCharacters,
+    TResult Function(_SuccessGetMoreCharacters value)? successGetMoreCharacters,
+    TResult Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
     required TResult orElse(),
   }) {
     if (successGetAllCharacters != null) {
@@ -722,6 +875,9 @@ class _$ErrorGetAllCharactersImpl implements _ErrorGetAllCharacters {
     required TResult Function() loadingGetAllCharacters,
     required TResult Function(CharactersAllModel list) successGetAllCharacters,
     required TResult Function(dynamic err) errorGetAllCharacters,
+    required TResult Function() loadingGetMoreCharacters,
+    required TResult Function(CharactersAllModel list) successGetMoreCharacters,
+    required TResult Function(dynamic err) errorGetMoreCharacters,
   }) {
     return errorGetAllCharacters(err);
   }
@@ -733,6 +889,9 @@ class _$ErrorGetAllCharactersImpl implements _ErrorGetAllCharacters {
     TResult? Function()? loadingGetAllCharacters,
     TResult? Function(CharactersAllModel list)? successGetAllCharacters,
     TResult? Function(dynamic err)? errorGetAllCharacters,
+    TResult? Function()? loadingGetMoreCharacters,
+    TResult? Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult? Function(dynamic err)? errorGetMoreCharacters,
   }) {
     return errorGetAllCharacters?.call(err);
   }
@@ -744,6 +903,9 @@ class _$ErrorGetAllCharactersImpl implements _ErrorGetAllCharacters {
     TResult Function()? loadingGetAllCharacters,
     TResult Function(CharactersAllModel list)? successGetAllCharacters,
     TResult Function(dynamic err)? errorGetAllCharacters,
+    TResult Function()? loadingGetMoreCharacters,
+    TResult Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult Function(dynamic err)? errorGetMoreCharacters,
     required TResult orElse(),
   }) {
     if (errorGetAllCharacters != null) {
@@ -756,12 +918,18 @@ class _$ErrorGetAllCharactersImpl implements _ErrorGetAllCharacters {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_LoadingGetAllCharactets value)
+    required TResult Function(_LoadingGetAllCharacters value)
         loadingGetAllCharacters,
     required TResult Function(_SuccessGetAllCharacters value)
         successGetAllCharacters,
     required TResult Function(_ErrorGetAllCharacters value)
         errorGetAllCharacters,
+    required TResult Function(_LoadingGetMoreCharactets value)
+        loadingGetMoreCharacters,
+    required TResult Function(_SuccessGetMoreCharacters value)
+        successGetMoreCharacters,
+    required TResult Function(_ErrorGetMoreCharacters value)
+        errorGetMoreCharacters,
   }) {
     return errorGetAllCharacters(this);
   }
@@ -770,9 +938,14 @@ class _$ErrorGetAllCharactersImpl implements _ErrorGetAllCharacters {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_LoadingGetAllCharactets value)? loadingGetAllCharacters,
+    TResult? Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
     TResult? Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
     TResult? Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult? Function(_LoadingGetMoreCharactets value)?
+        loadingGetMoreCharacters,
+    TResult? Function(_SuccessGetMoreCharacters value)?
+        successGetMoreCharacters,
+    TResult? Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
   }) {
     return errorGetAllCharacters?.call(this);
   }
@@ -781,9 +954,12 @@ class _$ErrorGetAllCharactersImpl implements _ErrorGetAllCharacters {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_LoadingGetAllCharactets value)? loadingGetAllCharacters,
+    TResult Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
     TResult Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
     TResult Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreCharacters,
+    TResult Function(_SuccessGetMoreCharacters value)? successGetMoreCharacters,
+    TResult Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
     required TResult orElse(),
   }) {
     if (errorGetAllCharacters != null) {
@@ -803,5 +979,513 @@ abstract class _ErrorGetAllCharacters implements CharactersState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorGetAllCharactersImplCopyWith<_$ErrorGetAllCharactersImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadingGetMoreCharactetsImplCopyWith<$Res> {
+  factory _$$LoadingGetMoreCharactetsImplCopyWith(
+          _$LoadingGetMoreCharactetsImpl value,
+          $Res Function(_$LoadingGetMoreCharactetsImpl) then) =
+      __$$LoadingGetMoreCharactetsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingGetMoreCharactetsImplCopyWithImpl<$Res>
+    extends _$CharactersStateCopyWithImpl<$Res, _$LoadingGetMoreCharactetsImpl>
+    implements _$$LoadingGetMoreCharactetsImplCopyWith<$Res> {
+  __$$LoadingGetMoreCharactetsImplCopyWithImpl(
+      _$LoadingGetMoreCharactetsImpl _value,
+      $Res Function(_$LoadingGetMoreCharactetsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CharactersState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadingGetMoreCharactetsImpl implements _LoadingGetMoreCharactets {
+  const _$LoadingGetMoreCharactetsImpl();
+
+  @override
+  String toString() {
+    return 'CharactersState.loadingGetMoreCharacters()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadingGetMoreCharactetsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loadingGetAllCharacters,
+    required TResult Function(CharactersAllModel list) successGetAllCharacters,
+    required TResult Function(dynamic err) errorGetAllCharacters,
+    required TResult Function() loadingGetMoreCharacters,
+    required TResult Function(CharactersAllModel list) successGetMoreCharacters,
+    required TResult Function(dynamic err) errorGetMoreCharacters,
+  }) {
+    return loadingGetMoreCharacters();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loadingGetAllCharacters,
+    TResult? Function(CharactersAllModel list)? successGetAllCharacters,
+    TResult? Function(dynamic err)? errorGetAllCharacters,
+    TResult? Function()? loadingGetMoreCharacters,
+    TResult? Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult? Function(dynamic err)? errorGetMoreCharacters,
+  }) {
+    return loadingGetMoreCharacters?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadingGetAllCharacters,
+    TResult Function(CharactersAllModel list)? successGetAllCharacters,
+    TResult Function(dynamic err)? errorGetAllCharacters,
+    TResult Function()? loadingGetMoreCharacters,
+    TResult Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult Function(dynamic err)? errorGetMoreCharacters,
+    required TResult orElse(),
+  }) {
+    if (loadingGetMoreCharacters != null) {
+      return loadingGetMoreCharacters();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LoadingGetAllCharacters value)
+        loadingGetAllCharacters,
+    required TResult Function(_SuccessGetAllCharacters value)
+        successGetAllCharacters,
+    required TResult Function(_ErrorGetAllCharacters value)
+        errorGetAllCharacters,
+    required TResult Function(_LoadingGetMoreCharactets value)
+        loadingGetMoreCharacters,
+    required TResult Function(_SuccessGetMoreCharacters value)
+        successGetMoreCharacters,
+    required TResult Function(_ErrorGetMoreCharacters value)
+        errorGetMoreCharacters,
+  }) {
+    return loadingGetMoreCharacters(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
+    TResult? Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
+    TResult? Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult? Function(_LoadingGetMoreCharactets value)?
+        loadingGetMoreCharacters,
+    TResult? Function(_SuccessGetMoreCharacters value)?
+        successGetMoreCharacters,
+    TResult? Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
+  }) {
+    return loadingGetMoreCharacters?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
+    TResult Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
+    TResult Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreCharacters,
+    TResult Function(_SuccessGetMoreCharacters value)? successGetMoreCharacters,
+    TResult Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
+    required TResult orElse(),
+  }) {
+    if (loadingGetMoreCharacters != null) {
+      return loadingGetMoreCharacters(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadingGetMoreCharactets implements CharactersState {
+  const factory _LoadingGetMoreCharactets() = _$LoadingGetMoreCharactetsImpl;
+}
+
+/// @nodoc
+abstract class _$$SuccessGetMoreCharactersImplCopyWith<$Res> {
+  factory _$$SuccessGetMoreCharactersImplCopyWith(
+          _$SuccessGetMoreCharactersImpl value,
+          $Res Function(_$SuccessGetMoreCharactersImpl) then) =
+      __$$SuccessGetMoreCharactersImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({CharactersAllModel list});
+}
+
+/// @nodoc
+class __$$SuccessGetMoreCharactersImplCopyWithImpl<$Res>
+    extends _$CharactersStateCopyWithImpl<$Res, _$SuccessGetMoreCharactersImpl>
+    implements _$$SuccessGetMoreCharactersImplCopyWith<$Res> {
+  __$$SuccessGetMoreCharactersImplCopyWithImpl(
+      _$SuccessGetMoreCharactersImpl _value,
+      $Res Function(_$SuccessGetMoreCharactersImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CharactersState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? list = null,
+  }) {
+    return _then(_$SuccessGetMoreCharactersImpl(
+      null == list
+          ? _value.list
+          : list // ignore: cast_nullable_to_non_nullable
+              as CharactersAllModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SuccessGetMoreCharactersImpl implements _SuccessGetMoreCharacters {
+  const _$SuccessGetMoreCharactersImpl(this.list);
+
+  @override
+  final CharactersAllModel list;
+
+  @override
+  String toString() {
+    return 'CharactersState.successGetMoreCharacters(list: $list)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessGetMoreCharactersImpl &&
+            (identical(other.list, list) || other.list == list));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, list);
+
+  /// Create a copy of CharactersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessGetMoreCharactersImplCopyWith<_$SuccessGetMoreCharactersImpl>
+      get copyWith => __$$SuccessGetMoreCharactersImplCopyWithImpl<
+          _$SuccessGetMoreCharactersImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loadingGetAllCharacters,
+    required TResult Function(CharactersAllModel list) successGetAllCharacters,
+    required TResult Function(dynamic err) errorGetAllCharacters,
+    required TResult Function() loadingGetMoreCharacters,
+    required TResult Function(CharactersAllModel list) successGetMoreCharacters,
+    required TResult Function(dynamic err) errorGetMoreCharacters,
+  }) {
+    return successGetMoreCharacters(list);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loadingGetAllCharacters,
+    TResult? Function(CharactersAllModel list)? successGetAllCharacters,
+    TResult? Function(dynamic err)? errorGetAllCharacters,
+    TResult? Function()? loadingGetMoreCharacters,
+    TResult? Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult? Function(dynamic err)? errorGetMoreCharacters,
+  }) {
+    return successGetMoreCharacters?.call(list);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadingGetAllCharacters,
+    TResult Function(CharactersAllModel list)? successGetAllCharacters,
+    TResult Function(dynamic err)? errorGetAllCharacters,
+    TResult Function()? loadingGetMoreCharacters,
+    TResult Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult Function(dynamic err)? errorGetMoreCharacters,
+    required TResult orElse(),
+  }) {
+    if (successGetMoreCharacters != null) {
+      return successGetMoreCharacters(list);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LoadingGetAllCharacters value)
+        loadingGetAllCharacters,
+    required TResult Function(_SuccessGetAllCharacters value)
+        successGetAllCharacters,
+    required TResult Function(_ErrorGetAllCharacters value)
+        errorGetAllCharacters,
+    required TResult Function(_LoadingGetMoreCharactets value)
+        loadingGetMoreCharacters,
+    required TResult Function(_SuccessGetMoreCharacters value)
+        successGetMoreCharacters,
+    required TResult Function(_ErrorGetMoreCharacters value)
+        errorGetMoreCharacters,
+  }) {
+    return successGetMoreCharacters(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
+    TResult? Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
+    TResult? Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult? Function(_LoadingGetMoreCharactets value)?
+        loadingGetMoreCharacters,
+    TResult? Function(_SuccessGetMoreCharacters value)?
+        successGetMoreCharacters,
+    TResult? Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
+  }) {
+    return successGetMoreCharacters?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
+    TResult Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
+    TResult Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreCharacters,
+    TResult Function(_SuccessGetMoreCharacters value)? successGetMoreCharacters,
+    TResult Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
+    required TResult orElse(),
+  }) {
+    if (successGetMoreCharacters != null) {
+      return successGetMoreCharacters(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SuccessGetMoreCharacters implements CharactersState {
+  const factory _SuccessGetMoreCharacters(final CharactersAllModel list) =
+      _$SuccessGetMoreCharactersImpl;
+
+  CharactersAllModel get list;
+
+  /// Create a copy of CharactersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SuccessGetMoreCharactersImplCopyWith<_$SuccessGetMoreCharactersImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ErrorGetMoreCharactersImplCopyWith<$Res> {
+  factory _$$ErrorGetMoreCharactersImplCopyWith(
+          _$ErrorGetMoreCharactersImpl value,
+          $Res Function(_$ErrorGetMoreCharactersImpl) then) =
+      __$$ErrorGetMoreCharactersImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({dynamic err});
+}
+
+/// @nodoc
+class __$$ErrorGetMoreCharactersImplCopyWithImpl<$Res>
+    extends _$CharactersStateCopyWithImpl<$Res, _$ErrorGetMoreCharactersImpl>
+    implements _$$ErrorGetMoreCharactersImplCopyWith<$Res> {
+  __$$ErrorGetMoreCharactersImplCopyWithImpl(
+      _$ErrorGetMoreCharactersImpl _value,
+      $Res Function(_$ErrorGetMoreCharactersImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CharactersState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? err = freezed,
+  }) {
+    return _then(_$ErrorGetMoreCharactersImpl(
+      freezed == err ? _value.err! : err,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ErrorGetMoreCharactersImpl implements _ErrorGetMoreCharacters {
+  const _$ErrorGetMoreCharactersImpl(this.err);
+
+  @override
+  final dynamic err;
+
+  @override
+  String toString() {
+    return 'CharactersState.errorGetMoreCharacters(err: $err)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorGetMoreCharactersImpl &&
+            const DeepCollectionEquality().equals(other.err, err));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(err));
+
+  /// Create a copy of CharactersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorGetMoreCharactersImplCopyWith<_$ErrorGetMoreCharactersImpl>
+      get copyWith => __$$ErrorGetMoreCharactersImplCopyWithImpl<
+          _$ErrorGetMoreCharactersImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loadingGetAllCharacters,
+    required TResult Function(CharactersAllModel list) successGetAllCharacters,
+    required TResult Function(dynamic err) errorGetAllCharacters,
+    required TResult Function() loadingGetMoreCharacters,
+    required TResult Function(CharactersAllModel list) successGetMoreCharacters,
+    required TResult Function(dynamic err) errorGetMoreCharacters,
+  }) {
+    return errorGetMoreCharacters(err);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loadingGetAllCharacters,
+    TResult? Function(CharactersAllModel list)? successGetAllCharacters,
+    TResult? Function(dynamic err)? errorGetAllCharacters,
+    TResult? Function()? loadingGetMoreCharacters,
+    TResult? Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult? Function(dynamic err)? errorGetMoreCharacters,
+  }) {
+    return errorGetMoreCharacters?.call(err);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadingGetAllCharacters,
+    TResult Function(CharactersAllModel list)? successGetAllCharacters,
+    TResult Function(dynamic err)? errorGetAllCharacters,
+    TResult Function()? loadingGetMoreCharacters,
+    TResult Function(CharactersAllModel list)? successGetMoreCharacters,
+    TResult Function(dynamic err)? errorGetMoreCharacters,
+    required TResult orElse(),
+  }) {
+    if (errorGetMoreCharacters != null) {
+      return errorGetMoreCharacters(err);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LoadingGetAllCharacters value)
+        loadingGetAllCharacters,
+    required TResult Function(_SuccessGetAllCharacters value)
+        successGetAllCharacters,
+    required TResult Function(_ErrorGetAllCharacters value)
+        errorGetAllCharacters,
+    required TResult Function(_LoadingGetMoreCharactets value)
+        loadingGetMoreCharacters,
+    required TResult Function(_SuccessGetMoreCharacters value)
+        successGetMoreCharacters,
+    required TResult Function(_ErrorGetMoreCharacters value)
+        errorGetMoreCharacters,
+  }) {
+    return errorGetMoreCharacters(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
+    TResult? Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
+    TResult? Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult? Function(_LoadingGetMoreCharactets value)?
+        loadingGetMoreCharacters,
+    TResult? Function(_SuccessGetMoreCharacters value)?
+        successGetMoreCharacters,
+    TResult? Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
+  }) {
+    return errorGetMoreCharacters?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadingGetAllCharacters value)? loadingGetAllCharacters,
+    TResult Function(_SuccessGetAllCharacters value)? successGetAllCharacters,
+    TResult Function(_ErrorGetAllCharacters value)? errorGetAllCharacters,
+    TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreCharacters,
+    TResult Function(_SuccessGetMoreCharacters value)? successGetMoreCharacters,
+    TResult Function(_ErrorGetMoreCharacters value)? errorGetMoreCharacters,
+    required TResult orElse(),
+  }) {
+    if (errorGetMoreCharacters != null) {
+      return errorGetMoreCharacters(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ErrorGetMoreCharacters implements CharactersState {
+  const factory _ErrorGetMoreCharacters(final dynamic err) =
+      _$ErrorGetMoreCharactersImpl;
+
+  dynamic get err;
+
+  /// Create a copy of CharactersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ErrorGetMoreCharactersImplCopyWith<_$ErrorGetMoreCharactersImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

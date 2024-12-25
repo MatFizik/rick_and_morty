@@ -19,14 +19,28 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
 
   Future<void> _onEvent(CharactersEvent event, Emitter<CharactersState> emit) {
     return event.map(
-      getAllCharacters: (_) async {
+      getAllCharacters: (data) async {
         try {
-          emit(const CharactersState.loadingGetAllCharacters());
+          if (data.page != null && data.page! != 1) {
+            emit(const CharactersState.loadingGetMoreCharacters());
+          } else {
+            emit(const CharactersState.loadingGetAllCharacters());
+          }
 
-          CharactersAllModel list = await repository.getAllCharacters();
-          emit(CharactersState.successGetAllCharacters(list));
+          CharactersAllModel list =
+              await repository.getAllCharacters(data.page);
+
+          if (data.page != null && data.page! != 1) {
+            emit(CharactersState.successGetMoreCharacters(list));
+          } else {
+            emit(CharactersState.successGetAllCharacters(list));
+          }
         } catch (err) {
-          emit(CharactersState.errorGetAllCharacters(err));
+          if (data.page != null && data.page! != 1) {
+            emit(CharactersState.errorGetMoreCharacters(err));
+          } else {
+            emit(CharactersState.errorGetAllCharacters(err));
+          }
         }
       },
     );

@@ -24,9 +24,10 @@ class _CharactersService implements CharactersService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<CharactersAllModel> getAllCharacters() async {
+  Future<CharactersAllModel> getAllCharacters(int? page) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<CharactersAllModel>(Options(
@@ -36,7 +37,7 @@ class _CharactersService implements CharactersService {
     )
         .compose(
           _dio.options,
-          'character',
+          'character?page=${page}',
           queryParameters: queryParameters,
           data: _data,
         )

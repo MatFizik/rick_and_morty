@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
+import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 
 class CustomTileWidget extends StatefulWidget {
   final String title;
@@ -37,10 +39,16 @@ class _CustomTileWidgetState extends State<CustomTileWidget> {
               borderRadius: widget.imageCircle
                   ? BorderRadius.circular(100)
                   : BorderRadius.circular(10),
-              child: Image.network(
+              child: CachedNetworkImage(
+                imageUrl: widget.imgPath,
                 width: 74,
                 height: 74,
-                widget.imgPath,
+                placeholder: (context, url) {
+                  return const ShimmerImageWidget(
+                    width: 74,
+                    height: 74,
+                  );
+                },
               ),
             ),
             Padding(

@@ -8,7 +8,7 @@ import 'package:rick_and_morty/logic/services/characters_service.dart';
 class CharacterProvider extends StatelessWidget {
   final Widget child;
 
-  CharacterProvider({required this.child});
+  const CharacterProvider({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rick_and_morty/logic/bloc/characters_bloc.dart';
 
 class SettingsMainScreen extends StatefulWidget {
   const SettingsMainScreen({super.key});
@@ -12,18 +10,10 @@ class SettingsMainScreen extends StatefulWidget {
 class _SettingsMainScreenState extends State<SettingsMainScreen> {
   @override
   void initState() {
-    BlocProvider.of<CharactersBloc>(context).add(
-      const CharactersEvent.getAllCharacters(),
-    );
-
     super.initState();
   }
 
-  Future<void> _refreshCharacters() async {
-    BlocProvider.of<CharactersBloc>(context).add(
-      const CharactersEvent.getAllCharacters(),
-    );
-  }
+  Future<void> _refreshCharacters() async {}
 
   @override
   Widget build(BuildContext context) {
