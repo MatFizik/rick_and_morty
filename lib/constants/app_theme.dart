@@ -42,7 +42,7 @@ class AppTheme {
       backgroundColor: AppColors.darkBgPrimary,
       foregroundColor: AppColors.darkBgPrimary,
       shadowColor: Colors.transparent,
-      surfaceTintColor: AppColors.darkBgPrimary,
+      surfaceTintColor: Colors.transparent,
     ),
   );
 }

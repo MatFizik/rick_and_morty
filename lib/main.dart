@@ -34,10 +34,10 @@ class MainWrap extends StatefulWidget {
   final String? title;
 
   @override
-  State<MainWrap> createState() => _MainScreenState();
+  State<MainWrap> createState() => _MainWrapState();
 }
 
-class _MainScreenState extends State<MainWrap> {
+class _MainWrapState extends State<MainWrap> {
   int _currentIndex = 0;
 
   @override
@@ -55,14 +55,15 @@ class _MainScreenState extends State<MainWrap> {
     ];
 
     return Scaffold(
-      body: SafeArea(
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (_) => CharactersBloc(charactersRepository),
-            )
-          ],
-          child: screens[_currentIndex],
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => CharactersBloc(charactersRepository),
+          )
+        ],
+        child: IndexedStack(
+          index: _currentIndex,
+          children: screens,
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rick_and_morty/constants/app_colors.dart';
 import 'package:rick_and_morty/constants/assets.dart';
 import 'package:rick_and_morty/logic/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/ui/widgets/custom_card_widget.dart';
@@ -36,8 +35,6 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.darkBgPrimary,
-        surfaceTintColor: Colors.transparent,
         title: const SearchTextfield(),
       ),
       body: RefreshIndicator(

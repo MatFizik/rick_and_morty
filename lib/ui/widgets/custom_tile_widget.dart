@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
 
 class CustomTileWidget extends StatefulWidget {
