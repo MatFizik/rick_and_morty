@@ -20,6 +20,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
   CharactersAllModel? characters;
 
   int _currentPage = 1;
+  late int _maxPage;
   bool cardView = false;
   bool isLoadingMore = false;
 
@@ -50,10 +51,13 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
   void _onScroll() {
     if (_scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent) {
-      isLoadingMore = true;
-      BlocProvider.of<CharactersBloc>(context).add(
-        CharactersEvent.getAllCharacters(_currentPage++),
-      );
+      if (_currentPage < _maxPage) {
+        isLoadingMore = true;
+        _currentPage += 1;
+        BlocProvider.of<CharactersBloc>(context).add(
+          CharactersEvent.getAllCharacters(_currentPage),
+        );
+      }
     }
   }
 
@@ -66,154 +70,148 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
       body: RefreshIndicator(
         onRefresh: _refreshCharacters,
         child: BlocConsumer<CharactersBloc, CharactersState>(
+          buildWhen: (previous, current) {
+            return current.maybeWhen(
+              orElse: () => true,
+              loadingGetAllCharacters: () => characters == null,
+              loadingGetMoreCharacters: () => false,
+            );
+          },
           listener: (context, state) {
             state.whenOrNull(
               loadingGetAllCharacters: () => isLoadingMore = true,
               successGetMoreCharacters: (list) {
                 if (isLoadingMore) {
-                  setState(() {
-                    characters?.results.addAll(list.results);
-                    isLoadingMore = false;
-                  });
+                  characters?.results.addAll(list.results);
+                  isLoadingMore = false;
                 }
               },
               successGetAllCharacters: (list) {
-                setState(() {
+                if (characters == null) {
                   characters = list;
                   isLoadingMore = false;
-                });
+                  _maxPage = list.info.pages;
+                }
               },
               errorGetAllCharacters: (err) => isLoadingMore = false,
             );
           },
           builder: (context, state) {
-            if (state.maybeWhen(
-                  loadingGetAllCharacters: () => true,
-                  loadingGetMoreCharacters: () => false,
-                  orElse: () => false,
-                ) &&
-                characters == null) {
-              return cardView
-                  ? const ShimmerCardWidget()
-                  : const ShimmerListWidget();
-            } else {
-              return Padding(
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                  top: 20,
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              child: state.maybeWhen(
+                loadingGetAllCharacters: () {
+                  return cardView
+                      ? const ShimmerGridWidget()
+                      : const ShimmerListWidget();
+                },
+                orElse: () {
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                      top: 20,
+                    ),
+                    child: Column(
                       children: [
-                        Text(
-                          "Всего персонажей: ${characters?.info.count ?? ''}",
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Всего персонажей: ${characters?.info.count ?? ''}",
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  cardView = !cardView;
+                                });
+                              },
+                              child: !cardView
+                                  ? Image.asset(ImageAssets.gridCardIcon)
+                                  : Image.asset(ImageAssets.gridListIcon),
+                            )
+                          ],
                         ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              cardView = !cardView;
-                            });
-                          },
+                        const SizedBox(height: 20),
+                        Expanded(
                           child: !cardView
-                              ? Image.asset(ImageAssets.gridCardIcon)
-                              : Image.asset(ImageAssets.gridListIcon),
-                        )
+                              ? ListView.builder(
+                                  controller: _scrollController,
+                                  shrinkWrap: true,
+                                  itemCount:
+                                      (characters?.results.length ?? 0) + 3,
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      children: [
+                                        index <
+                                                (characters?.results.length ??
+                                                    2)
+                                            ? CustomTileWidget(
+                                                title: characters
+                                                        ?.results[index].name ??
+                                                    '',
+                                                description:
+                                                    '${characters?.results[index].species}, ${characters?.results[index].gender}',
+                                                status: characters
+                                                        ?.results[index]
+                                                        .status ??
+                                                    '',
+                                                imgPath: characters
+                                                        ?.results[index]
+                                                        .image ??
+                                                    '',
+                                              )
+                                            : const ShimmerTileWidget(),
+                                        const SizedBox(height: 24)
+                                      ],
+                                    );
+                                  },
+                                )
+                              : GridView.builder(
+                                  controller: _scrollController,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 16.0,
+                                    mainAxisSpacing: 16.0,
+                                    childAspectRatio: 0.7,
+                                  ),
+                                  itemCount:
+                                      (characters?.results.length ?? 0) + 2,
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      children: [
+                                        index <
+                                                (characters?.results.length ??
+                                                    1)
+                                            ? CustomCardWidget(
+                                                title: characters
+                                                        ?.results[index].name ??
+                                                    '',
+                                                description:
+                                                    '${characters?.results[index].species}, ${characters?.results[index].gender}',
+                                                status: characters
+                                                        ?.results[index]
+                                                        .status ??
+                                                    '',
+                                                imgPath: characters
+                                                        ?.results[index]
+                                                        .image ??
+                                                    '',
+                                              )
+                                            : const ShimmerCardWidget(),
+                                        const SizedBox(height: 24),
+                                      ],
+                                    );
+                                  },
+                                ),
+                        ),
                       ],
                     ),
-                    const SizedBox(height: 20),
-                    Expanded(
-                      child: !cardView
-                          ? ListView.builder(
-                              controller: _scrollController,
-                              shrinkWrap: true,
-                              itemCount: (characters?.results.length ?? 0) + 3,
-                              itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                    index < (characters?.results.length ?? 2)
-                                        ? CustomTileWidget(
-                                            title: characters
-                                                    ?.results[index].name ??
-                                                '',
-                                            description: characters
-                                                    ?.results[index].species ??
-                                                '',
-                                            descriptionExtra: characters
-                                                    ?.results[index].gender ??
-                                                '',
-                                            status: characters
-                                                    ?.results[index].status ??
-                                                '',
-                                            imgPath: characters
-                                                    ?.results[index].image ??
-                                                '',
-                                          )
-                                        : const Row(
-                                            children: [
-                                              ShimmerImageWidget(
-                                                height: 74,
-                                                width: 74,
-                                              ),
-                                              SizedBox(width: 16),
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  ShimmerTextWidget(width: 80),
-                                                  ShimmerTextWidget(width: 120),
-                                                  ShimmerTextWidget(width: 80),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                    const SizedBox(height: 24)
-                                  ],
-                                );
-                              },
-                            )
-                          : GridView.builder(
-                              controller: _scrollController,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 16.0,
-                                mainAxisSpacing: 16.0,
-                                childAspectRatio: 0.7,
-                              ),
-                              itemCount: characters?.results.length ?? 0,
-                              itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                    CustomCardWidget(
-                                      title:
-                                          characters?.results[index].name ?? '',
-                                      description:
-                                          characters?.results[index].species ??
-                                              '',
-                                      descriptionExtra:
-                                          characters?.results[index].gender,
-                                      status:
-                                          characters?.results[index].status ??
-                                              '',
-                                      imgPath:
-                                          characters?.results[index].image ??
-                                              '',
-                                    ),
-                                    const SizedBox(height: 24),
-                                  ],
-                                );
-                              },
-                            ),
-                    ),
-                  ],
-                ),
-              );
-            }
+                  );
+                },
+              ),
+            );
           },
         ),
       ),

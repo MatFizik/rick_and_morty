@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ShimmerCardWidget extends StatelessWidget {
-  const ShimmerCardWidget({super.key});
+class ShimmerGridWidget extends StatelessWidget {
+  const ShimmerGridWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +54,61 @@ class ShimmerListWidget extends StatelessWidget {
                   ShimmerTextWidget(width: 80),
                   ShimmerTextWidget(width: 120),
                   ShimmerTextWidget(width: 80),
+                  SizedBox(height: 24),
                 ],
               ),
             ],
           );
         },
       ),
+    );
+  }
+}
+
+class ShimmerTileWidget extends StatefulWidget {
+  const ShimmerTileWidget({super.key});
+
+  @override
+  State<ShimmerTileWidget> createState() => _ShimmerTileWidgetState();
+}
+
+class _ShimmerTileWidgetState extends State<ShimmerTileWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        ShimmerImageWidget(
+          height: 74,
+          width: 74,
+        ),
+        SizedBox(width: 16),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ShimmerTextWidget(width: 80),
+            ShimmerTextWidget(width: 120),
+            ShimmerTextWidget(width: 80),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class ShimmerCardWidget extends StatelessWidget {
+  const ShimmerCardWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        ShimmerImageWidget(),
+        SizedBox(height: 18),
+        ShimmerTextWidget(width: 80),
+        ShimmerTextWidget(width: 120),
+        ShimmerTextWidget(width: 80),
+      ],
     );
   }
 }

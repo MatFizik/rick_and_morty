@@ -6,7 +6,6 @@ import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 class CustomTileWidget extends StatefulWidget {
   final String title;
   final String description;
-  final String? descriptionExtra;
   final bool imageCircle;
   final bool actionIcon;
   final String status;
@@ -18,7 +17,6 @@ class CustomTileWidget extends StatefulWidget {
     required this.description,
     required this.status,
     required this.imgPath,
-    this.descriptionExtra,
     this.imageCircle = true,
     this.actionIcon = false,
   });
@@ -33,69 +31,62 @@ class _CustomTileWidgetState extends State<CustomTileWidget> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            ClipRRect(
-              borderRadius: widget.imageCircle
-                  ? BorderRadius.circular(100)
-                  : BorderRadius.circular(10),
-              child: CachedNetworkImage(
-                imageUrl: widget.imgPath,
-                width: 74,
-                height: 74,
-                placeholder: (context, url) {
-                  return const ShimmerImageWidget(
-                    width: 74,
-                    height: 74,
-                  );
-                },
+        Flexible(
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: widget.imageCircle
+                    ? BorderRadius.circular(100)
+                    : BorderRadius.circular(10),
+                child: CachedNetworkImage(
+                  imageUrl: widget.imgPath,
+                  width: 74,
+                  height: 74,
+                  placeholder: (context, url) {
+                    return const ShimmerImageWidget(
+                      width: 74,
+                      height: 74,
+                    );
+                  },
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 18.0,
-                top: 9.0,
-                bottom: 9.0,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.status,
-                    style: TextStyle(
-                      color: widget.status == 'Alive'
-                          ? AppColors.green
-                          : AppColors.red,
-                    ),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 18.0,
+                    top: 9.0,
+                    bottom: 9.0,
                   ),
-                  Text(
-                    widget.title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
-                  Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text(
+                        widget.status,
+                        style: TextStyle(
+                          color: widget.status == 'Alive'
+                              ? AppColors.green
+                              : AppColors.red,
+                        ),
+                      ),
+                      Text(
+                        widget.title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
                       Text(
                         widget.description,
                         style: const TextStyle(
                           color: AppColors.textTertiary,
                         ),
-                      ),
-                      if (widget.descriptionExtra != null)
-                        Text(
-                          ', ${widget.descriptionExtra!}',
-                          style: const TextStyle(
-                            color: AppColors.textTertiary,
-                          ),
-                        ),
+                      )
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         if (widget.actionIcon)
           const Icon(
