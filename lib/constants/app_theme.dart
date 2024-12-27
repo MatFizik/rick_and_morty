@@ -44,5 +44,10 @@ class AppTheme {
       shadowColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
     ),
+    dividerColor: AppColors.darkBgSecondary,
+    dividerTheme: const DividerThemeData(
+      color: AppColors.darkBgSecondary,
+      thickness: 1,
+    ),
   );
 }

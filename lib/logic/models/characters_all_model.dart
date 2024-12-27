@@ -7,11 +7,11 @@ class CharactersAllModel {
   @JsonKey(name: "info")
   Info info;
   @JsonKey(name: "results")
-  List<Result> results;
+  List<Character> characters;
 
   CharactersAllModel({
     required this.info,
-    required this.results,
+    required this.characters,
   });
 
   factory CharactersAllModel.fromJson(Map<String, dynamic> json) =>
@@ -44,7 +44,7 @@ class Info {
 }
 
 @JsonSerializable()
-class Result {
+class Character {
   @JsonKey(name: "id")
   int id;
   @JsonKey(name: "name")
@@ -70,7 +70,7 @@ class Result {
   @JsonKey(name: "created")
   String created;
 
-  Result({
+  Character({
     required this.id,
     required this.name,
     required this.status,
@@ -85,9 +85,10 @@ class Result {
     required this.created,
   });
 
-  factory Result.fromJson(Map<String, dynamic> json) => _$ResultFromJson(json);
+  factory Character.fromJson(Map<String, dynamic> json) =>
+      _$CharacterFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ResultToJson(this);
+  Map<String, dynamic> toJson() => _$CharacterToJson(this);
 }
 
 @JsonSerializable()

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/assets.dart';
 import 'package:rick_and_morty/logic/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/logic/models/characters_all_model.dart';
+import 'package:rick_and_morty/ui/characters/character_detail.dart';
 import 'package:rick_and_morty/ui/widgets/custom_card_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_tile_widget.dart';
@@ -82,7 +83,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
               loadingGetAllCharacters: () => isLoadingMore = true,
               successGetMoreCharacters: (list) {
                 if (isLoadingMore) {
-                  characters?.results.addAll(list.results);
+                  characters?.characters.addAll(list.characters);
                   isLoadingMore = false;
                 }
               },
@@ -139,27 +140,40 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                   controller: _scrollController,
                                   shrinkWrap: true,
                                   itemCount:
-                                      (characters?.results.length ?? 0) + 3,
+                                      (characters?.characters.length ?? 0) + 3,
                                   itemBuilder: (context, index) {
                                     return Column(
                                       children: [
                                         index <
-                                                (characters?.results.length ??
+                                                (characters
+                                                        ?.characters.length ??
                                                     2)
                                             ? CustomTileWidget(
                                                 title: characters
-                                                        ?.results[index].name ??
+                                                        ?.characters[index]
+                                                        .name ??
                                                     '',
                                                 description:
-                                                    '${characters?.results[index].species}, ${characters?.results[index].gender}',
+                                                    '${characters?.characters[index].species}, ${characters?.characters[index].gender}',
                                                 status: characters
-                                                        ?.results[index]
+                                                        ?.characters[index]
                                                         .status ??
                                                     '',
                                                 imgPath: characters
-                                                        ?.results[index]
+                                                        ?.characters[index]
                                                         .image ??
                                                     '',
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          CharacterDetailScreen(
+                                                        character: characters!
+                                                            .characters[index],
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
                                               )
                                             : const ShimmerTileWidget(),
                                         const SizedBox(height: 24)
@@ -177,25 +191,27 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                     childAspectRatio: 0.7,
                                   ),
                                   itemCount:
-                                      (characters?.results.length ?? 0) + 2,
+                                      (characters?.characters.length ?? 0) + 2,
                                   itemBuilder: (context, index) {
                                     return Column(
                                       children: [
                                         index <
-                                                (characters?.results.length ??
+                                                (characters
+                                                        ?.characters.length ??
                                                     1)
                                             ? CustomCardWidget(
                                                 title: characters
-                                                        ?.results[index].name ??
+                                                        ?.characters[index]
+                                                        .name ??
                                                     '',
                                                 description:
-                                                    '${characters?.results[index].species}, ${characters?.results[index].gender}',
+                                                    '${characters?.characters[index].species}, ${characters?.characters[index].gender}',
                                                 status: characters
-                                                        ?.results[index]
+                                                        ?.characters[index]
                                                         .status ??
                                                     '',
                                                 imgPath: characters
-                                                        ?.results[index]
+                                                        ?.characters[index]
                                                         .image ??
                                                     '',
                                               )

@@ -9,15 +9,15 @@ part of 'characters_all_model.dart';
 CharactersAllModel _$CharactersAllModelFromJson(Map<String, dynamic> json) =>
     CharactersAllModel(
       info: Info.fromJson(json['info'] as Map<String, dynamic>),
-      results: (json['results'] as List<dynamic>)
-          .map((e) => Result.fromJson(e as Map<String, dynamic>))
+      characters: (json['results'] as List<dynamic>)
+          .map((e) => Character.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$CharactersAllModelToJson(CharactersAllModel instance) =>
     <String, dynamic>{
       'info': instance.info,
-      'results': instance.results,
+      'results': instance.characters,
     };
 
 Info _$InfoFromJson(Map<String, dynamic> json) => Info(
@@ -34,7 +34,7 @@ Map<String, dynamic> _$InfoToJson(Info instance) => <String, dynamic>{
       'prev': instance.prev,
     };
 
-Result _$ResultFromJson(Map<String, dynamic> json) => Result(
+Character _$CharacterFromJson(Map<String, dynamic> json) => Character(
       id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       status: json['status'] as String,
@@ -50,7 +50,7 @@ Result _$ResultFromJson(Map<String, dynamic> json) => Result(
       created: json['created'] as String,
     );
 
-Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
+Map<String, dynamic> _$CharacterToJson(Character instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'status': instance.status,

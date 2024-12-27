@@ -10,6 +10,7 @@ class CustomTileWidget extends StatefulWidget {
   final bool actionIcon;
   final String status;
   final String imgPath;
+  final VoidCallback? onTap;
 
   const CustomTileWidget({
     super.key,
@@ -19,6 +20,7 @@ class CustomTileWidget extends StatefulWidget {
     required this.imgPath,
     this.imageCircle = true,
     this.actionIcon = false,
+    this.onTap,
   });
 
   @override
@@ -28,72 +30,79 @@ class CustomTileWidget extends StatefulWidget {
 class _CustomTileWidgetState extends State<CustomTileWidget> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Flexible(
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: widget.imageCircle
-                    ? BorderRadius.circular(100)
-                    : BorderRadius.circular(10),
-                child: CachedNetworkImage(
-                  imageUrl: widget.imgPath,
-                  width: 74,
-                  height: 74,
-                  placeholder: (context, url) {
-                    return const ShimmerImageWidget(
-                      width: 74,
-                      height: 74,
-                    );
-                  },
-                ),
-              ),
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 18.0,
-                    top: 9.0,
-                    bottom: 9.0,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.status,
-                        style: TextStyle(
-                          color: widget.status == 'Alive'
-                              ? AppColors.green
-                              : AppColors.red,
-                        ),
-                      ),
-                      Text(
-                        widget.title,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: AppColors.textPrimary,
-                        ),
-                      ),
-                      Text(
-                        widget.description,
-                        style: const TextStyle(
-                          color: AppColors.textTertiary,
-                        ),
-                      )
-                    ],
+    return InkWell(
+      onTap: () {
+        if (widget.onTap != null) {
+          widget.onTap!.call();
+        }
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: widget.imageCircle
+                      ? BorderRadius.circular(100)
+                      : BorderRadius.circular(10),
+                  child: CachedNetworkImage(
+                    imageUrl: widget.imgPath,
+                    width: 74,
+                    height: 74,
+                    placeholder: (context, url) {
+                      return const ShimmerImageWidget(
+                        width: 74,
+                        height: 74,
+                      );
+                    },
                   ),
                 ),
-              ),
-            ],
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 18.0,
+                      top: 9.0,
+                      bottom: 9.0,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.status,
+                          style: TextStyle(
+                            color: widget.status == 'Alive'
+                                ? AppColors.green
+                                : AppColors.red,
+                          ),
+                        ),
+                        Text(
+                          widget.title,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: AppColors.textPrimary,
+                          ),
+                        ),
+                        Text(
+                          widget.description,
+                          style: const TextStyle(
+                            color: AppColors.textTertiary,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        if (widget.actionIcon)
-          const Icon(
-            Icons.keyboard_arrow_right,
-            size: 16,
-          )
-      ],
+          if (widget.actionIcon)
+            const Icon(
+              Icons.keyboard_arrow_right,
+              size: 16,
+            )
+        ],
+      ),
     );
   }
 }
