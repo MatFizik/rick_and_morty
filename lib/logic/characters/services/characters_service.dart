@@ -2,7 +2,7 @@ import 'dart:core';
 
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:rick_and_morty/logic/models/characters_all_model.dart';
+import 'package:rick_and_morty/logic/characters/models/characters_all_model.dart';
 
 part 'characters_service.g.dart';
 

@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/app_theme.dart';
 import 'package:rick_and_morty/constants/assets.dart';
-import 'package:rick_and_morty/logic/bloc/characters_bloc.dart';
-import 'package:rick_and_morty/logic/repositories/impl/characters_repository_impl.dart';
-import 'package:rick_and_morty/logic/services/characters_service.dart';
+import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
+import 'package:rick_and_morty/logic/characters/repositories/impl/characters_repository_impl.dart';
+import 'package:rick_and_morty/logic/characters/services/characters_service.dart';
+import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
+import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
+import 'package:rick_and_morty/logic/episodes/services/episodes_services.dart';
+import 'package:rick_and_morty/logic/utils/logger.dart';
 import 'package:rick_and_morty/ui/characters/characters_main.dart';
-import 'package:rick_and_morty/ui/episodes/episode_main.dart';
+import 'package:rick_and_morty/ui/episodes/episodes_main.dart';
 import 'package:rick_and_morty/ui/locations/location_main.dart';
 import 'package:rick_and_morty/ui/settings/settings_main.dart';
 
@@ -18,7 +22,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,15 +45,18 @@ class _MainWrapState extends State<MainWrap> {
 
   @override
   Widget build(BuildContext context) {
-    final dio = Dio();
+    final dio = DioClient.dio;
 
     final charactersService = CharactersService(dio);
     final charactersRepository = CharactersRepositoryImpl(charactersService);
 
+    final episodesService = EpisodesServices(dio);
+    final episodesRepository = EpisodesRepositoryImpl(episodesService);
+
     List<Widget> screens = [
       const CharactersMainScreen(),
       const LocationMainScreen(),
-      const EpisodeMainScreen(),
+      const EpisodesMainScreen(),
       const SettingsMainScreen()
     ];
 
@@ -59,6 +65,9 @@ class _MainWrapState extends State<MainWrap> {
         providers: [
           BlocProvider(
             create: (_) => CharactersBloc(charactersRepository),
+          ),
+          BlocProvider(
+            create: (_) => EpisodesBloc(episodesRepository),
           )
         ],
         child: IndexedStack(

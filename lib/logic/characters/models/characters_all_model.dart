@@ -63,8 +63,14 @@ class Character {
   Location location;
   @JsonKey(name: "image")
   String image;
-  @JsonKey(name: "episode")
-  List<String> episode;
+
+  @JsonKey(
+    name: "episode",
+    fromJson: _episodesFromJson,
+    toJson: _episodesToJson,
+  )
+  List<int> episode;
+
   @JsonKey(name: "url")
   String url;
   @JsonKey(name: "created")
@@ -107,4 +113,14 @@ class Location {
       _$LocationFromJson(json);
 
   Map<String, dynamic> toJson() => _$LocationToJson(this);
+}
+
+List<int> _episodesFromJson(List<dynamic> episodes) {
+  return episodes.map((e) => int.parse(e.toString().split('/').last)).toList();
+}
+
+List<String> _episodesToJson(List<int> episodes) {
+  return episodes
+      .map((e) => "https://rickandmortyapi.com/api/episode/$e")
+      .toList();
 }

@@ -36,8 +36,9 @@ class ShimmerListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
+      padding: const EdgeInsets.only(left: 16, right: 16),
       child: ListView.builder(
+        shrinkWrap: true,
         itemCount: 10,
         itemBuilder: (context, index) {
           return const Row(

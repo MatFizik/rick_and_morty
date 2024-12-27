@@ -2,27 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/assets.dart';
 import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
-import 'package:rick_and_morty/logic/characters/models/characters_all_model.dart';
 import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
-import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
-import 'package:rick_and_morty/logic/episodes/services/episodes_services.dart';
-import 'package:rick_and_morty/logic/utils/logger.dart';
-import 'package:rick_and_morty/ui/characters/character_detail.dart';
+import 'package:rick_and_morty/logic/episodes/models/episodes_all_model.dart';
 import 'package:rick_and_morty/ui/widgets/custom_card_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_tile_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_search.dart';
 
-class CharactersMainScreen extends StatefulWidget {
-  const CharactersMainScreen({super.key});
+class EpisodesMainScreen extends StatefulWidget {
+  const EpisodesMainScreen({super.key});
 
   @override
-  State<CharactersMainScreen> createState() => _CharactersMainScreenState();
+  State<EpisodesMainScreen> createState() => _EpisodesMainScreenState();
 }
 
-class _CharactersMainScreenState extends State<CharactersMainScreen> {
+class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
   late ScrollController _scrollController;
-  CharactersAllModel? characters;
+  EpisodesAllModel? episodes;
+  final String image =
+      'https://rickandmortyapi.com/api/character/avatar/6.jpeg';
 
   int _currentPage = 1;
   late int _maxPage;
@@ -31,8 +29,8 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
 
   @override
   void initState() {
-    BlocProvider.of<CharactersBloc>(context).add(
-      CharactersEvent.getAllCharacters(_currentPage),
+    BlocProvider.of<EpisodesBloc>(context).add(
+      EpisodesEvent.getAllEpisodes(_currentPage),
     );
 
     _scrollController = ScrollController();
@@ -48,8 +46,8 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
 
   Future<void> _refreshCharacters() async {
     _currentPage = 1;
-    BlocProvider.of<CharactersBloc>(context).add(
-      CharactersEvent.getAllCharacters(_currentPage),
+    BlocProvider.of<EpisodesBloc>(context).add(
+      EpisodesEvent.getAllEpisodes(_currentPage),
     );
   }
 
@@ -74,38 +72,38 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: _refreshCharacters,
-        child: BlocConsumer<CharactersBloc, CharactersState>(
+        child: BlocConsumer<EpisodesBloc, EpisodesState>(
           buildWhen: (previous, current) {
             return current.maybeWhen(
               orElse: () => true,
-              loadingGetAllCharacters: () => characters == null,
-              loadingGetMoreCharacters: () => false,
+              loadingGetAllEpisodes: () => episodes == null,
+              loadingGetMoreEpisodes: () => false,
             );
           },
           listener: (context, state) {
             state.whenOrNull(
-              loadingGetAllCharacters: () => isLoadingMore = true,
-              successGetMoreCharacters: (list) {
+              loadingGetAllEpisodes: () => isLoadingMore = true,
+              successGetMoreEpisodes: (list) {
                 if (isLoadingMore) {
-                  characters?.characters.addAll(list.characters);
+                  episodes?.episodes.addAll(list.episodes);
                   isLoadingMore = false;
                 }
               },
-              successGetAllCharacters: (list) {
-                if (characters == null) {
-                  characters = list;
+              successGetAllEpisodes: (list) {
+                if (episodes == null) {
+                  episodes = list;
                   isLoadingMore = false;
-                  _maxPage = list.info.pages;
+                  _maxPage = list.info!.pages!;
                 }
               },
-              errorGetAllCharacters: (err) => isLoadingMore = false,
+              errorGetAllEpisodes: (err) => isLoadingMore = false,
             );
           },
           builder: (context, state) {
             return AnimatedSwitcher(
               duration: const Duration(milliseconds: 500),
               child: state.maybeWhen(
-                loadingGetAllCharacters: () {
+                loadingGetAllEpisodes: () {
                   return cardView
                       ? const ShimmerGridWidget()
                       : const ShimmerListWidget();
@@ -123,7 +121,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Всего персонажей: ${characters?.info.count ?? ''}",
+                              "Всего персонажей: ${episodes?.info?.count ?? ''}",
                             ),
                             InkWell(
                               onTap: () {
@@ -144,51 +142,46 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                   controller: _scrollController,
                                   shrinkWrap: true,
                                   itemCount:
-                                      (characters?.characters.length ?? 0) + 3,
+                                      (episodes?.episodes.length ?? 0) + 3,
                                   itemBuilder: (context, index) {
                                     return Column(
                                       children: [
-                                        index <
-                                                (characters
-                                                        ?.characters.length ??
-                                                    2)
+                                        index < (episodes?.episodes.length ?? 2)
                                             ? CustomTileWidget(
-                                                title: characters
-                                                        ?.characters[index]
+                                                title: episodes?.episodes[index]
                                                         .name ??
                                                     '',
-                                                description:
-                                                    '${characters?.characters[index].species}, ${characters?.characters[index].gender}',
-                                                status: characters
-                                                        ?.characters[index]
-                                                        .status ??
+                                                description: episodes
+                                                        ?.episodes[index]
+                                                        .airDate ??
                                                     '',
-                                                imgPath: characters
-                                                        ?.characters[index]
-                                                        .image ??
+                                                status: episodes
+                                                        ?.episodes[index]
+                                                        .episode ??
                                                     '',
-                                                onTap: () {
-                                                  Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          BlocProvider(
-                                                        create: (_) =>
-                                                            EpisodesBloc(
-                                                          EpisodesRepositoryImpl(
-                                                            EpisodesServices(
-                                                                DioClient.dio),
-                                                          ),
-                                                        ),
-                                                        child:
-                                                            CharacterDetailScreen(
-                                                          character: characters!
-                                                                  .characters[
-                                                              index],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
+                                                imgPath: image,
+                                                // onTap: () {
+                                                //   Navigator.of(context).push(
+                                                //     MaterialPageRoute(
+                                                //       builder: (context) =>
+                                                //           BlocProvider(
+                                                //         create: (_) =>
+                                                //             EpisodesBloc(
+                                                //           EpisodesRepositoryImpl(
+                                                //             EpisodesServices(
+                                                //                 DioClient.dio),
+                                                //           ),
+                                                //         ),
+                                                //         child:
+                                                //             CharacterDetailScreen(
+                                                //           character: episodes!
+                                                //                   .characters[
+                                                //               index],
+                                                //         ),
+                                                //       ),
+                                                //     ),
+                                                //   );
+                                                // },
                                               )
                                             : const ShimmerTileWidget(),
                                         const SizedBox(height: 24)
@@ -206,29 +199,24 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                     childAspectRatio: 0.7,
                                   ),
                                   itemCount:
-                                      (characters?.characters.length ?? 0) + 2,
+                                      (episodes?.episodes.length ?? 0) + 2,
                                   itemBuilder: (context, index) {
                                     return Column(
                                       children: [
-                                        index <
-                                                (characters
-                                                        ?.characters.length ??
-                                                    1)
+                                        index < (episodes?.episodes.length ?? 1)
                                             ? CustomCardWidget(
-                                                title: characters
-                                                        ?.characters[index]
+                                                title: episodes?.episodes[index]
                                                         .name ??
                                                     '',
-                                                description:
-                                                    '${characters?.characters[index].species}, ${characters?.characters[index].gender}',
-                                                status: characters
-                                                        ?.characters[index]
-                                                        .status ??
+                                                description: episodes
+                                                        ?.episodes[index]
+                                                        .airDate ??
                                                     '',
-                                                imgPath: characters
-                                                        ?.characters[index]
-                                                        .image ??
+                                                status: episodes
+                                                        ?.episodes[index]
+                                                        .airDate ??
                                                     '',
+                                                imgPath: image,
                                               )
                                             : const ShimmerCardWidget(),
                                         const SizedBox(height: 24),

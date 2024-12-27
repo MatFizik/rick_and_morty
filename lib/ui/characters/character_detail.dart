@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
-import 'package:rick_and_morty/logic/models/characters_all_model.dart';
+
+import 'package:rick_and_morty/logic/characters/models/characters_all_model.dart';
+import 'package:rick_and_morty/ui/episodes/episode_with_character.dart';
 import 'package:rick_and_morty/ui/widgets/custom_mini_tile.dart';
 
 class CharacterDetailScreen extends StatefulWidget {
@@ -18,11 +20,6 @@ class CharacterDetailScreen extends StatefulWidget {
 }
 
 class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,6 +81,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
             ),
             const SizedBox(height: 80),
             Text(
+              textAlign: TextAlign.center,
               widget.character.name,
               style: const TextStyle(fontSize: 34, color: Colors.white),
             ),
@@ -161,6 +159,11 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                   ),
                 ],
               ),
+            ),
+            EpisodesWithCharactersWidget(
+              characterId: 8, //widget.character.id,
+              img: widget.character.image,
+              episodesId: widget.character.episode,
             ),
           ],
         ),

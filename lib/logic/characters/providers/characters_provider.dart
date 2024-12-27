@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dio/dio.dart';
-import 'package:rick_and_morty/logic/bloc/characters_bloc.dart';
-import 'package:rick_and_morty/logic/repositories/impl/characters_repository_impl.dart';
-import 'package:rick_and_morty/logic/services/characters_service.dart';
+import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
+import 'package:rick_and_morty/logic/characters/repositories/impl/characters_repository_impl.dart';
+import 'package:rick_and_morty/logic/characters/services/characters_service.dart';
+import 'package:rick_and_morty/logic/utils/logger.dart';
 
 class CharacterProvider extends StatelessWidget {
   final Widget child;
@@ -12,7 +12,7 @@ class CharacterProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dio = Dio();
+    final dio = DioClient.dio;
     final charactersService = CharactersService(dio);
     final charactersRepository = CharactersRepositoryImpl(charactersService);
 
