@@ -121,7 +121,7 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Всего персонажей: ${episodes?.info?.count ?? ''}",
+                              "Всего эпизодов: ${episodes?.info?.count ?? ''}",
                             ),
                             InkWell(
                               onTap: () {
