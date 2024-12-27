@@ -19,13 +19,24 @@ class EpisodesBloc extends Bloc<EpisodesEvent, EpisodesState> {
     return event.map(
       getAllEpisodes: (data) async {
         try {
-          emit(const EpisodesState.loadingGetAllEpisodes());
+          if (data.page != null && data.page! != 1) {
+            emit(const EpisodesState.loadingGetMoreEpisodes());
+          } else {
+            emit(const EpisodesState.loadingGetAllEpisodes());
+          }
 
           EpisodesAllModel list = await repository.getAllEpisodes(data.page);
-
-          emit(EpisodesState.successGetAllEpisodes(list));
+          if (data.page != null && data.page! != 1) {
+            emit(EpisodesState.successGetMoreEpisodes(list));
+          } else {
+            emit(EpisodesState.successGetAllEpisodes(list));
+          }
         } catch (err) {
-          emit(EpisodesState.errorGetAllEpisodes(err));
+          if (data.page != null && data.page! != 1) {
+            emit(EpisodesState.errorGetMoreEpisodes(err));
+          } else {
+            emit(EpisodesState.errorGetAllEpisodes(err));
+          }
         }
       },
       getFilteredEpisodes: (data) async {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/assets.dart';
-import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
 import 'package:rick_and_morty/logic/episodes/models/episodes_all_model.dart';
 import 'package:rick_and_morty/ui/widgets/custom_card_widget.dart';
@@ -44,7 +43,7 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
     super.dispose();
   }
 
-  Future<void> _refreshCharacters() async {
+  Future<void> _refresh() async {
     _currentPage = 1;
     BlocProvider.of<EpisodesBloc>(context).add(
       EpisodesEvent.getAllEpisodes(_currentPage),
@@ -57,8 +56,8 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
       if (_currentPage < _maxPage) {
         isLoadingMore = true;
         _currentPage += 1;
-        BlocProvider.of<CharactersBloc>(context).add(
-          CharactersEvent.getAllCharacters(_currentPage),
+        BlocProvider.of<EpisodesBloc>(context).add(
+          EpisodesEvent.getAllEpisodes(_currentPage),
         );
       }
     }
@@ -71,7 +70,7 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
         title: const SearchTextfield(),
       ),
       body: RefreshIndicator(
-        onRefresh: _refreshCharacters,
+        onRefresh: _refresh,
         child: BlocConsumer<EpisodesBloc, EpisodesState>(
           buildWhen: (previous, current) {
             return current.maybeWhen(
