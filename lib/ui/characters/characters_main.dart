@@ -229,6 +229,28 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                                         ?.characters[index]
                                                         .image ??
                                                     '',
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          BlocProvider(
+                                                        create: (_) =>
+                                                            EpisodesBloc(
+                                                          EpisodesRepositoryImpl(
+                                                            EpisodesServices(
+                                                                DioClient.dio),
+                                                          ),
+                                                        ),
+                                                        child:
+                                                            CharacterDetailScreen(
+                                                          character: characters!
+                                                                  .characters[
+                                                              index],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
                                               )
                                             : const ShimmerCardWidget(),
                                         const SizedBox(height: 24),

@@ -223,6 +223,27 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                                                         .episode ??
                                                     '',
                                                 imgPath: image,
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          BlocProvider(
+                                                        create: (_) =>
+                                                            EpisodesBloc(
+                                                          EpisodesRepositoryImpl(
+                                                            EpisodesServices(
+                                                                DioClient.dio),
+                                                          ),
+                                                        ),
+                                                        child:
+                                                            EpisodeDetailScreen(
+                                                          episode: episodes!
+                                                              .episodes[index],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
                                               )
                                             : index <
                                                     (episodes?.info?.count ?? 0)

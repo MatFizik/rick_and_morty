@@ -11,6 +11,7 @@ class CustomCardWidget extends StatefulWidget {
   final String status;
   final Color? statusColor;
   final String imgPath;
+  final VoidCallback onTap;
 
   const CustomCardWidget({
     super.key,
@@ -18,6 +19,7 @@ class CustomCardWidget extends StatefulWidget {
     required this.description,
     required this.status,
     required this.imgPath,
+    required this.onTap,
     this.imageCircle = true,
     this.actionIcon = false,
     this.statusColor,
@@ -31,53 +33,56 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.all(
-              Radius.circular(100),
+      child: InkWell(
+        onTap: () => widget.onTap.call(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(100),
+              ),
+              child: CachedNetworkImage(
+                imageUrl: widget.imgPath,
+                width: 120,
+                height: 120,
+              ),
             ),
-            child: CachedNetworkImage(
-              imageUrl: widget.imgPath,
-              width: 120,
-              height: 120,
+            const SizedBox(
+              height: 18,
             ),
-          ),
-          const SizedBox(
-            height: 18,
-          ),
-          Text(
-            widget.status,
-            style: TextStyle(
-              color: widget.statusColor ?? AppColors.blue,
+            Text(
+              widget.status,
+              style: TextStyle(
+                color: widget.statusColor ?? AppColors.blue,
+              ),
             ),
-          ),
-          Text(
-            widget.title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 16,
-              color: AppColors.textPrimary,
+            Text(
+              widget.title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 16,
+                color: AppColors.textPrimary,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
-            overflow: TextOverflow.ellipsis,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
-                child: Text(
-                  textAlign: TextAlign.center,
-                  widget.description,
-                  style: const TextStyle(
-                    color: AppColors.textTertiary,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    widget.description,
+                    style: const TextStyle(
+                      color: AppColors.textTertiary,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
