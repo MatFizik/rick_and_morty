@@ -36,7 +36,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
   bool isLoadingMore = false;
   bool isSearch = false;
 
-  String searchName = '';
+  String? searchName;
 
   @override
   void initState() {
@@ -156,6 +156,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
             );
           },
           builder: (context, state) {
+            print('jfsdfsdhfhf ${state}');
             return AnimatedSwitcher(
               duration: const Duration(milliseconds: 500),
               child: state.maybeWhen(
@@ -163,6 +164,23 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                   return cardView
                       ? const ShimmerGridWidget()
                       : const ShimmerListWidget();
+                },
+                errorGetCharacters: (err) {
+                  if (err.response.statusCode == 404) {
+                    return Center(
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 120),
+                          Image.asset(ImageAssets.searchEmpty),
+                          const SizedBox(height: 45),
+                          const Text(
+                            'Персонажа с таким\n именем нет',
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    );
+                  }
                 },
                 orElse: () {
                   return Padding(
