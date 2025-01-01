@@ -3,6 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/assets.dart';
 import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
 import 'package:rick_and_morty/logic/episodes/models/episodes_all_model.dart';
+import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
+import 'package:rick_and_morty/logic/episodes/services/episodes_services.dart';
+import 'package:rick_and_morty/logic/utils/logger.dart';
+import 'package:rick_and_morty/ui/episodes/episode_detail_screen.dart';
 import 'package:rick_and_morty/ui/widgets/custom_card_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_tile_widget.dart';
@@ -154,33 +158,33 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                                                         ?.episodes[index]
                                                         .airDate ??
                                                     '',
+                                                imageCircle: false,
                                                 status: episodes
                                                         ?.episodes[index]
                                                         .episode ??
                                                     '',
                                                 imgPath: image,
-                                                // onTap: () {
-                                                //   Navigator.of(context).push(
-                                                //     MaterialPageRoute(
-                                                //       builder: (context) =>
-                                                //           BlocProvider(
-                                                //         create: (_) =>
-                                                //             EpisodesBloc(
-                                                //           EpisodesRepositoryImpl(
-                                                //             EpisodesServices(
-                                                //                 DioClient.dio),
-                                                //           ),
-                                                //         ),
-                                                //         child:
-                                                //             CharacterDetailScreen(
-                                                //           character: episodes!
-                                                //                   .characters[
-                                                //               index],
-                                                //         ),
-                                                //       ),
-                                                //     ),
-                                                //   );
-                                                // },
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          BlocProvider(
+                                                        create: (_) =>
+                                                            EpisodesBloc(
+                                                          EpisodesRepositoryImpl(
+                                                            EpisodesServices(
+                                                                DioClient.dio),
+                                                          ),
+                                                        ),
+                                                        child:
+                                                            EpisodeDetailScreen(
+                                                          episode: episodes!
+                                                              .episodes[index],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
                                               )
                                             : index <
                                                     (episodes?.info?.count ?? 0)
@@ -224,7 +228,6 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                                                     (episodes?.info?.count ?? 0)
                                                 ? const ShimmerCardWidget()
                                                 : const SizedBox(),
-                                        const SizedBox(height: 24),
                                       ],
                                     );
                                   },
