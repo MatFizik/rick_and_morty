@@ -2,10 +2,16 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
 
 import 'package:rick_and_morty/logic/characters/models/characters_all_model.dart';
+import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
+import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
+import 'package:rick_and_morty/logic/episodes/services/episodes_services.dart';
+import 'package:rick_and_morty/logic/utils/logger.dart';
 import 'package:rick_and_morty/ui/episodes/episode_with_character.dart';
+import 'package:rick_and_morty/ui/episodes/episodes_main.dart';
 import 'package:rick_and_morty/ui/widgets/custom_mini_tile.dart';
 
 class CharacterDetailScreen extends StatefulWidget {
@@ -136,10 +142,10 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                   const SizedBox(height: 36),
                   const Divider(thickness: 1),
                   const SizedBox(height: 36),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Episodes',
                         style: TextStyle(
                           fontSize: 20,
@@ -147,7 +153,19 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                         ),
                       ),
                       InkWell(
-                        child: Text(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (_) => EpisodesBloc(
+                                EpisodesRepositoryImpl(
+                                  EpisodesServices(DioClient.dio),
+                                ),
+                              ),
+                              child: const EpisodesMainScreen(),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
                           'All episodes',
                           style: TextStyle(
                             fontSize: 12,
@@ -161,7 +179,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
               ),
             ),
             EpisodesWithCharactersWidget(
-              characterId: 8, //widget.character.id,
+              characterId: widget.character.id,
               img: widget.character.image,
               episodesId: widget.character.episode,
             ),

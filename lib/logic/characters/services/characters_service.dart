@@ -10,8 +10,17 @@ part 'characters_service.g.dart';
 abstract class CharactersService {
   factory CharactersService(Dio dio, {String baseUrl}) = _CharactersService;
 
-  @GET('character?page={page}')
-  Future<CharactersAllModel> getAllCharacters(
-    @Path('page') int? page,
+  @GET('character')
+  Future<CharactersAllModel> getCharacters(
+    @Query('page') int? page,
+    @Query('name') String? name,
+    @Query('status') String? status,
+    @Query('species') String? species,
+    @Query('type') String? type,
+    @Query('gender') String? gender,
   );
+
+  @GET('character/{characters}')
+  Future<List<Character>> getMultipleCharacters(
+      @Path('characters') List<int>? characters);
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rick_and_morty/constants/app_colors.dart';
 import 'package:rick_and_morty/constants/assets.dart';
 import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/logic/characters/models/characters_all_model.dart';
@@ -23,16 +24,23 @@ class CharactersMainScreen extends StatefulWidget {
 class _CharactersMainScreenState extends State<CharactersMainScreen> {
   late ScrollController _scrollController;
   CharactersAllModel? characters;
+  List<Character>? filteredCharacter;
 
   int _currentPage = 1;
   late int _maxPage;
+
   bool cardView = false;
   bool isLoadingMore = false;
+  bool isSearch = false;
+
+  List<String> filterList = [];
+
+  String searchName = '';
 
   @override
   void initState() {
     BlocProvider.of<CharactersBloc>(context).add(
-      CharactersEvent.getAllCharacters(_currentPage),
+      CharactersEvent.getCharacters(_currentPage, null, null, null, null, null),
     );
 
     _scrollController = ScrollController();
@@ -49,7 +57,8 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
   Future<void> _refreshCharacters() async {
     _currentPage = 1;
     BlocProvider.of<CharactersBloc>(context).add(
-      CharactersEvent.getAllCharacters(_currentPage),
+      CharactersEvent.getCharacters(
+          _currentPage, searchName, null, null, null, null),
     );
   }
 
@@ -60,17 +69,37 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
         isLoadingMore = true;
         _currentPage += 1;
         BlocProvider.of<CharactersBloc>(context).add(
-          CharactersEvent.getAllCharacters(_currentPage),
+          CharactersEvent.getCharacters(
+              _currentPage, searchName, null, null, null, null),
         );
       }
     }
+  }
+
+  void onSearch(String characterName) {
+    _currentPage = 1;
+    searchName = characterName;
+    isSearch = true;
+    BlocProvider.of<CharactersBloc>(context).add(
+      CharactersEvent.getCharacters(
+          _currentPage, characterName, null, null, null, null),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const SearchTextfield(),
+        leading: Navigator.of(context).canPop()
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back),
+                color: Colors.white,
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            : null,
+        title: SearchTextfield(
+          onChanged: onSearch,
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: _refreshCharacters,
@@ -78,34 +107,39 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
           buildWhen: (previous, current) {
             return current.maybeWhen(
               orElse: () => true,
-              loadingGetAllCharacters: () => characters == null,
+              loadingGetCharacters: () => characters == null,
               loadingGetMoreCharacters: () => false,
             );
           },
           listener: (context, state) {
             state.whenOrNull(
-              loadingGetAllCharacters: () => isLoadingMore = true,
+              loadingGetCharacters: () => isLoadingMore = true,
+              loadingGetMultipleCharacters: () => true,
               successGetMoreCharacters: (list) {
                 if (isLoadingMore) {
                   characters?.characters.addAll(list.characters);
                   isLoadingMore = false;
                 }
               },
-              successGetAllCharacters: (list) {
-                if (characters == null) {
+              successGetMultipleCharacters: (list) {
+                filteredCharacter = list;
+              },
+              successGetCharacters: (list) {
+                if (characters == null || isSearch) {
                   characters = list;
                   isLoadingMore = false;
                   _maxPage = list.info.pages;
                 }
               },
-              errorGetAllCharacters: (err) => isLoadingMore = false,
+              errorGetCharacters: (err) => isLoadingMore = false,
+              errorGetMultipleCharacters: (err) => false,
             );
           },
           builder: (context, state) {
             return AnimatedSwitcher(
               duration: const Duration(milliseconds: 500),
               child: state.maybeWhen(
-                loadingGetAllCharacters: () {
+                loadingGetCharacters: () {
                   return cardView
                       ? const ShimmerGridWidget()
                       : const ShimmerListWidget();
@@ -163,6 +197,18 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                                         ?.characters[index]
                                                         .status ??
                                                     '',
+                                                statusColor: characters
+                                                            ?.characters[index]
+                                                            .status ==
+                                                        'Alive'
+                                                    ? AppColors.green
+                                                    : characters
+                                                                ?.characters[
+                                                                    index]
+                                                                .status ==
+                                                            'Dead'
+                                                        ? AppColors.red
+                                                        : null,
                                                 imgPath: characters
                                                         ?.characters[index]
                                                         .image ??
@@ -190,7 +236,9 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                                   );
                                                 },
                                               )
-                                            : const ShimmerTileWidget(),
+                                            : index < characters!.info.count
+                                                ? const ShimmerTileWidget()
+                                                : const SizedBox(),
                                         const SizedBox(height: 24)
                                       ],
                                     );
@@ -225,6 +273,18 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                                         ?.characters[index]
                                                         .status ??
                                                     '',
+                                                statusColor: characters
+                                                            ?.characters[index]
+                                                            .status ==
+                                                        'Alive'
+                                                    ? AppColors.green
+                                                    : characters
+                                                                ?.characters[
+                                                                    index]
+                                                                .status ==
+                                                            'Dead'
+                                                        ? AppColors.red
+                                                        : null,
                                                 imgPath: characters
                                                         ?.characters[index]
                                                         .image ??
@@ -252,7 +312,9 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                                   );
                                                 },
                                               )
-                                            : const ShimmerCardWidget(),
+                                            : index < characters!.info.count
+                                                ? const ShimmerCardWidget()
+                                                : const SizedBox(),
                                         const SizedBox(height: 24),
                                       ],
                                     );

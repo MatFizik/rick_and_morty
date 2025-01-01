@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
 
 class SearchTextfield extends StatefulWidget {
-  const SearchTextfield({super.key});
+  final VoidCallback? onTap;
+  final Function(String)? onChanged;
+
+  const SearchTextfield({
+    super.key,
+    this.onTap,
+    this.onChanged,
+  });
 
   @override
   State<SearchTextfield> createState() => _SearchTextfieldState();
@@ -11,18 +18,20 @@ class SearchTextfield extends StatefulWidget {
 class _SearchTextfieldState extends State<SearchTextfield> {
   @override
   Widget build(BuildContext context) {
-    return const SearchBar(
+    return SearchBar(
+      onChanged: (value) => widget.onChanged!(value),
+      onTap: () => widget.onTap?.call(),
       hintText: 'Search...',
-      padding: WidgetStatePropertyAll(
+      padding: const WidgetStatePropertyAll(
         EdgeInsets.symmetric(horizontal: 14),
       ),
-      hintStyle: WidgetStatePropertyAll(
+      hintStyle: const WidgetStatePropertyAll(
         TextStyle(color: AppColors.textTertiary),
       ),
       shadowColor: null,
-      elevation: WidgetStatePropertyAll(0),
-      backgroundColor: WidgetStatePropertyAll(AppColors.darkBgSecondary),
-      leading: Icon(Icons.search, color: AppColors.textTertiary),
+      elevation: const WidgetStatePropertyAll(0),
+      backgroundColor: const WidgetStatePropertyAll(AppColors.darkBgSecondary),
+      leading: const Icon(Icons.search, color: AppColors.textTertiary),
     );
   }
 }

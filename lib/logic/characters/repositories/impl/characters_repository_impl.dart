@@ -8,7 +8,30 @@ class CharactersRepositoryImpl implements CharactersRepository {
   CharactersRepositoryImpl(this.service);
 
   @override
-  Future<CharactersAllModel> getAllCharacters(int? page) {
-    return service.getAllCharacters(page);
+  Future<CharactersAllModel> getCharacters(
+    int? page,
+    String? name,
+    String? status,
+    String? species,
+    String? type,
+    String? gender,
+  ) {
+    return service.getCharacters(
+      page,
+      name,
+      status,
+      species,
+      type,
+      gender,
+    );
+  }
+
+  @override
+  Future<List<Character>> getMultipleCharacters(
+    List<int>? characters,
+  ) {
+    return service.getMultipleCharacters(
+      characters,
+    );
   }
 }

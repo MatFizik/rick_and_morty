@@ -19,28 +19,46 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
 
   Future<void> _onEvent(CharactersEvent event, Emitter<CharactersState> emit) {
     return event.map(
-      getAllCharacters: (data) async {
+      getCharacters: (data) async {
         try {
           if (data.page != null && data.page! != 1) {
             emit(const CharactersState.loadingGetMoreCharacters());
           } else {
-            emit(const CharactersState.loadingGetAllCharacters());
+            emit(const CharactersState.loadingGetCharacters());
           }
 
-          CharactersAllModel list =
-              await repository.getAllCharacters(data.page);
+          CharactersAllModel list = await repository.getCharacters(
+            data.page,
+            data.name,
+            data.status,
+            data.species,
+            data.type,
+            data.gender,
+          );
 
           if (data.page != null && data.page! != 1) {
             emit(CharactersState.successGetMoreCharacters(list));
           } else {
-            emit(CharactersState.successGetAllCharacters(list));
+            emit(CharactersState.successGetCharacters(list));
           }
         } catch (err) {
           if (data.page != null && data.page! != 1) {
             emit(CharactersState.errorGetMoreCharacters(err));
           } else {
-            emit(CharactersState.errorGetAllCharacters(err));
+            emit(CharactersState.errorGetCharacters(err));
           }
+        }
+      },
+      getMultipleCharacters: (data) async {
+        try {
+          emit(const CharactersState.loadingGetMultipleCharacters());
+
+          List<Character> list =
+              await repository.getMultipleCharacters(data.characters);
+
+          emit(CharactersState.successGetMultipleCharacters(list));
+        } catch (err) {
+          emit(CharactersState.errorGetMultipleCharacters(err));
         }
       },
     );
