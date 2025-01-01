@@ -6,7 +6,7 @@ class ImageAssets {
   static const String locationIconSvg = '${_baseSvgPath}locationIcon.svg';
   static const String episodeIconSvg = '${_baseSvgPath}episodeIcon.svg';
 
-  static const String filterIcon = '${_basePath}filterIcon.png';
+  static const String filterIcon = '${_basePath}filter.png';
   static const String searchIcon = '${_basePath}searchIcon.png';
 
   static const String characterIcon = '${_basePath}characterIcon.png';

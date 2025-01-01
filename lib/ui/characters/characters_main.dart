@@ -22,18 +22,19 @@ class CharactersMainScreen extends StatefulWidget {
 }
 
 class _CharactersMainScreenState extends State<CharactersMainScreen> {
-  late ScrollController _scrollController;
   CharactersAllModel? characters;
   List<Character>? filteredCharacter;
 
   int _currentPage = 1;
+
   late int _maxPage;
+  late ScrollController _scrollController;
+
+  CharactersFilters filters = CharactersFilters();
 
   bool cardView = false;
   bool isLoadingMore = false;
   bool isSearch = false;
-
-  List<String> filterList = [];
 
   String searchName = '';
 
@@ -58,7 +59,13 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
     _currentPage = 1;
     BlocProvider.of<CharactersBloc>(context).add(
       CharactersEvent.getCharacters(
-          _currentPage, searchName, null, null, null, null),
+        _currentPage,
+        searchName,
+        filters.status,
+        filters.species,
+        filters.type,
+        filters.gender,
+      ),
     );
   }
 
@@ -70,7 +77,13 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
         _currentPage += 1;
         BlocProvider.of<CharactersBloc>(context).add(
           CharactersEvent.getCharacters(
-              _currentPage, searchName, null, null, null, null),
+            _currentPage,
+            searchName,
+            filters.status,
+            filters.species,
+            filters.type,
+            filters.gender,
+          ),
         );
       }
     }
@@ -82,7 +95,13 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
     isSearch = true;
     BlocProvider.of<CharactersBloc>(context).add(
       CharactersEvent.getCharacters(
-          _currentPage, characterName, null, null, null, null),
+        _currentPage,
+        characterName,
+        filters.status,
+        filters.species,
+        filters.type,
+        filters.gender,
+      ),
     );
   }
 
@@ -99,6 +118,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
             : null,
         title: SearchTextfield(
           onChanged: onSearch,
+          filters: filters,
         ),
       ),
       body: RefreshIndicator(
@@ -332,4 +352,18 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
       ),
     );
   }
+}
+
+class CharactersFilters {
+  late String? status;
+  late String? type;
+  late String? species;
+  late String? gender;
+
+  CharactersFilters({
+    this.status,
+    this.type,
+    this.gender,
+    this.species,
+  });
 }
