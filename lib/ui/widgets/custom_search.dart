@@ -12,7 +12,7 @@ class _SearchTextfieldState extends State<SearchTextfield> {
   @override
   Widget build(BuildContext context) {
     return const SearchBar(
-      hintText: 'Search character...',
+      hintText: 'Search...',
       padding: WidgetStatePropertyAll(
         EdgeInsets.symmetric(horizontal: 14),
       ),
