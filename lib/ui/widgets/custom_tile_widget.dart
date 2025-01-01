@@ -9,6 +9,7 @@ class CustomTileWidget extends StatefulWidget {
   final bool imageCircle;
   final bool actionIcon;
   final String status;
+  final Color? statusColor;
   final String imgPath;
   final VoidCallback? onTap;
 
@@ -21,6 +22,7 @@ class CustomTileWidget extends StatefulWidget {
     this.imageCircle = true,
     this.actionIcon = false,
     this.onTap,
+    this.statusColor,
   });
 
   @override
@@ -71,9 +73,7 @@ class _CustomTileWidgetState extends State<CustomTileWidget> {
                         Text(
                           widget.status,
                           style: TextStyle(
-                            color: widget.status == 'Alive'
-                                ? AppColors.green
-                                : AppColors.red,
+                            color: widget.statusColor ?? AppColors.blue,
                           ),
                         ),
                         Text(

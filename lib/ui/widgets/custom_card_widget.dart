@@ -9,6 +9,7 @@ class CustomCardWidget extends StatefulWidget {
   final bool imageCircle;
   final bool actionIcon;
   final String status;
+  final Color? statusColor;
   final String imgPath;
 
   const CustomCardWidget({
@@ -19,6 +20,7 @@ class CustomCardWidget extends StatefulWidget {
     required this.imgPath,
     this.imageCircle = true,
     this.actionIcon = false,
+    this.statusColor,
   });
 
   @override
@@ -49,7 +51,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
           Text(
             widget.status,
             style: TextStyle(
-              color: widget.status == 'Alive' ? AppColors.green : AppColors.red,
+              color: widget.statusColor ?? AppColors.blue,
             ),
           ),
           Text(
@@ -59,6 +61,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
               fontSize: 16,
               color: AppColors.textPrimary,
             ),
+            overflow: TextOverflow.ellipsis,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

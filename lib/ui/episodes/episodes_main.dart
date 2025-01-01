@@ -182,7 +182,10 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                                                 //   );
                                                 // },
                                               )
-                                            : const ShimmerTileWidget(),
+                                            : index <
+                                                    (episodes?.info?.count ?? 0)
+                                                ? const ShimmerTileWidget()
+                                                : const SizedBox(),
                                         const SizedBox(height: 24)
                                       ],
                                     );
@@ -213,11 +216,14 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                                                     '',
                                                 status: episodes
                                                         ?.episodes[index]
-                                                        .airDate ??
+                                                        .episode ??
                                                     '',
                                                 imgPath: image,
                                               )
-                                            : const ShimmerCardWidget(),
+                                            : index <
+                                                    (episodes?.info?.count ?? 0)
+                                                ? const ShimmerCardWidget()
+                                                : const SizedBox(),
                                         const SizedBox(height: 24),
                                       ],
                                     );
