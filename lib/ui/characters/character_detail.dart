@@ -16,6 +16,7 @@ import 'package:rick_and_morty/ui/widgets/custom_mini_tile.dart';
 
 class CharacterDetailScreen extends StatefulWidget {
   final Character character;
+
   const CharacterDetailScreen({
     super.key,
     required this.character,
@@ -62,10 +63,9 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                     width: double.infinity,
                     height: 200,
                     child: BackdropFilter(
-                      filter: ImageFilter.blur(
-                          sigmaX: 5.0, sigmaY: 5.0), // Параметры размытия
+                      filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
                       child: Container(
-                        color: Colors.transparent, // Прозрачный цвет
+                        color: Colors.transparent,
                       ),
                     ),
                   ),

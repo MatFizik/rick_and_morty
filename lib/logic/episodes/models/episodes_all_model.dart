@@ -53,8 +53,13 @@ class Episode {
   String? airDate;
   @JsonKey(name: "episode")
   String? episode;
-  @JsonKey(name: "characters")
-  List<String>? characters;
+
+  @JsonKey(
+      name: "characters",
+      fromJson: _charactersFromJson,
+      toJson: _charactersToJson)
+  List<int>? characters;
+
   @JsonKey(name: "url")
   String? url;
   @JsonKey(name: "created")
@@ -74,4 +79,18 @@ class Episode {
       _$EpisodeFromJson(json);
 
   Map<String, dynamic> toJson() => _$EpisodeToJson(this);
+
+  static List<int> _charactersFromJson(List<dynamic> urls) {
+    return urls.map((url) {
+      final parts = url.split('/');
+      return int.parse(parts.last);
+    }).toList();
+  }
+
+  static List<String> _charactersToJson(List<int>? ids) {
+    return ids
+            ?.map((id) => 'https://rickandmortyapi.com/api/character/$id')
+            .toList() ??
+        [];
+  }
 }

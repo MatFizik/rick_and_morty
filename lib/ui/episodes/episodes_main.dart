@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/assets.dart';
+import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
+import 'package:rick_and_morty/logic/characters/repositories/impl/characters_repository_impl.dart';
+import 'package:rick_and_morty/logic/characters/services/characters_service.dart';
 import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
 import 'package:rick_and_morty/logic/episodes/models/episodes_all_model.dart';
 import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
@@ -229,10 +232,11 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                                                       builder: (context) =>
                                                           BlocProvider(
                                                         create: (_) =>
-                                                            EpisodesBloc(
-                                                          EpisodesRepositoryImpl(
-                                                            EpisodesServices(
-                                                                DioClient.dio),
+                                                            CharactersBloc(
+                                                          CharactersRepositoryImpl(
+                                                            CharactersService(
+                                                              DioClient.dio,
+                                                            ),
                                                           ),
                                                         ),
                                                         child:

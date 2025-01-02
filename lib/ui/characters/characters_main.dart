@@ -181,6 +181,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                       ),
                     );
                   }
+                  return null;
                 },
                 orElse: () {
                   return Padding(
@@ -260,7 +261,8 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                                             EpisodesBloc(
                                                           EpisodesRepositoryImpl(
                                                             EpisodesServices(
-                                                                DioClient.dio),
+                                                              DioClient.dio,
+                                                            ),
                                                           ),
                                                         ),
                                                         child:
@@ -336,7 +338,8 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                                             EpisodesBloc(
                                                           EpisodesRepositoryImpl(
                                                             EpisodesServices(
-                                                                DioClient.dio),
+                                                              DioClient.dio,
+                                                            ),
                                                           ),
                                                         ),
                                                         child:

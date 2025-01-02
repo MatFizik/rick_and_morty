@@ -9,6 +9,7 @@ import 'package:rick_and_morty/logic/characters/repositories/impl/characters_rep
 import 'package:rick_and_morty/logic/characters/services/characters_service.dart';
 import 'package:rick_and_morty/logic/episodes/models/episodes_all_model.dart';
 import 'package:rick_and_morty/logic/utils/logger.dart';
+import 'package:rick_and_morty/ui/characters/characters_in_episode.dart';
 import 'package:rick_and_morty/ui/characters/characters_main.dart';
 import 'package:rick_and_morty/ui/widgets/custom_mini_tile.dart';
 
@@ -156,6 +157,10 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
                       ),
                     ],
                   ),
+                  CharactersInEpisodeWidget(
+                    episodeId: widget.episode.id,
+                    charactersId: widget.episode.characters,
+                  )
                 ],
               ),
             ),

@@ -41,9 +41,7 @@ Episode _$EpisodeFromJson(Map<String, dynamic> json) => Episode(
       name: json['name'] as String?,
       airDate: json['air_date'] as String?,
       episode: json['episode'] as String?,
-      characters: (json['characters'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+      characters: Episode._charactersFromJson(json['characters'] as List),
       url: json['url'] as String?,
       created: json['created'] as String?,
     );
@@ -53,7 +51,7 @@ Map<String, dynamic> _$EpisodeToJson(Episode instance) => <String, dynamic>{
       'name': instance.name,
       'air_date': instance.airDate,
       'episode': instance.episode,
-      'characters': instance.characters,
+      'characters': Episode._charactersToJson(instance.characters),
       'url': instance.url,
       'created': instance.created,
     };
