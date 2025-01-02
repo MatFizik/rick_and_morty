@@ -28,143 +28,150 @@ class EpisodeDetailScreen extends StatefulWidget {
 class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
+    return BlocProvider(
+      create: (_) => CharactersBloc(
+        CharactersRepositoryImpl(
+          CharactersService(DioClient.dio),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                ClipRRect(
-                  child: Container(
-                    height: 251,
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(ImageAssets.episodeBackground),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(
-                        sigmaX: 2.0,
-                        sigmaY: 2.0,
-                      ),
-                      child: Container(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: -50,
-                  left: (MediaQuery.of(context).size.width - 100) / 2,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(1000),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      color: AppColors.blue,
-                      child: const Center(
-                        child: Icon(
-                          Icons.play_arrow_rounded,
-                          size: 60,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
             ),
-            const SizedBox(height: 80),
-            Text(
-              textAlign: TextAlign.center,
-              widget.episode.name ?? '',
-              style: const TextStyle(fontSize: 34, color: Colors.white),
-            ),
-            Text(
-              widget.episode.episode ?? '',
-              style: const TextStyle(
-                fontSize: 14,
-                color: AppColors.blue,
-              ),
-            ),
-            const SizedBox(height: 24),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'Зигерионцы помещают Джерри и Рика в симуляцию, чтобы узнать секрет изготовления концен-трирован- ной темной материи.',
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 13, color: Colors.white),
-              ),
-            ),
-            const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Stack(
+                clipBehavior: Clip.none,
                 children: [
-                  CustomMiniTileWidget(
-                    title: 'Primere',
-                    subtitle: widget.episode.airDate ?? '',
-                  ),
-                  const SizedBox(height: 36),
-                  const Divider(thickness: 1),
-                  const SizedBox(height: 36),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Characters',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
+                  ClipRRect(
+                    child: Container(
+                      height: 251,
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(ImageAssets.episodeBackground),
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => BlocProvider(
-                                create: (_) => CharactersBloc(
-                                  CharactersRepositoryImpl(
-                                    CharactersService(DioClient.dio),
-                                  ),
-                                ),
-                                child: const CharactersMainScreen(),
-                              ),
-                            ),
-                          );
-                        },
-                        child: const Text(
-                          'All characters',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: AppColors.textTertiary,
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(
+                          sigmaX: 1.0,
+                          sigmaY: 1.0,
+                        ),
+                        child: Container(
+                          color: Colors.transparent,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: -50,
+                    left: (MediaQuery.of(context).size.width - 100) / 2,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(1000),
+                      child: Container(
+                        width: 100,
+                        height: 100,
+                        color: AppColors.blue,
+                        child: const Center(
+                          child: Icon(
+                            Icons.play_arrow_rounded,
+                            size: 60,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  CharactersInEpisodeWidget(
-                    episodeId: widget.episode.id,
-                    charactersId: widget.episode.characters,
+                    ),
                   )
                 ],
               ),
-            ),
-          ],
+              const SizedBox(height: 80),
+              Text(
+                textAlign: TextAlign.center,
+                widget.episode.name ?? '',
+                style: const TextStyle(fontSize: 34, color: Colors.white),
+              ),
+              Text(
+                widget.episode.episode ?? '',
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: AppColors.blue,
+                ),
+              ),
+              const SizedBox(height: 24),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  'Зигерионцы помещают Джерри и Рика в симуляцию, чтобы узнать секрет изготовления концен-трирован- ной темной материи.',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 13, color: Colors.white),
+                ),
+              ),
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    CustomMiniTileWidget(
+                      title: 'Primere',
+                      subtitle: widget.episode.airDate ?? '',
+                    ),
+                    const SizedBox(height: 36),
+                    const Divider(thickness: 1),
+                    const SizedBox(height: 36),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Characters',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (_) => CharactersBloc(
+                                    CharactersRepositoryImpl(
+                                      CharactersService(DioClient.dio),
+                                    ),
+                                  ),
+                                  child: const CharactersMainScreen(),
+                                ),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'All characters',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: AppColors.textTertiary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    CharactersInEpisodeWidget(
+                      episodeId: widget.episode.id,
+                      charactersId: widget.episode.characters,
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

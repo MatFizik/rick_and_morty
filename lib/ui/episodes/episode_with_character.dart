@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
+import 'package:rick_and_morty/logic/characters/repositories/impl/characters_repository_impl.dart';
+import 'package:rick_and_morty/logic/characters/services/characters_service.dart';
 import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
 import 'package:rick_and_morty/logic/episodes/models/episodes_all_model.dart';
+import 'package:rick_and_morty/logic/utils/logger.dart';
+import 'package:rick_and_morty/ui/episodes/episode_detail_screen.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_tile_widget.dart';
 
@@ -74,6 +79,24 @@ class _EpisodesWithCharactersWidgetState
                             description: list[index].airDate ?? '',
                             status: list[index].episode ?? '',
                             imgPath: widget.img,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (_) => CharactersBloc(
+                                      CharactersRepositoryImpl(
+                                        CharactersService(
+                                          DioClient.dio,
+                                        ),
+                                      ),
+                                    ),
+                                    child: EpisodeDetailScreen(
+                                      episode: list[index],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                           const SizedBox(height: 24)
                         ],

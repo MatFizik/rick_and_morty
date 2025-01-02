@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/assets.dart';
@@ -23,15 +25,20 @@ class EpisodesMainScreen extends StatefulWidget {
 }
 
 class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
-  late ScrollController _scrollController;
   EpisodesAllModel? episodes;
-  final String image =
-      'https://rickandmortyapi.com/api/character/avatar/6.jpeg';
+  Random random = Random();
+
+  late ScrollController _scrollController;
+  late String image;
+  late int _maxPage;
 
   int _currentPage = 1;
-  late int _maxPage;
+
   bool cardView = false;
   bool isLoadingMore = false;
+  bool isSearch = false;
+
+  String? searchName;
 
   @override
   void initState() {
@@ -39,6 +46,9 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
       EpisodesEvent.getAllEpisodes(_currentPage),
     );
 
+    int randomNumber = random.nextInt(40) + 1;
+    image =
+        'https://rickandmortyapi.com/api/character/avatar/$randomNumber.jpeg';
     _scrollController = ScrollController();
     _scrollController.addListener(_onScroll);
     super.initState();
@@ -176,7 +186,8 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                                                             EpisodesBloc(
                                                           EpisodesRepositoryImpl(
                                                             EpisodesServices(
-                                                                DioClient.dio),
+                                                              DioClient.dio,
+                                                            ),
                                                           ),
                                                         ),
                                                         child:

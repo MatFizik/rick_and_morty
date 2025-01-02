@@ -23,7 +23,6 @@ class CharactersMainScreen extends StatefulWidget {
 
 class _CharactersMainScreenState extends State<CharactersMainScreen> {
   CharactersAllModel? characters;
-  List<Character>? filteredCharacter;
 
   int _currentPage = 1;
 
@@ -140,9 +139,6 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                   characters?.characters.addAll(list.characters);
                   isLoadingMore = false;
                 }
-              },
-              successGetMultipleCharacters: (list) {
-                filteredCharacter = list;
               },
               successGetCharacters: (list) {
                 if (characters == null || isSearch) {
