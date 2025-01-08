@@ -145,6 +145,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                   characters = list;
                   isLoadingMore = false;
                   _maxPage = list.info.pages;
+                  isSearch = false;
                 }
               },
               errorGetCharacters: (err) => isLoadingMore = false,

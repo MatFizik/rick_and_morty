@@ -88,6 +88,20 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
     }
   }
 
+  void onSearch(String locationName) {
+    _currentPage = 1;
+    searchName = locationName;
+    isSearch = true;
+    BlocProvider.of<LocationsBloc>(context).add(
+      LocationsEvent.getLocations(
+        _currentPage,
+        locationName,
+        null,
+        null,
+      ),
+    );
+  }
+
   String imageRand() {
     int randomNumber = random.nextInt(40) + 1;
     return 'https://rickandmortyapi.com/api/character/avatar/$randomNumber.jpeg';
@@ -97,7 +111,9 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const SearchTextfield(),
+        title: SearchTextfield(
+          onChanged: onSearch,
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: _refresh,
@@ -119,10 +135,11 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
                 }
               },
               successGetLocations: (list) {
-                if (locations == null) {
+                if (locations == null || isSearch) {
                   locations = list;
                   isLoadingMore = false;
                   _maxPage = list.info!.pages!;
+                  isSearch = false;
                 }
               },
               errorGetLocations: (err) => isLoadingMore = false,
