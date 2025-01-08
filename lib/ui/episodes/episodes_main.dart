@@ -46,12 +46,14 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
       EpisodesEvent.getAllEpisodes(_currentPage),
     );
 
-    int randomNumber = random.nextInt(40) + 1;
-    image =
-        'https://rickandmortyapi.com/api/character/avatar/$randomNumber.jpeg';
     _scrollController = ScrollController();
     _scrollController.addListener(_onScroll);
     super.initState();
+  }
+
+  String imageRand() {
+    int randomNumber = random.nextInt(40) + 1;
+    return 'https://rickandmortyapi.com/api/character/avatar/$randomNumber.jpeg';
   }
 
   @override
@@ -176,7 +178,7 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                                                         ?.episodes[index]
                                                         .episode ??
                                                     '',
-                                                imgPath: image,
+                                                imgPath: imageRand(),
                                                 onTap: () {
                                                   Navigator.of(context).push(
                                                     MaterialPageRoute(
@@ -236,7 +238,7 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                                                         ?.episodes[index]
                                                         .episode ??
                                                     '',
-                                                imgPath: image,
+                                                imgPath: imageRand(),
                                                 onTap: () {
                                                   Navigator.of(context).push(
                                                     MaterialPageRoute(

@@ -65,7 +65,8 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                         image: DecorationImage(
                           opacity: 0.3,
                           image: CachedNetworkImageProvider(
-                              widget.character.image),
+                            widget.character.image,
+                          ),
                           fit: BoxFit.cover,
                         ),
                       ),

@@ -8,6 +8,9 @@ import 'package:rick_and_morty/logic/characters/services/characters_service.dart
 import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
 import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
 import 'package:rick_and_morty/logic/episodes/services/episodes_services.dart';
+import 'package:rick_and_morty/logic/locations/bloc/locations_bloc.dart';
+import 'package:rick_and_morty/logic/locations/repositories/impl/locations_repository_impl.dart';
+import 'package:rick_and_morty/logic/locations/services/locations_service.dart';
 import 'package:rick_and_morty/logic/utils/logger.dart';
 import 'package:rick_and_morty/ui/characters/characters_main.dart';
 import 'package:rick_and_morty/ui/episodes/episodes_main.dart';
@@ -52,6 +55,9 @@ class _MainWrapState extends State<MainWrap> {
     final episodesService = EpisodesServices(dio);
     final episodesRepository = EpisodesRepositoryImpl(episodesService);
 
+    final locationsService = LocationsService(dio);
+    final locationsRepository = LocationsRepositoryImpl(locationsService);
+
     List<Widget> screens = [
       const CharactersMainScreen(),
       const LocationMainScreen(),
@@ -67,6 +73,9 @@ class _MainWrapState extends State<MainWrap> {
           ),
           BlocProvider(
             create: (_) => EpisodesBloc(episodesRepository),
+          ),
+          BlocProvider(
+            create: (_) => LocationsBloc(locationsRepository),
           )
         ],
         child: IndexedStack(
