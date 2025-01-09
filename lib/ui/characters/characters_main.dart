@@ -153,7 +153,6 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
             );
           },
           builder: (context, state) {
-            print('jfsdfsdhfhf ${state}');
             return AnimatedSwitcher(
               duration: const Duration(milliseconds: 500),
               child: state.maybeWhen(

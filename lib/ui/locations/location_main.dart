@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rick_and_morty/constants/assets.dart';
 
 import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
 import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
@@ -153,6 +154,24 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
                   return cardView
                       ? const ShimmerGridWidget()
                       : const ShimmerListWidget();
+                },
+                errorGetLocations: (err) {
+                  if (err.response.statusCode == 404) {
+                    return Center(
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 120),
+                          Image.asset(ImageAssets.searchEmpty),
+                          const SizedBox(height: 45),
+                          const Text(
+                            'Такой локации нет',
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                  return null;
                 },
                 orElse: () {
                   return Padding(
