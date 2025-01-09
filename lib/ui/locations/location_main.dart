@@ -10,6 +10,7 @@ import 'package:rick_and_morty/logic/episodes/services/episodes_services.dart';
 import 'package:rick_and_morty/logic/locations/bloc/locations_bloc.dart';
 import 'package:rick_and_morty/logic/locations/models/locations_model.dart';
 import 'package:rick_and_morty/logic/utils/logger.dart';
+import 'package:rick_and_morty/ui/locations/location_detail_screen.dart';
 import 'package:rick_and_morty/ui/widgets/custom_big_card_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_search.dart';
@@ -195,6 +196,7 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
                             child: ListView.builder(
                           controller: _scrollController,
                           shrinkWrap: true,
+                          padding: const EdgeInsets.all(0),
                           itemCount: (locations?.results?.length ?? 0) + 3,
                           itemBuilder: (context, index) {
                             return Column(
@@ -214,20 +216,20 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
                                         onTap: () {
                                           Navigator.of(context).push(
                                             MaterialPageRoute(
-                                              builder: (context) => BlocProvider(
-                                                  create: (_) => EpisodesBloc(
-                                                        EpisodesRepositoryImpl(
-                                                          EpisodesServices(
-                                                            DioClient.dio,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                  child: Placeholder()
-                                                  //     LocationDetailScreen(
-                                                  //   episode: locations!
-                                                  //       .results?[index],
-                                                  // ),
+                                              builder: (context) =>
+                                                  BlocProvider(
+                                                create: (_) => EpisodesBloc(
+                                                  EpisodesRepositoryImpl(
+                                                    EpisodesServices(
+                                                      DioClient.dio,
+                                                    ),
                                                   ),
+                                                ),
+                                                child: LocationDetailScreen(
+                                                  locations: locations!
+                                                      .results?[index],
+                                                ),
+                                              ),
                                             ),
                                           );
                                         },

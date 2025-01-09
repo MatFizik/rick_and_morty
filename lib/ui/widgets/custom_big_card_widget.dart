@@ -40,7 +40,6 @@ class _CustomBigCardWidgetState extends State<CustomBigCardWidget> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Container(
-          width: 343,
           height: 218,
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -51,7 +50,7 @@ class _CustomBigCardWidgetState extends State<CustomBigCardWidget> {
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              width: 343,
+              width: double.infinity,
               color: AppColors.darkBgSecondary,
               height: 68,
               child: Padding(
