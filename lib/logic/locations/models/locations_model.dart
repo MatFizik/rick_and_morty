@@ -53,8 +53,12 @@ class Location {
   String? type;
   @JsonKey(name: "dimension")
   String? dimension;
-  @JsonKey(name: "residents")
-  List<String>? residents;
+  @JsonKey(
+    name: "residents",
+    fromJson: _residentsFromJson,
+    toJson: _residentsToJson,
+  )
+  List<int> residents;
   @JsonKey(name: "url")
   String? url;
   @JsonKey(name: "created")
@@ -65,7 +69,7 @@ class Location {
     this.name,
     this.type,
     this.dimension,
-    this.residents,
+    required this.residents,
     this.url,
     this.created,
   });
@@ -74,4 +78,14 @@ class Location {
       _$LocationFromJson(json);
 
   Map<String, dynamic> toJson() => _$LocationToJson(this);
+}
+
+List<int> _residentsFromJson(List<dynamic> residents) {
+  return residents.map((e) => int.parse(e.toString().split('/').last)).toList();
+}
+
+List<String> _residentsToJson(List<int> residents) {
+  return residents
+      .map((e) => "https://rickandmortyapi.com/api/character/$e")
+      .toList();
 }

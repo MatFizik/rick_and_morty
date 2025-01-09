@@ -136,7 +136,7 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                     ),
                     CharactersInEpisodeWidget(
                       episodeId: widget.locations?.id,
-                      charactersId: [1, 2, 3],
+                      charactersId: widget.locations?.residents,
                     )
                   ],
                 ),
