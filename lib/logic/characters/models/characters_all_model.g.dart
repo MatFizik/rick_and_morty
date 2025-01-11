@@ -66,10 +66,10 @@ Map<String, dynamic> _$CharacterToJson(Character instance) => <String, dynamic>{
 
 Location _$LocationFromJson(Map<String, dynamic> json) => Location(
       name: json['name'] as String,
-      url: json['url'] as String,
+      url: _urlToId(json['url'] as String?),
     );
 
 Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
       'name': instance.name,
-      'url': instance.url,
+      'url': _idToUrl(instance.url),
     };

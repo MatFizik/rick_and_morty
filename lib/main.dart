@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rick_and_morty/constants/app_theme.dart';
 import 'package:rick_and_morty/constants/assets.dart';
 import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
@@ -26,9 +27,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppTheme.darkTheme,
-      home: const MainWrap(),
+    final dio = DioClient.dio;
+
+    final charactersService = CharactersService(dio);
+    final charactersRepository = CharactersRepositoryImpl(charactersService);
+
+    final episodesService = EpisodesServices(dio);
+    final episodesRepository = EpisodesRepositoryImpl(episodesService);
+
+    final locationsService = LocationsService(dio);
+    final locationsRepository = LocationsRepositoryImpl(locationsService);
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => CharactersBloc(charactersRepository),
+        ),
+        BlocProvider(
+          create: (_) => EpisodesBloc(episodesRepository),
+        ),
+        BlocProvider(
+          create: (_) => LocationsBloc(locationsRepository),
+        )
+      ],
+      child: MaterialApp(
+        theme: AppTheme.darkTheme,
+        home: const LoaderOverlay(
+          child: MainWrap(),
+        ),
+      ),
     );
   }
 }
@@ -47,17 +73,6 @@ class _MainWrapState extends State<MainWrap> {
 
   @override
   Widget build(BuildContext context) {
-    final dio = DioClient.dio;
-
-    final charactersService = CharactersService(dio);
-    final charactersRepository = CharactersRepositoryImpl(charactersService);
-
-    final episodesService = EpisodesServices(dio);
-    final episodesRepository = EpisodesRepositoryImpl(episodesService);
-
-    final locationsService = LocationsService(dio);
-    final locationsRepository = LocationsRepositoryImpl(locationsService);
-
     List<Widget> screens = [
       const CharactersMainScreen(),
       const LocationMainScreen(),
@@ -66,22 +81,9 @@ class _MainWrapState extends State<MainWrap> {
     ];
 
     return Scaffold(
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) => CharactersBloc(charactersRepository),
-          ),
-          BlocProvider(
-            create: (_) => EpisodesBloc(episodesRepository),
-          ),
-          BlocProvider(
-            create: (_) => LocationsBloc(locationsRepository),
-          )
-        ],
-        child: IndexedStack(
-          index: _currentIndex,
-          children: screens,
-        ),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,

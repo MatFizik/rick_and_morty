@@ -101,8 +101,13 @@ class Character {
 class Location {
   @JsonKey(name: "name")
   String name;
-  @JsonKey(name: "url")
-  String url;
+
+  @JsonKey(
+    name: "url",
+    fromJson: _urlToId,
+    toJson: _idToUrl,
+  )
+  int url;
 
   Location({
     required this.name,
@@ -113,6 +118,24 @@ class Location {
       _$LocationFromJson(json);
 
   Map<String, dynamic> toJson() => _$LocationToJson(this);
+}
+
+int _urlToId(String? url) {
+  if (url == null || url.isEmpty) {
+    return -1;
+  }
+  try {
+    return int.parse(url.split('/').last);
+  } catch (e) {
+    throw FormatException('Invalid URL format for id extraction: $url');
+  }
+}
+
+String _idToUrl(int id) {
+  if (id == -1) {
+    return "";
+  }
+  return "https://rickandmortyapi.com/api/location/$id";
 }
 
 List<int> _episodesFromJson(List<dynamic> episodes) {

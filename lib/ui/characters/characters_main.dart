@@ -4,10 +4,6 @@ import 'package:rick_and_morty/constants/app_colors.dart';
 import 'package:rick_and_morty/constants/assets.dart';
 import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/logic/characters/models/characters_all_model.dart';
-import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
-import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
-import 'package:rick_and_morty/logic/episodes/services/episodes_services.dart';
-import 'package:rick_and_morty/logic/utils/logger.dart';
 import 'package:rick_and_morty/ui/characters/character_detail.dart';
 import 'package:rick_and_morty/ui/widgets/custom_card_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
@@ -112,7 +108,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
             ? IconButton(
                 icon: const Icon(Icons.arrow_back),
                 color: Colors.white,
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => Navigator.of(context).canPop(),
               )
             : null,
         title: SearchTextfield(
@@ -252,21 +248,9 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                                   Navigator.of(context).push(
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          BlocProvider(
-                                                        create: (_) =>
-                                                            EpisodesBloc(
-                                                          EpisodesRepositoryImpl(
-                                                            EpisodesServices(
-                                                              DioClient.dio,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        child:
-                                                            CharacterDetailScreen(
-                                                          character: characters!
-                                                                  .characters[
-                                                              index],
-                                                        ),
+                                                          CharacterDetailScreen(
+                                                        character: characters!
+                                                            .characters[index],
                                                       ),
                                                     ),
                                                   );
@@ -329,21 +313,9 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                                   Navigator.of(context).push(
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          BlocProvider(
-                                                        create: (_) =>
-                                                            EpisodesBloc(
-                                                          EpisodesRepositoryImpl(
-                                                            EpisodesServices(
-                                                              DioClient.dio,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        child:
-                                                            CharacterDetailScreen(
-                                                          character: characters!
-                                                                  .characters[
-                                                              index],
-                                                        ),
+                                                          CharacterDetailScreen(
+                                                        character: characters!
+                                                            .characters[index],
                                                       ),
                                                     ),
                                                   );

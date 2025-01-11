@@ -25,6 +25,7 @@ class _CustomMiniTileWidgetState extends State<CustomMiniTileWidget> {
         if (widget.onTap != null) {
           widget.onTap!.call();
         }
+        null;
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
