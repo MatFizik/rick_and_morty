@@ -154,8 +154,14 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
               child: state.maybeWhen(
                 loadingGetCharacters: () {
                   return cardView
-                      ? const ShimmerGridWidget()
-                      : const ShimmerListWidget();
+                      ? const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 60),
+                          child: ShimmerGridWidget(),
+                        )
+                      : const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 60),
+                          child: ShimmerListWidget(),
+                        );
                 },
                 errorGetCharacters: (err) {
                   if (err.response.statusCode == 404) {
