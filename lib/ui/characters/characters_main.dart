@@ -5,6 +5,7 @@ import 'package:rick_and_morty/constants/assets.dart';
 import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/logic/characters/models/characters_all_model.dart';
 import 'package:rick_and_morty/ui/characters/character_detail.dart';
+import 'package:rick_and_morty/ui/characters/characters_filters_screen.dart';
 import 'package:rick_and_morty/ui/widgets/custom_card_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_tile_widget.dart';
@@ -84,7 +85,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
     }
   }
 
-  void onSearch(String characterName) {
+  void onFilter(String characterName) {
     _currentPage = 1;
     searchName = characterName;
     isSearch = true;
@@ -108,12 +109,25 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
             ? IconButton(
                 icon: const Icon(Icons.arrow_back),
                 color: Colors.white,
-                onPressed: () => Navigator.of(context).canPop(),
+                onPressed: () => Navigator.of(context).maybePop(),
               )
             : null,
         title: SearchTextfield(
-          onChanged: onSearch,
+          onChanged: onFilter,
           filters: filters,
+          onFilters: () {
+            Navigator.of(context)
+                .push(
+              MaterialPageRoute(
+                builder: (context) => CharactersFiltersScreen(
+                  filters: filters,
+                ),
+              ),
+            )
+                .then((_) {
+              onFilter('');
+            });
+          },
         ),
       ),
       body: RefreshIndicator(
