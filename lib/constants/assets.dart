@@ -20,6 +20,7 @@ class ImageAssets {
 
   static const String episodeBackground = '${_basePath}episode_background.png';
   static const String searchEmpty = '${_basePath}search_empty.png';
+  static const String filterEmpty = '${_basePath}rickFace.png';
 
   static const String gridCardIcon = '${_basePath}gridCard.png';
   static const String gridListIcon = '${_basePath}gridList.png';

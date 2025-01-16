@@ -10,6 +10,7 @@ import 'package:rick_and_morty/ui/widgets/custom_card_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_tile_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_search.dart';
+import 'package:rick_and_morty/ui/widgets/empty_state_widget.dart';
 
 class CharactersMainScreen extends StatefulWidget {
   const CharactersMainScreen({super.key});
@@ -32,7 +33,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
   bool isLoadingMore = false;
   bool isSearch = false;
 
-  String? searchName;
+  String searchName = '';
 
   @override
   void initState() {
@@ -88,7 +89,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
   void onFilter(String characterName) {
     _currentPage = 1;
     searchName = characterName;
-    isSearch = true;
+    isSearch = characterName != '';
     BlocProvider.of<CharactersBloc>(context).add(
       CharactersEvent.getCharacters(
         _currentPage,
@@ -125,7 +126,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
               ),
             )
                 .then((_) {
-              onFilter('');
+              onFilter(searchName);
             });
           },
         ),
@@ -179,19 +180,17 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                 },
                 errorGetCharacters: (err) {
                   if (err.response.statusCode == 404) {
-                    return Center(
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 120),
-                          Image.asset(ImageAssets.searchEmpty),
-                          const SizedBox(height: 45),
-                          const Text(
-                            'Персонажа с таким\n именем нет',
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    );
+                    return searchName != ''
+                        ? const EmptyStateWidget(
+                            key: ValueKey('searchEmpty'),
+                            title: 'Персонажа с таким\n именем нет',
+                            imgPath: ImageAssets.searchEmpty,
+                          )
+                        : const EmptyStateWidget(
+                            key: ValueKey('filterEmpty'),
+                            title: 'По данным фильтра\nничего не найдено',
+                            imgPath: ImageAssets.filterEmpty,
+                          );
                   }
                   return null;
                 },
@@ -243,7 +242,8 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                                         .name ??
                                                     '',
                                                 description:
-                                                    '${characters?.characters[index].species}, ${characters?.characters[index].gender}',
+                                                    '${characters?.characters[index].species},'
+                                                    '${characters?.characters[index].gender}',
                                                 status: characters
                                                         ?.characters[index]
                                                         .status ??
@@ -308,7 +308,8 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                                         .name ??
                                                     '',
                                                 description:
-                                                    '${characters?.characters[index].species}, ${characters?.characters[index].gender}',
+                                                    '${characters?.characters[index].species},'
+                                                    '${characters?.characters[index].gender}',
                                                 status: characters
                                                         ?.characters[index]
                                                         .status ??
