@@ -77,7 +77,8 @@ class _EpisodesWithCharactersWidgetState
                             title: list[index].name ?? '',
                             imageCircle: false,
                             description: list[index].airDate ?? '',
-                            status: list[index].episode ?? '',
+                            status:
+                                "Season ${list[index].seasonId} Episode ${list[index].episodeId}",
                             imgPath: widget.img,
                             onTap: () {
                               Navigator.of(context).push(

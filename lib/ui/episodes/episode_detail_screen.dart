@@ -100,12 +100,25 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
                 widget.episode.name ?? '',
                 style: const TextStyle(fontSize: 34, color: Colors.white),
               ),
-              Text(
-                widget.episode.episode ?? '',
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: AppColors.blue,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Season ${widget.episode.seasonId}",
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: AppColors.green,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Text(
+                    "Episode ${widget.episode.episodeId}",
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: AppColors.blue,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 24),
               const Padding(

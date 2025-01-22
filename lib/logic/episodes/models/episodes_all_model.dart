@@ -65,6 +65,12 @@ class Episode {
   @JsonKey(name: "created")
   String? created;
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  int? seasonId;
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  int? episodeId;
+
   Episode({
     this.id,
     this.name,
@@ -73,12 +79,32 @@ class Episode {
     this.characters,
     this.url,
     this.created,
-  });
+  }) {
+    if (episode != null) {
+      final match = RegExp(r'^S(\d+)E(\d+)$').firstMatch(episode!);
+      if (match != null) {
+        seasonId = int.tryParse(match.group(1) ?? '0');
+        episodeId = int.tryParse(match.group(2) ?? '0');
+      }
+    }
+  }
 
-  factory Episode.fromJson(Map<String, dynamic> json) =>
-      _$EpisodeFromJson(json);
+  factory Episode.fromJson(Map<String, dynamic> json) {
+    final instance = _$EpisodeFromJson(json);
+    if (instance.episode != null) {
+      final match = RegExp(r'^S(\d+)E(\d+)$').firstMatch(instance.episode!);
+      if (match != null) {
+        instance.seasonId = int.tryParse(match.group(1) ?? '0');
+        instance.episodeId = int.tryParse(match.group(2) ?? '0');
+      }
+    }
+    return instance;
+  }
 
-  Map<String, dynamic> toJson() => _$EpisodeToJson(this);
+  Map<String, dynamic> toJson() {
+    final json = _$EpisodeToJson(this);
+    return json;
+  }
 
   static List<int> _charactersFromJson(List<dynamic> urls) {
     return urls.map((url) {

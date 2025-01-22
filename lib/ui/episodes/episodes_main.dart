@@ -174,10 +174,8 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                                                         .airDate ??
                                                     '',
                                                 imageCircle: false,
-                                                status: episodes
-                                                        ?.episodes[index]
-                                                        .episode ??
-                                                    '',
+                                                status:
+                                                    "Season ${episodes?.episodes[index].seasonId} Episode ${episodes?.episodes[index].episodeId}",
                                                 imgPath: imageRand(),
                                                 onTap: () {
                                                   Navigator.of(context).push(
@@ -234,10 +232,8 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                                                         ?.episodes[index]
                                                         .airDate ??
                                                     '',
-                                                status: episodes
-                                                        ?.episodes[index]
-                                                        .episode ??
-                                                    '',
+                                                status:
+                                                    "Season ${episodes?.episodes[index].seasonId} Episode ${episodes?.episodes[index].episodeId}",
                                                 imgPath: imageRand(),
                                                 onTap: () {
                                                   Navigator.of(context).push(
