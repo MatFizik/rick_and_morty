@@ -13,9 +13,9 @@ abstract class EpisodesServices {
   @GET('episode')
   Future<EpisodesAllModel> getEpisodes(
     @Query('page') int? page,
+    @Query('name') String? name,
   );
   @GET('episode/{episodes}')
   Future<List<Episode>> getFilteredEpisodes(
-    @Path('episodes') List<int> episodes,
-  );
+      @Path('episodes') List<int> episodes);
 }

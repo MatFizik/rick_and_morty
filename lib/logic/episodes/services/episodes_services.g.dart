@@ -24,9 +24,15 @@ class _EpisodesServices implements EpisodesServices {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<EpisodesAllModel> getEpisodes(int? page) async {
+  Future<EpisodesAllModel> getEpisodes(
+    int? page,
+    String? name,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'page': page};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'name': name,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;

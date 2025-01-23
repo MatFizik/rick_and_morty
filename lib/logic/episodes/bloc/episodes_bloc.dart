@@ -25,7 +25,10 @@ class EpisodesBloc extends Bloc<EpisodesEvent, EpisodesState> {
             emit(const EpisodesState.loadingGetAllEpisodes());
           }
 
-          EpisodesAllModel list = await repository.getAllEpisodes(data.page);
+          EpisodesAllModel list = await repository.getAllEpisodes(
+            data.page,
+            data.name,
+          );
           if (data.page != null && data.page! != 1) {
             emit(EpisodesState.successGetMoreEpisodes(list));
           } else {

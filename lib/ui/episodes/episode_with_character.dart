@@ -34,9 +34,7 @@ class _EpisodesWithCharactersWidgetState
   @override
   void initState() {
     BlocProvider.of<EpisodesBloc>(context).add(
-      EpisodesEvent.getFilteredEpisodes(
-        widget.episodesId,
-      ),
+      EpisodesEvent.getFilteredEpisodes(widget.episodesId),
     );
     super.initState();
   }

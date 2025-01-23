@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$EpisodesEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? page) getAllEpisodes,
+    required TResult Function(int? page, String? name) getAllEpisodes,
     required TResult Function(List<int> episodes) getFilteredEpisodes,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? page)? getAllEpisodes,
+    TResult? Function(int? page, String? name)? getAllEpisodes,
     TResult? Function(List<int> episodes)? getFilteredEpisodes,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? page)? getAllEpisodes,
+    TResult Function(int? page, String? name)? getAllEpisodes,
     TResult Function(List<int> episodes)? getFilteredEpisodes,
     required TResult orElse(),
   }) =>
@@ -83,7 +83,7 @@ abstract class _$$GetAllEpisodesImplCopyWith<$Res> {
           $Res Function(_$GetAllEpisodesImpl) then) =
       __$$GetAllEpisodesImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int? page});
+  $Res call({int? page, String? name});
 }
 
 /// @nodoc
@@ -100,12 +100,17 @@ class __$$GetAllEpisodesImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? page = freezed,
+    Object? name = freezed,
   }) {
     return _then(_$GetAllEpisodesImpl(
       freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int?,
+      freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -113,14 +118,16 @@ class __$$GetAllEpisodesImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GetAllEpisodesImpl implements _GetAllEpisodes {
-  const _$GetAllEpisodesImpl(this.page);
+  const _$GetAllEpisodesImpl(this.page, this.name);
 
   @override
   final int? page;
+  @override
+  final String? name;
 
   @override
   String toString() {
-    return 'EpisodesEvent.getAllEpisodes(page: $page)';
+    return 'EpisodesEvent.getAllEpisodes(page: $page, name: $name)';
   }
 
   @override
@@ -128,11 +135,12 @@ class _$GetAllEpisodesImpl implements _GetAllEpisodes {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetAllEpisodesImpl &&
-            (identical(other.page, page) || other.page == page));
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, page);
+  int get hashCode => Object.hash(runtimeType, page, name);
 
   /// Create a copy of EpisodesEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -146,30 +154,30 @@ class _$GetAllEpisodesImpl implements _GetAllEpisodes {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? page) getAllEpisodes,
+    required TResult Function(int? page, String? name) getAllEpisodes,
     required TResult Function(List<int> episodes) getFilteredEpisodes,
   }) {
-    return getAllEpisodes(page);
+    return getAllEpisodes(page, name);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? page)? getAllEpisodes,
+    TResult? Function(int? page, String? name)? getAllEpisodes,
     TResult? Function(List<int> episodes)? getFilteredEpisodes,
   }) {
-    return getAllEpisodes?.call(page);
+    return getAllEpisodes?.call(page, name);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? page)? getAllEpisodes,
+    TResult Function(int? page, String? name)? getAllEpisodes,
     TResult Function(List<int> episodes)? getFilteredEpisodes,
     required TResult orElse(),
   }) {
     if (getAllEpisodes != null) {
-      return getAllEpisodes(page);
+      return getAllEpisodes(page, name);
     }
     return orElse();
   }
@@ -207,9 +215,11 @@ class _$GetAllEpisodesImpl implements _GetAllEpisodes {
 }
 
 abstract class _GetAllEpisodes implements EpisodesEvent {
-  const factory _GetAllEpisodes(final int? page) = _$GetAllEpisodesImpl;
+  const factory _GetAllEpisodes(final int? page, final String? name) =
+      _$GetAllEpisodesImpl;
 
   int? get page;
+  String? get name;
 
   /// Create a copy of EpisodesEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -294,7 +304,7 @@ class _$GetFilteredEpisodesImpl implements _GetFilteredEpisodes {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? page) getAllEpisodes,
+    required TResult Function(int? page, String? name) getAllEpisodes,
     required TResult Function(List<int> episodes) getFilteredEpisodes,
   }) {
     return getFilteredEpisodes(episodes);
@@ -303,7 +313,7 @@ class _$GetFilteredEpisodesImpl implements _GetFilteredEpisodes {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? page)? getAllEpisodes,
+    TResult? Function(int? page, String? name)? getAllEpisodes,
     TResult? Function(List<int> episodes)? getFilteredEpisodes,
   }) {
     return getFilteredEpisodes?.call(episodes);
@@ -312,7 +322,7 @@ class _$GetFilteredEpisodesImpl implements _GetFilteredEpisodes {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? page)? getAllEpisodes,
+    TResult Function(int? page, String? name)? getAllEpisodes,
     TResult Function(List<int> episodes)? getFilteredEpisodes,
     required TResult orElse(),
   }) {

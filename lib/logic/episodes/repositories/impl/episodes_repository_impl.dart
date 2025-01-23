@@ -8,8 +8,8 @@ class EpisodesRepositoryImpl implements EpisodesRepository {
   EpisodesRepositoryImpl(this.service);
 
   @override
-  Future<EpisodesAllModel> getAllEpisodes(int? page) {
-    return service.getEpisodes(page);
+  Future<EpisodesAllModel> getAllEpisodes(int? page, String? name) {
+    return service.getEpisodes(page, name);
   }
 
   @override
