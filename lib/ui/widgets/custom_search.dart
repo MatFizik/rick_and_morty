@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
 import 'package:rick_and_morty/constants/assets.dart';
@@ -25,10 +27,20 @@ class SearchTextfield extends StatefulWidget {
 }
 
 class _SearchTextfieldState extends State<SearchTextfield> {
+  Timer? _debounce;
+
+  void _onSearchChanged(String value) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+
+    _debounce = Timer(const Duration(milliseconds: 300), () {
+      widget.onChanged!(value);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SearchBar(
-      onChanged: (value) => widget.onChanged!(value),
+      onChanged: (value) => _onSearchChanged(value),
       onTap: () => widget.onTap?.call(),
       hintText: 'Search...',
       padding: const WidgetStatePropertyAll(
