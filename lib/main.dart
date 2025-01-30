@@ -17,6 +17,7 @@ import 'package:rick_and_morty/ui/characters/characters_main.dart';
 import 'package:rick_and_morty/ui/episodes/episodes_main.dart';
 import 'package:rick_and_morty/ui/locations/location_main.dart';
 import 'package:rick_and_morty/ui/settings/settings_main.dart';
+import 'package:rick_and_morty/ui/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: AppTheme.darkTheme,
         home: const LoaderOverlay(
-          child: MainWrap(),
+          child: SplashScreen(),
         ),
       ),
     );
