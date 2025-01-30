@@ -276,7 +276,9 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                                   );
                                                 },
                                               )
-                                            : index < characters!.info.count
+                                            : index <
+                                                    (characters?.info.count ??
+                                                        0)
                                                 ? const ShimmerTileWidget()
                                                 : const SizedBox(),
                                         const SizedBox(height: 24)

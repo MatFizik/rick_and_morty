@@ -173,3 +173,40 @@ class ShimmerImageWidget extends StatelessWidget {
     );
   }
 }
+
+class ShimmerBigCardWidget extends StatefulWidget {
+  const ShimmerBigCardWidget({super.key});
+
+  @override
+  State<ShimmerBigCardWidget> createState() => _ShimmerBigCardWidgetState();
+}
+
+class _ShimmerBigCardWidgetState extends State<ShimmerBigCardWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Shimmer.fromColors(
+          baseColor: AppColors.darkBgPrimary,
+          highlightColor: AppColors.darkBgSecondary,
+          child: Container(
+            height: 150,
+            decoration: BoxDecoration(
+              color: AppColors.darkBgSecondary,
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
+        const ShimmerTextWidget(
+          width: 200,
+        ),
+        const ShimmerTextWidget(
+          width: 150,
+        ),
+      ],
+    );
+  }
+}

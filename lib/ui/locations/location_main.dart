@@ -104,11 +104,6 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
     );
   }
 
-  String imageRand() {
-    int randomNumber = random.nextInt(40) + 1;
-    return 'https://rickandmortyapi.com/api/character/avatar/$randomNumber.jpeg';
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -197,11 +192,11 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
                           controller: _scrollController,
                           shrinkWrap: true,
                           padding: const EdgeInsets.all(0),
-                          itemCount: (locations?.results?.length ?? 0) + 3,
+                          itemCount: (locations?.results?.length ?? 0) + 1,
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
-                                index < (locations?.results?.length ?? 2)
+                                index < (locations?.results?.length ?? 1)
                                     ? CustomBigCardWidget(
                                         title:
                                             locations?.results?[index].name ??
@@ -212,7 +207,7 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
                                         status:
                                             locations?.results?[index].type ??
                                                 '',
-                                        imgPath: imageRand(),
+                                        imgPath: ImageAssets.earthPicture,
                                         onTap: () {
                                           Navigator.of(context).push(
                                             MaterialPageRoute(
@@ -235,7 +230,7 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
                                         },
                                       )
                                     : index < (locations?.info?.count ?? 0)
-                                        ? const ShimmerTileWidget()
+                                        ? const ShimmerBigCardWidget()
                                         : const SizedBox(),
                                 const SizedBox(height: 24)
                               ],

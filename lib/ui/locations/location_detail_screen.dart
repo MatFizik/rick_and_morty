@@ -57,7 +57,7 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(ImageAssets.episodeBackground),
+                      image: AssetImage(ImageAssets.earthPicture),
                       fit: BoxFit.cover,
                     ),
                   ),

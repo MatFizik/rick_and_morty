@@ -13,12 +13,15 @@ class ImageAssets {
   static const String locationIcon = '${_basePath}locationIcon.png';
   static const String episodeIcon = '${_basePath}episodeIcon.png';
   static const String settingsIcon = '${_basePath}settingsIcon.png';
+
   static const String characterGreenIcon = '${_basePath}characterGreenIcon.png';
   static const String locationGreenIcon = '${_basePath}locationGreenIcon.png';
   static const String episodeGreenIcon = '${_basePath}episodeGreenIcon.png';
   static const String settingsGreenIcon = '${_basePath}settingsGreenIcon.png';
 
   static const String episodeBackground = '${_basePath}episode_background.png';
+  static const String earthPicture = '${_basePath}earth_picture.png';
+
   static const String searchEmpty = '${_basePath}search_empty.png';
   static const String filterEmpty = '${_basePath}rickFace.png';
 

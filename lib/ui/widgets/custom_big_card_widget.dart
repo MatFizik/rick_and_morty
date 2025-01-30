@@ -29,6 +29,13 @@ class CustomBigCardWidget extends StatefulWidget {
 }
 
 class _CustomBigCardWidgetState extends State<CustomBigCardWidget> {
+  bool _isNetworkImage(String path) {
+    Uri? uri = Uri.tryParse(path);
+    return uri != null &&
+        uri.hasScheme &&
+        (uri.scheme == 'http' || uri.scheme == 'https');
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -43,7 +50,9 @@ class _CustomBigCardWidgetState extends State<CustomBigCardWidget> {
           height: 218,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: CachedNetworkImageProvider(widget.imgPath),
+              image: _isNetworkImage(widget.imgPath)
+                  ? CachedNetworkImageProvider(widget.imgPath)
+                  : AssetImage(widget.imgPath),
               fit: BoxFit.cover,
             ),
           ),
