@@ -107,7 +107,7 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                   loadingGetAllEpisodes: () => isLoadingMore = true,
                   loadingGetFilteredEpisodes: () => true,
                   successGetAllEpisodes: (list) {
-                    if (episodesAllModel == null || searchName != null) {
+                    if (episodesAllModel == null || (searchName != null)) {
                       episodesAllModel = list;
                       episodesList = list.episodes;
 
@@ -120,7 +120,7 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                     }
                   },
                   successGetFilteredEpisodes: (list) {
-                    if (searchName == null) {
+                    if (searchName == null || searchName == '') {
                       episodesAllModel?.episodes = list;
                       getMaxSeason();
                       episodesList = list
@@ -186,7 +186,7 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                               ],
                             ),
                             const SizedBox(height: 20),
-                            searchName == ''
+                            searchName == '' || searchName == null
                                 ? TabBar(
                                     isScrollable: true,
                                     tabAlignment: TabAlignment.start,
