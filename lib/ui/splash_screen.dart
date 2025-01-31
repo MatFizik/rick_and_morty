@@ -20,13 +20,11 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller = AnimationController(vsync: this);
 
-    // Load the Lottie animation and get its duration
     AssetLottie('assets/splash_anim.json').load().then((composition) {
       _controller
         ..duration = composition.duration
         ..forward();
 
-      // Wait for the animation to finish before navigating
       Future.delayed(composition.duration, () {
         if (mounted) {
           Navigator.pushReplacement(
