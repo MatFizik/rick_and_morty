@@ -142,7 +142,7 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                           : const ShimmerListWidget();
                     },
                     errorGetAllEpisodes: (err) {
-                      if (err.response.statusCode == 404) {
+                      if (err.response?.statusCode == 404) {
                         return searchName != ''
                             ? const EmptyStateWidget(
                                 key: ValueKey('searchEmpty'),

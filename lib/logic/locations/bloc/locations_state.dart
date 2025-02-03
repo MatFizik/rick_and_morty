@@ -22,4 +22,11 @@ class LocationsState with _$LocationsState {
       _SuccessGetMoreLocations;
   const factory LocationsState.errorGetMoreLocations(err) =
       _ErrorGetMoreLocations;
+
+  const factory LocationsState.loadingGetLocationsFilters() =
+      _LoadingGetLocationsFilters;
+  const factory LocationsState.successGetLocationsFilters(
+      List<String> types, List<String> dimension) = _SuccessGetLocationsFilters;
+  const factory LocationsState.errorGetLocationsFilters(err) =
+      _ErrorGetLocationsFilters;
 }

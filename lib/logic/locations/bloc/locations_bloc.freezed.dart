@@ -21,6 +21,7 @@ mixin _$LocationsEvent {
     required TResult Function(
             int? page, String? name, String? type, String? dimension)
         getLocations,
+    required TResult Function(List<int>? locations) getLoctionsFilters,
     required TResult Function(List<int>? locations) getMultipleLocations,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,6 +29,7 @@ mixin _$LocationsEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
+    TResult? Function(List<int>? locations)? getLoctionsFilters,
     TResult? Function(List<int>? locations)? getMultipleLocations,
   }) =>
       throw _privateConstructorUsedError;
@@ -35,6 +37,7 @@ mixin _$LocationsEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
+    TResult Function(List<int>? locations)? getLoctionsFilters,
     TResult Function(List<int>? locations)? getMultipleLocations,
     required TResult orElse(),
   }) =>
@@ -42,18 +45,21 @@ mixin _$LocationsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetLocations value) getLocations,
+    required TResult Function(_GetLocationsFilters value) getLoctionsFilters,
     required TResult Function(_GetMultipleLocations value) getMultipleLocations,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetLocations value)? getLocations,
+    TResult? Function(_GetLocationsFilters value)? getLoctionsFilters,
     TResult? Function(_GetMultipleLocations value)? getMultipleLocations,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetLocations value)? getLocations,
+    TResult Function(_GetLocationsFilters value)? getLoctionsFilters,
     TResult Function(_GetMultipleLocations value)? getMultipleLocations,
     required TResult orElse(),
   }) =>
@@ -177,6 +183,7 @@ class _$GetLocationsImpl implements _GetLocations {
     required TResult Function(
             int? page, String? name, String? type, String? dimension)
         getLocations,
+    required TResult Function(List<int>? locations) getLoctionsFilters,
     required TResult Function(List<int>? locations) getMultipleLocations,
   }) {
     return getLocations(page, name, type, dimension);
@@ -187,6 +194,7 @@ class _$GetLocationsImpl implements _GetLocations {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
+    TResult? Function(List<int>? locations)? getLoctionsFilters,
     TResult? Function(List<int>? locations)? getMultipleLocations,
   }) {
     return getLocations?.call(page, name, type, dimension);
@@ -197,6 +205,7 @@ class _$GetLocationsImpl implements _GetLocations {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
+    TResult Function(List<int>? locations)? getLoctionsFilters,
     TResult Function(List<int>? locations)? getMultipleLocations,
     required TResult orElse(),
   }) {
@@ -210,6 +219,7 @@ class _$GetLocationsImpl implements _GetLocations {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetLocations value) getLocations,
+    required TResult Function(_GetLocationsFilters value) getLoctionsFilters,
     required TResult Function(_GetMultipleLocations value) getMultipleLocations,
   }) {
     return getLocations(this);
@@ -219,6 +229,7 @@ class _$GetLocationsImpl implements _GetLocations {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetLocations value)? getLocations,
+    TResult? Function(_GetLocationsFilters value)? getLoctionsFilters,
     TResult? Function(_GetMultipleLocations value)? getMultipleLocations,
   }) {
     return getLocations?.call(this);
@@ -228,6 +239,7 @@ class _$GetLocationsImpl implements _GetLocations {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetLocations value)? getLocations,
+    TResult Function(_GetLocationsFilters value)? getLoctionsFilters,
     TResult Function(_GetMultipleLocations value)? getMultipleLocations,
     required TResult orElse(),
   }) {
@@ -251,6 +263,168 @@ abstract class _GetLocations implements LocationsEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetLocationsImplCopyWith<_$GetLocationsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetLocationsFiltersImplCopyWith<$Res> {
+  factory _$$GetLocationsFiltersImplCopyWith(_$GetLocationsFiltersImpl value,
+          $Res Function(_$GetLocationsFiltersImpl) then) =
+      __$$GetLocationsFiltersImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<int>? locations});
+}
+
+/// @nodoc
+class __$$GetLocationsFiltersImplCopyWithImpl<$Res>
+    extends _$LocationsEventCopyWithImpl<$Res, _$GetLocationsFiltersImpl>
+    implements _$$GetLocationsFiltersImplCopyWith<$Res> {
+  __$$GetLocationsFiltersImplCopyWithImpl(_$GetLocationsFiltersImpl _value,
+      $Res Function(_$GetLocationsFiltersImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of LocationsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? locations = freezed,
+  }) {
+    return _then(_$GetLocationsFiltersImpl(
+      freezed == locations
+          ? _value._locations
+          : locations // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetLocationsFiltersImpl implements _GetLocationsFilters {
+  const _$GetLocationsFiltersImpl(final List<int>? locations)
+      : _locations = locations;
+
+  final List<int>? _locations;
+  @override
+  List<int>? get locations {
+    final value = _locations;
+    if (value == null) return null;
+    if (_locations is EqualUnmodifiableListView) return _locations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'LocationsEvent.getLoctionsFilters(locations: $locations)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetLocationsFiltersImpl &&
+            const DeepCollectionEquality()
+                .equals(other._locations, _locations));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_locations));
+
+  /// Create a copy of LocationsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetLocationsFiltersImplCopyWith<_$GetLocationsFiltersImpl> get copyWith =>
+      __$$GetLocationsFiltersImplCopyWithImpl<_$GetLocationsFiltersImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            int? page, String? name, String? type, String? dimension)
+        getLocations,
+    required TResult Function(List<int>? locations) getLoctionsFilters,
+    required TResult Function(List<int>? locations) getMultipleLocations,
+  }) {
+    return getLoctionsFilters(locations);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int? page, String? name, String? type, String? dimension)?
+        getLocations,
+    TResult? Function(List<int>? locations)? getLoctionsFilters,
+    TResult? Function(List<int>? locations)? getMultipleLocations,
+  }) {
+    return getLoctionsFilters?.call(locations);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int? page, String? name, String? type, String? dimension)?
+        getLocations,
+    TResult Function(List<int>? locations)? getLoctionsFilters,
+    TResult Function(List<int>? locations)? getMultipleLocations,
+    required TResult orElse(),
+  }) {
+    if (getLoctionsFilters != null) {
+      return getLoctionsFilters(locations);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetLocations value) getLocations,
+    required TResult Function(_GetLocationsFilters value) getLoctionsFilters,
+    required TResult Function(_GetMultipleLocations value) getMultipleLocations,
+  }) {
+    return getLoctionsFilters(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetLocations value)? getLocations,
+    TResult? Function(_GetLocationsFilters value)? getLoctionsFilters,
+    TResult? Function(_GetMultipleLocations value)? getMultipleLocations,
+  }) {
+    return getLoctionsFilters?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetLocations value)? getLocations,
+    TResult Function(_GetLocationsFilters value)? getLoctionsFilters,
+    TResult Function(_GetMultipleLocations value)? getMultipleLocations,
+    required TResult orElse(),
+  }) {
+    if (getLoctionsFilters != null) {
+      return getLoctionsFilters(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetLocationsFilters implements LocationsEvent {
+  const factory _GetLocationsFilters(final List<int>? locations) =
+      _$GetLocationsFiltersImpl;
+
+  List<int>? get locations;
+
+  /// Create a copy of LocationsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetLocationsFiltersImplCopyWith<_$GetLocationsFiltersImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -337,6 +511,7 @@ class _$GetMultipleLocationsImpl implements _GetMultipleLocations {
     required TResult Function(
             int? page, String? name, String? type, String? dimension)
         getLocations,
+    required TResult Function(List<int>? locations) getLoctionsFilters,
     required TResult Function(List<int>? locations) getMultipleLocations,
   }) {
     return getMultipleLocations(locations);
@@ -347,6 +522,7 @@ class _$GetMultipleLocationsImpl implements _GetMultipleLocations {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
+    TResult? Function(List<int>? locations)? getLoctionsFilters,
     TResult? Function(List<int>? locations)? getMultipleLocations,
   }) {
     return getMultipleLocations?.call(locations);
@@ -357,6 +533,7 @@ class _$GetMultipleLocationsImpl implements _GetMultipleLocations {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
+    TResult Function(List<int>? locations)? getLoctionsFilters,
     TResult Function(List<int>? locations)? getMultipleLocations,
     required TResult orElse(),
   }) {
@@ -370,6 +547,7 @@ class _$GetMultipleLocationsImpl implements _GetMultipleLocations {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetLocations value) getLocations,
+    required TResult Function(_GetLocationsFilters value) getLoctionsFilters,
     required TResult Function(_GetMultipleLocations value) getMultipleLocations,
   }) {
     return getMultipleLocations(this);
@@ -379,6 +557,7 @@ class _$GetMultipleLocationsImpl implements _GetMultipleLocations {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetLocations value)? getLocations,
+    TResult? Function(_GetLocationsFilters value)? getLoctionsFilters,
     TResult? Function(_GetMultipleLocations value)? getMultipleLocations,
   }) {
     return getMultipleLocations?.call(this);
@@ -388,6 +567,7 @@ class _$GetMultipleLocationsImpl implements _GetMultipleLocations {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetLocations value)? getLocations,
+    TResult Function(_GetLocationsFilters value)? getLoctionsFilters,
     TResult Function(_GetMultipleLocations value)? getMultipleLocations,
     required TResult orElse(),
   }) {
@@ -425,6 +605,10 @@ mixin _$LocationsState {
     required TResult Function() loadingGetMoreLocations,
     required TResult Function(LocationsModel list) successGetMoreLocations,
     required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -439,6 +623,10 @@ mixin _$LocationsState {
     TResult? Function()? loadingGetMoreLocations,
     TResult? Function(LocationsModel list)? successGetMoreLocations,
     TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -453,6 +641,10 @@ mixin _$LocationsState {
     TResult Function()? loadingGetMoreLocations,
     TResult Function(LocationsModel list)? successGetMoreLocations,
     TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -474,6 +666,12 @@ mixin _$LocationsState {
         successGetMoreLocations,
     required TResult Function(_ErrorGetMoreLocations value)
         errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -491,6 +689,12 @@ mixin _$LocationsState {
     TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -508,6 +712,11 @@ mixin _$LocationsState {
     TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -585,6 +794,10 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loadingGetMoreLocations,
     required TResult Function(LocationsModel list) successGetMoreLocations,
     required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
   }) {
     return initial();
   }
@@ -602,6 +815,10 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loadingGetMoreLocations,
     TResult? Function(LocationsModel list)? successGetMoreLocations,
     TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
   }) {
     return initial?.call();
   }
@@ -619,6 +836,10 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loadingGetMoreLocations,
     TResult Function(LocationsModel list)? successGetMoreLocations,
     TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -646,6 +867,12 @@ class _$InitialImpl implements _Initial {
         successGetMoreLocations,
     required TResult Function(_ErrorGetMoreLocations value)
         errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
   }) {
     return initial(this);
   }
@@ -666,6 +893,12 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
   }) {
     return initial?.call(this);
   }
@@ -686,6 +919,11 @@ class _$InitialImpl implements _Initial {
     TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -751,6 +989,10 @@ class _$LoadingGetLocationsImpl implements _LoadingGetLocations {
     required TResult Function() loadingGetMoreLocations,
     required TResult Function(LocationsModel list) successGetMoreLocations,
     required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
   }) {
     return loadingGetLocations();
   }
@@ -768,6 +1010,10 @@ class _$LoadingGetLocationsImpl implements _LoadingGetLocations {
     TResult? Function()? loadingGetMoreLocations,
     TResult? Function(LocationsModel list)? successGetMoreLocations,
     TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
   }) {
     return loadingGetLocations?.call();
   }
@@ -785,6 +1031,10 @@ class _$LoadingGetLocationsImpl implements _LoadingGetLocations {
     TResult Function()? loadingGetMoreLocations,
     TResult Function(LocationsModel list)? successGetMoreLocations,
     TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (loadingGetLocations != null) {
@@ -812,6 +1062,12 @@ class _$LoadingGetLocationsImpl implements _LoadingGetLocations {
         successGetMoreLocations,
     required TResult Function(_ErrorGetMoreLocations value)
         errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
   }) {
     return loadingGetLocations(this);
   }
@@ -832,6 +1088,12 @@ class _$LoadingGetLocationsImpl implements _LoadingGetLocations {
     TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
   }) {
     return loadingGetLocations?.call(this);
   }
@@ -852,6 +1114,11 @@ class _$LoadingGetLocationsImpl implements _LoadingGetLocations {
     TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (loadingGetLocations != null) {
@@ -944,6 +1211,10 @@ class _$SuccessGetLocationsImpl implements _SuccessGetLocations {
     required TResult Function() loadingGetMoreLocations,
     required TResult Function(LocationsModel list) successGetMoreLocations,
     required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
   }) {
     return successGetLocations(list);
   }
@@ -961,6 +1232,10 @@ class _$SuccessGetLocationsImpl implements _SuccessGetLocations {
     TResult? Function()? loadingGetMoreLocations,
     TResult? Function(LocationsModel list)? successGetMoreLocations,
     TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
   }) {
     return successGetLocations?.call(list);
   }
@@ -978,6 +1253,10 @@ class _$SuccessGetLocationsImpl implements _SuccessGetLocations {
     TResult Function()? loadingGetMoreLocations,
     TResult Function(LocationsModel list)? successGetMoreLocations,
     TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (successGetLocations != null) {
@@ -1005,6 +1284,12 @@ class _$SuccessGetLocationsImpl implements _SuccessGetLocations {
         successGetMoreLocations,
     required TResult Function(_ErrorGetMoreLocations value)
         errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
   }) {
     return successGetLocations(this);
   }
@@ -1025,6 +1310,12 @@ class _$SuccessGetLocationsImpl implements _SuccessGetLocations {
     TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
   }) {
     return successGetLocations?.call(this);
   }
@@ -1045,6 +1336,11 @@ class _$SuccessGetLocationsImpl implements _SuccessGetLocations {
     TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (successGetLocations != null) {
@@ -1144,6 +1440,10 @@ class _$ErrorGetLocationsImpl implements _ErrorGetLocations {
     required TResult Function() loadingGetMoreLocations,
     required TResult Function(LocationsModel list) successGetMoreLocations,
     required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
   }) {
     return errorGetLocations(err);
   }
@@ -1161,6 +1461,10 @@ class _$ErrorGetLocationsImpl implements _ErrorGetLocations {
     TResult? Function()? loadingGetMoreLocations,
     TResult? Function(LocationsModel list)? successGetMoreLocations,
     TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
   }) {
     return errorGetLocations?.call(err);
   }
@@ -1178,6 +1482,10 @@ class _$ErrorGetLocationsImpl implements _ErrorGetLocations {
     TResult Function()? loadingGetMoreLocations,
     TResult Function(LocationsModel list)? successGetMoreLocations,
     TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (errorGetLocations != null) {
@@ -1205,6 +1513,12 @@ class _$ErrorGetLocationsImpl implements _ErrorGetLocations {
         successGetMoreLocations,
     required TResult Function(_ErrorGetMoreLocations value)
         errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
   }) {
     return errorGetLocations(this);
   }
@@ -1225,6 +1539,12 @@ class _$ErrorGetLocationsImpl implements _ErrorGetLocations {
     TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
   }) {
     return errorGetLocations?.call(this);
   }
@@ -1245,6 +1565,11 @@ class _$ErrorGetLocationsImpl implements _ErrorGetLocations {
     TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (errorGetLocations != null) {
@@ -1322,6 +1647,10 @@ class _$LoadingGetMultipleLocationsImpl
     required TResult Function() loadingGetMoreLocations,
     required TResult Function(LocationsModel list) successGetMoreLocations,
     required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
   }) {
     return loadingGetMultipleLocations();
   }
@@ -1339,6 +1668,10 @@ class _$LoadingGetMultipleLocationsImpl
     TResult? Function()? loadingGetMoreLocations,
     TResult? Function(LocationsModel list)? successGetMoreLocations,
     TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
   }) {
     return loadingGetMultipleLocations?.call();
   }
@@ -1356,6 +1689,10 @@ class _$LoadingGetMultipleLocationsImpl
     TResult Function()? loadingGetMoreLocations,
     TResult Function(LocationsModel list)? successGetMoreLocations,
     TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (loadingGetMultipleLocations != null) {
@@ -1383,6 +1720,12 @@ class _$LoadingGetMultipleLocationsImpl
         successGetMoreLocations,
     required TResult Function(_ErrorGetMoreLocations value)
         errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
   }) {
     return loadingGetMultipleLocations(this);
   }
@@ -1403,6 +1746,12 @@ class _$LoadingGetMultipleLocationsImpl
     TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
   }) {
     return loadingGetMultipleLocations?.call(this);
   }
@@ -1423,6 +1772,11 @@ class _$LoadingGetMultipleLocationsImpl
     TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (loadingGetMultipleLocations != null) {
@@ -1525,6 +1879,10 @@ class _$SuccessGetMultipleocationsImpl implements _SuccessGetMultipleocations {
     required TResult Function() loadingGetMoreLocations,
     required TResult Function(LocationsModel list) successGetMoreLocations,
     required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
   }) {
     return successGetMultipleLocations(list);
   }
@@ -1542,6 +1900,10 @@ class _$SuccessGetMultipleocationsImpl implements _SuccessGetMultipleocations {
     TResult? Function()? loadingGetMoreLocations,
     TResult? Function(LocationsModel list)? successGetMoreLocations,
     TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
   }) {
     return successGetMultipleLocations?.call(list);
   }
@@ -1559,6 +1921,10 @@ class _$SuccessGetMultipleocationsImpl implements _SuccessGetMultipleocations {
     TResult Function()? loadingGetMoreLocations,
     TResult Function(LocationsModel list)? successGetMoreLocations,
     TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (successGetMultipleLocations != null) {
@@ -1586,6 +1952,12 @@ class _$SuccessGetMultipleocationsImpl implements _SuccessGetMultipleocations {
         successGetMoreLocations,
     required TResult Function(_ErrorGetMoreLocations value)
         errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
   }) {
     return successGetMultipleLocations(this);
   }
@@ -1606,6 +1978,12 @@ class _$SuccessGetMultipleocationsImpl implements _SuccessGetMultipleocations {
     TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
   }) {
     return successGetMultipleLocations?.call(this);
   }
@@ -1626,6 +2004,11 @@ class _$SuccessGetMultipleocationsImpl implements _SuccessGetMultipleocations {
     TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (successGetMultipleLocations != null) {
@@ -1727,6 +2110,10 @@ class _$ErrorGetMultipleLocationsImpl implements _ErrorGetMultipleLocations {
     required TResult Function() loadingGetMoreLocations,
     required TResult Function(LocationsModel list) successGetMoreLocations,
     required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
   }) {
     return errorGetMultipleLocations(err);
   }
@@ -1744,6 +2131,10 @@ class _$ErrorGetMultipleLocationsImpl implements _ErrorGetMultipleLocations {
     TResult? Function()? loadingGetMoreLocations,
     TResult? Function(LocationsModel list)? successGetMoreLocations,
     TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
   }) {
     return errorGetMultipleLocations?.call(err);
   }
@@ -1761,6 +2152,10 @@ class _$ErrorGetMultipleLocationsImpl implements _ErrorGetMultipleLocations {
     TResult Function()? loadingGetMoreLocations,
     TResult Function(LocationsModel list)? successGetMoreLocations,
     TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (errorGetMultipleLocations != null) {
@@ -1788,6 +2183,12 @@ class _$ErrorGetMultipleLocationsImpl implements _ErrorGetMultipleLocations {
         successGetMoreLocations,
     required TResult Function(_ErrorGetMoreLocations value)
         errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
   }) {
     return errorGetMultipleLocations(this);
   }
@@ -1808,6 +2209,12 @@ class _$ErrorGetMultipleLocationsImpl implements _ErrorGetMultipleLocations {
     TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
   }) {
     return errorGetMultipleLocations?.call(this);
   }
@@ -1828,6 +2235,11 @@ class _$ErrorGetMultipleLocationsImpl implements _ErrorGetMultipleLocations {
     TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (errorGetMultipleLocations != null) {
@@ -1904,6 +2316,10 @@ class _$LoadingGetMoreCharactetsImpl implements _LoadingGetMoreCharactets {
     required TResult Function() loadingGetMoreLocations,
     required TResult Function(LocationsModel list) successGetMoreLocations,
     required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
   }) {
     return loadingGetMoreLocations();
   }
@@ -1921,6 +2337,10 @@ class _$LoadingGetMoreCharactetsImpl implements _LoadingGetMoreCharactets {
     TResult? Function()? loadingGetMoreLocations,
     TResult? Function(LocationsModel list)? successGetMoreLocations,
     TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
   }) {
     return loadingGetMoreLocations?.call();
   }
@@ -1938,6 +2358,10 @@ class _$LoadingGetMoreCharactetsImpl implements _LoadingGetMoreCharactets {
     TResult Function()? loadingGetMoreLocations,
     TResult Function(LocationsModel list)? successGetMoreLocations,
     TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (loadingGetMoreLocations != null) {
@@ -1965,6 +2389,12 @@ class _$LoadingGetMoreCharactetsImpl implements _LoadingGetMoreCharactets {
         successGetMoreLocations,
     required TResult Function(_ErrorGetMoreLocations value)
         errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
   }) {
     return loadingGetMoreLocations(this);
   }
@@ -1985,6 +2415,12 @@ class _$LoadingGetMoreCharactetsImpl implements _LoadingGetMoreCharactets {
     TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
   }) {
     return loadingGetMoreLocations?.call(this);
   }
@@ -2005,6 +2441,11 @@ class _$LoadingGetMoreCharactetsImpl implements _LoadingGetMoreCharactets {
     TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (loadingGetMoreLocations != null) {
@@ -2099,6 +2540,10 @@ class _$SuccessGetMoreLocationsImpl implements _SuccessGetMoreLocations {
     required TResult Function() loadingGetMoreLocations,
     required TResult Function(LocationsModel list) successGetMoreLocations,
     required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
   }) {
     return successGetMoreLocations(list);
   }
@@ -2116,6 +2561,10 @@ class _$SuccessGetMoreLocationsImpl implements _SuccessGetMoreLocations {
     TResult? Function()? loadingGetMoreLocations,
     TResult? Function(LocationsModel list)? successGetMoreLocations,
     TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
   }) {
     return successGetMoreLocations?.call(list);
   }
@@ -2133,6 +2582,10 @@ class _$SuccessGetMoreLocationsImpl implements _SuccessGetMoreLocations {
     TResult Function()? loadingGetMoreLocations,
     TResult Function(LocationsModel list)? successGetMoreLocations,
     TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (successGetMoreLocations != null) {
@@ -2160,6 +2613,12 @@ class _$SuccessGetMoreLocationsImpl implements _SuccessGetMoreLocations {
         successGetMoreLocations,
     required TResult Function(_ErrorGetMoreLocations value)
         errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
   }) {
     return successGetMoreLocations(this);
   }
@@ -2180,6 +2639,12 @@ class _$SuccessGetMoreLocationsImpl implements _SuccessGetMoreLocations {
     TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
   }) {
     return successGetMoreLocations?.call(this);
   }
@@ -2200,6 +2665,11 @@ class _$SuccessGetMoreLocationsImpl implements _SuccessGetMoreLocations {
     TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (successGetMoreLocations != null) {
@@ -2300,6 +2770,10 @@ class _$ErrorGetMoreLocationsImpl implements _ErrorGetMoreLocations {
     required TResult Function() loadingGetMoreLocations,
     required TResult Function(LocationsModel list) successGetMoreLocations,
     required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
   }) {
     return errorGetMoreLocations(err);
   }
@@ -2317,6 +2791,10 @@ class _$ErrorGetMoreLocationsImpl implements _ErrorGetMoreLocations {
     TResult? Function()? loadingGetMoreLocations,
     TResult? Function(LocationsModel list)? successGetMoreLocations,
     TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
   }) {
     return errorGetMoreLocations?.call(err);
   }
@@ -2334,6 +2812,10 @@ class _$ErrorGetMoreLocationsImpl implements _ErrorGetMoreLocations {
     TResult Function()? loadingGetMoreLocations,
     TResult Function(LocationsModel list)? successGetMoreLocations,
     TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (errorGetMoreLocations != null) {
@@ -2361,6 +2843,12 @@ class _$ErrorGetMoreLocationsImpl implements _ErrorGetMoreLocations {
         successGetMoreLocations,
     required TResult Function(_ErrorGetMoreLocations value)
         errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
   }) {
     return errorGetMoreLocations(this);
   }
@@ -2381,6 +2869,12 @@ class _$ErrorGetMoreLocationsImpl implements _ErrorGetMoreLocations {
     TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
   }) {
     return errorGetMoreLocations?.call(this);
   }
@@ -2401,6 +2895,11 @@ class _$ErrorGetMoreLocationsImpl implements _ErrorGetMoreLocations {
     TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
     TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
     TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
     required TResult orElse(),
   }) {
     if (errorGetMoreLocations != null) {
@@ -2420,5 +2919,695 @@ abstract class _ErrorGetMoreLocations implements LocationsState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorGetMoreLocationsImplCopyWith<_$ErrorGetMoreLocationsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadingGetLocationsFiltersImplCopyWith<$Res> {
+  factory _$$LoadingGetLocationsFiltersImplCopyWith(
+          _$LoadingGetLocationsFiltersImpl value,
+          $Res Function(_$LoadingGetLocationsFiltersImpl) then) =
+      __$$LoadingGetLocationsFiltersImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingGetLocationsFiltersImplCopyWithImpl<$Res>
+    extends _$LocationsStateCopyWithImpl<$Res, _$LoadingGetLocationsFiltersImpl>
+    implements _$$LoadingGetLocationsFiltersImplCopyWith<$Res> {
+  __$$LoadingGetLocationsFiltersImplCopyWithImpl(
+      _$LoadingGetLocationsFiltersImpl _value,
+      $Res Function(_$LoadingGetLocationsFiltersImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of LocationsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadingGetLocationsFiltersImpl implements _LoadingGetLocationsFilters {
+  const _$LoadingGetLocationsFiltersImpl();
+
+  @override
+  String toString() {
+    return 'LocationsState.loadingGetLocationsFilters()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadingGetLocationsFiltersImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loadingGetLocations,
+    required TResult Function(LocationsModel list) successGetLocations,
+    required TResult Function(dynamic err) errorGetLocations,
+    required TResult Function() loadingGetMultipleLocations,
+    required TResult Function(List<Location> list) successGetMultipleLocations,
+    required TResult Function(dynamic err) errorGetMultipleLocations,
+    required TResult Function() loadingGetMoreLocations,
+    required TResult Function(LocationsModel list) successGetMoreLocations,
+    required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
+  }) {
+    return loadingGetLocationsFilters();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loadingGetLocations,
+    TResult? Function(LocationsModel list)? successGetLocations,
+    TResult? Function(dynamic err)? errorGetLocations,
+    TResult? Function()? loadingGetMultipleLocations,
+    TResult? Function(List<Location> list)? successGetMultipleLocations,
+    TResult? Function(dynamic err)? errorGetMultipleLocations,
+    TResult? Function()? loadingGetMoreLocations,
+    TResult? Function(LocationsModel list)? successGetMoreLocations,
+    TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
+  }) {
+    return loadingGetLocationsFilters?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadingGetLocations,
+    TResult Function(LocationsModel list)? successGetLocations,
+    TResult Function(dynamic err)? errorGetLocations,
+    TResult Function()? loadingGetMultipleLocations,
+    TResult Function(List<Location> list)? successGetMultipleLocations,
+    TResult Function(dynamic err)? errorGetMultipleLocations,
+    TResult Function()? loadingGetMoreLocations,
+    TResult Function(LocationsModel list)? successGetMoreLocations,
+    TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
+    required TResult orElse(),
+  }) {
+    if (loadingGetLocationsFilters != null) {
+      return loadingGetLocationsFilters();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LoadingGetLocations value) loadingGetLocations,
+    required TResult Function(_SuccessGetLocations value) successGetLocations,
+    required TResult Function(_ErrorGetLocations value) errorGetLocations,
+    required TResult Function(_LoadingGetMultipleLocations value)
+        loadingGetMultipleLocations,
+    required TResult Function(_SuccessGetMultipleocations value)
+        successGetMultipleLocations,
+    required TResult Function(_ErrorGetMultipleLocations value)
+        errorGetMultipleLocations,
+    required TResult Function(_LoadingGetMoreCharactets value)
+        loadingGetMoreLocations,
+    required TResult Function(_SuccessGetMoreLocations value)
+        successGetMoreLocations,
+    required TResult Function(_ErrorGetMoreLocations value)
+        errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
+  }) {
+    return loadingGetLocationsFilters(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LoadingGetLocations value)? loadingGetLocations,
+    TResult? Function(_SuccessGetLocations value)? successGetLocations,
+    TResult? Function(_ErrorGetLocations value)? errorGetLocations,
+    TResult? Function(_LoadingGetMultipleLocations value)?
+        loadingGetMultipleLocations,
+    TResult? Function(_SuccessGetMultipleocations value)?
+        successGetMultipleLocations,
+    TResult? Function(_ErrorGetMultipleLocations value)?
+        errorGetMultipleLocations,
+    TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
+    TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
+    TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
+  }) {
+    return loadingGetLocationsFilters?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadingGetLocations value)? loadingGetLocations,
+    TResult Function(_SuccessGetLocations value)? successGetLocations,
+    TResult Function(_ErrorGetLocations value)? errorGetLocations,
+    TResult Function(_LoadingGetMultipleLocations value)?
+        loadingGetMultipleLocations,
+    TResult Function(_SuccessGetMultipleocations value)?
+        successGetMultipleLocations,
+    TResult Function(_ErrorGetMultipleLocations value)?
+        errorGetMultipleLocations,
+    TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
+    TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
+    TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
+    required TResult orElse(),
+  }) {
+    if (loadingGetLocationsFilters != null) {
+      return loadingGetLocationsFilters(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadingGetLocationsFilters implements LocationsState {
+  const factory _LoadingGetLocationsFilters() =
+      _$LoadingGetLocationsFiltersImpl;
+}
+
+/// @nodoc
+abstract class _$$SuccessGetLocationsFiltersImplCopyWith<$Res> {
+  factory _$$SuccessGetLocationsFiltersImplCopyWith(
+          _$SuccessGetLocationsFiltersImpl value,
+          $Res Function(_$SuccessGetLocationsFiltersImpl) then) =
+      __$$SuccessGetLocationsFiltersImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<String> types, List<String> dimension});
+}
+
+/// @nodoc
+class __$$SuccessGetLocationsFiltersImplCopyWithImpl<$Res>
+    extends _$LocationsStateCopyWithImpl<$Res, _$SuccessGetLocationsFiltersImpl>
+    implements _$$SuccessGetLocationsFiltersImplCopyWith<$Res> {
+  __$$SuccessGetLocationsFiltersImplCopyWithImpl(
+      _$SuccessGetLocationsFiltersImpl _value,
+      $Res Function(_$SuccessGetLocationsFiltersImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of LocationsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? types = null,
+    Object? dimension = null,
+  }) {
+    return _then(_$SuccessGetLocationsFiltersImpl(
+      null == types
+          ? _value._types
+          : types // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      null == dimension
+          ? _value._dimension
+          : dimension // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SuccessGetLocationsFiltersImpl implements _SuccessGetLocationsFilters {
+  const _$SuccessGetLocationsFiltersImpl(
+      final List<String> types, final List<String> dimension)
+      : _types = types,
+        _dimension = dimension;
+
+  final List<String> _types;
+  @override
+  List<String> get types {
+    if (_types is EqualUnmodifiableListView) return _types;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_types);
+  }
+
+  final List<String> _dimension;
+  @override
+  List<String> get dimension {
+    if (_dimension is EqualUnmodifiableListView) return _dimension;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_dimension);
+  }
+
+  @override
+  String toString() {
+    return 'LocationsState.successGetLocationsFilters(types: $types, dimension: $dimension)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessGetLocationsFiltersImpl &&
+            const DeepCollectionEquality().equals(other._types, _types) &&
+            const DeepCollectionEquality()
+                .equals(other._dimension, _dimension));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_types),
+      const DeepCollectionEquality().hash(_dimension));
+
+  /// Create a copy of LocationsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessGetLocationsFiltersImplCopyWith<_$SuccessGetLocationsFiltersImpl>
+      get copyWith => __$$SuccessGetLocationsFiltersImplCopyWithImpl<
+          _$SuccessGetLocationsFiltersImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loadingGetLocations,
+    required TResult Function(LocationsModel list) successGetLocations,
+    required TResult Function(dynamic err) errorGetLocations,
+    required TResult Function() loadingGetMultipleLocations,
+    required TResult Function(List<Location> list) successGetMultipleLocations,
+    required TResult Function(dynamic err) errorGetMultipleLocations,
+    required TResult Function() loadingGetMoreLocations,
+    required TResult Function(LocationsModel list) successGetMoreLocations,
+    required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
+  }) {
+    return successGetLocationsFilters(types, dimension);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loadingGetLocations,
+    TResult? Function(LocationsModel list)? successGetLocations,
+    TResult? Function(dynamic err)? errorGetLocations,
+    TResult? Function()? loadingGetMultipleLocations,
+    TResult? Function(List<Location> list)? successGetMultipleLocations,
+    TResult? Function(dynamic err)? errorGetMultipleLocations,
+    TResult? Function()? loadingGetMoreLocations,
+    TResult? Function(LocationsModel list)? successGetMoreLocations,
+    TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
+  }) {
+    return successGetLocationsFilters?.call(types, dimension);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadingGetLocations,
+    TResult Function(LocationsModel list)? successGetLocations,
+    TResult Function(dynamic err)? errorGetLocations,
+    TResult Function()? loadingGetMultipleLocations,
+    TResult Function(List<Location> list)? successGetMultipleLocations,
+    TResult Function(dynamic err)? errorGetMultipleLocations,
+    TResult Function()? loadingGetMoreLocations,
+    TResult Function(LocationsModel list)? successGetMoreLocations,
+    TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
+    required TResult orElse(),
+  }) {
+    if (successGetLocationsFilters != null) {
+      return successGetLocationsFilters(types, dimension);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LoadingGetLocations value) loadingGetLocations,
+    required TResult Function(_SuccessGetLocations value) successGetLocations,
+    required TResult Function(_ErrorGetLocations value) errorGetLocations,
+    required TResult Function(_LoadingGetMultipleLocations value)
+        loadingGetMultipleLocations,
+    required TResult Function(_SuccessGetMultipleocations value)
+        successGetMultipleLocations,
+    required TResult Function(_ErrorGetMultipleLocations value)
+        errorGetMultipleLocations,
+    required TResult Function(_LoadingGetMoreCharactets value)
+        loadingGetMoreLocations,
+    required TResult Function(_SuccessGetMoreLocations value)
+        successGetMoreLocations,
+    required TResult Function(_ErrorGetMoreLocations value)
+        errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
+  }) {
+    return successGetLocationsFilters(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LoadingGetLocations value)? loadingGetLocations,
+    TResult? Function(_SuccessGetLocations value)? successGetLocations,
+    TResult? Function(_ErrorGetLocations value)? errorGetLocations,
+    TResult? Function(_LoadingGetMultipleLocations value)?
+        loadingGetMultipleLocations,
+    TResult? Function(_SuccessGetMultipleocations value)?
+        successGetMultipleLocations,
+    TResult? Function(_ErrorGetMultipleLocations value)?
+        errorGetMultipleLocations,
+    TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
+    TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
+    TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
+  }) {
+    return successGetLocationsFilters?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadingGetLocations value)? loadingGetLocations,
+    TResult Function(_SuccessGetLocations value)? successGetLocations,
+    TResult Function(_ErrorGetLocations value)? errorGetLocations,
+    TResult Function(_LoadingGetMultipleLocations value)?
+        loadingGetMultipleLocations,
+    TResult Function(_SuccessGetMultipleocations value)?
+        successGetMultipleLocations,
+    TResult Function(_ErrorGetMultipleLocations value)?
+        errorGetMultipleLocations,
+    TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
+    TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
+    TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
+    required TResult orElse(),
+  }) {
+    if (successGetLocationsFilters != null) {
+      return successGetLocationsFilters(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SuccessGetLocationsFilters implements LocationsState {
+  const factory _SuccessGetLocationsFilters(
+          final List<String> types, final List<String> dimension) =
+      _$SuccessGetLocationsFiltersImpl;
+
+  List<String> get types;
+  List<String> get dimension;
+
+  /// Create a copy of LocationsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SuccessGetLocationsFiltersImplCopyWith<_$SuccessGetLocationsFiltersImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ErrorGetLocationsFiltersImplCopyWith<$Res> {
+  factory _$$ErrorGetLocationsFiltersImplCopyWith(
+          _$ErrorGetLocationsFiltersImpl value,
+          $Res Function(_$ErrorGetLocationsFiltersImpl) then) =
+      __$$ErrorGetLocationsFiltersImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({dynamic err});
+}
+
+/// @nodoc
+class __$$ErrorGetLocationsFiltersImplCopyWithImpl<$Res>
+    extends _$LocationsStateCopyWithImpl<$Res, _$ErrorGetLocationsFiltersImpl>
+    implements _$$ErrorGetLocationsFiltersImplCopyWith<$Res> {
+  __$$ErrorGetLocationsFiltersImplCopyWithImpl(
+      _$ErrorGetLocationsFiltersImpl _value,
+      $Res Function(_$ErrorGetLocationsFiltersImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of LocationsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? err = freezed,
+  }) {
+    return _then(_$ErrorGetLocationsFiltersImpl(
+      freezed == err ? _value.err! : err,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ErrorGetLocationsFiltersImpl implements _ErrorGetLocationsFilters {
+  const _$ErrorGetLocationsFiltersImpl(this.err);
+
+  @override
+  final dynamic err;
+
+  @override
+  String toString() {
+    return 'LocationsState.errorGetLocationsFilters(err: $err)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorGetLocationsFiltersImpl &&
+            const DeepCollectionEquality().equals(other.err, err));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(err));
+
+  /// Create a copy of LocationsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorGetLocationsFiltersImplCopyWith<_$ErrorGetLocationsFiltersImpl>
+      get copyWith => __$$ErrorGetLocationsFiltersImplCopyWithImpl<
+          _$ErrorGetLocationsFiltersImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loadingGetLocations,
+    required TResult Function(LocationsModel list) successGetLocations,
+    required TResult Function(dynamic err) errorGetLocations,
+    required TResult Function() loadingGetMultipleLocations,
+    required TResult Function(List<Location> list) successGetMultipleLocations,
+    required TResult Function(dynamic err) errorGetMultipleLocations,
+    required TResult Function() loadingGetMoreLocations,
+    required TResult Function(LocationsModel list) successGetMoreLocations,
+    required TResult Function(dynamic err) errorGetMoreLocations,
+    required TResult Function() loadingGetLocationsFilters,
+    required TResult Function(List<String> types, List<String> dimension)
+        successGetLocationsFilters,
+    required TResult Function(dynamic err) errorGetLocationsFilters,
+  }) {
+    return errorGetLocationsFilters(err);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loadingGetLocations,
+    TResult? Function(LocationsModel list)? successGetLocations,
+    TResult? Function(dynamic err)? errorGetLocations,
+    TResult? Function()? loadingGetMultipleLocations,
+    TResult? Function(List<Location> list)? successGetMultipleLocations,
+    TResult? Function(dynamic err)? errorGetMultipleLocations,
+    TResult? Function()? loadingGetMoreLocations,
+    TResult? Function(LocationsModel list)? successGetMoreLocations,
+    TResult? Function(dynamic err)? errorGetMoreLocations,
+    TResult? Function()? loadingGetLocationsFilters,
+    TResult? Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult? Function(dynamic err)? errorGetLocationsFilters,
+  }) {
+    return errorGetLocationsFilters?.call(err);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadingGetLocations,
+    TResult Function(LocationsModel list)? successGetLocations,
+    TResult Function(dynamic err)? errorGetLocations,
+    TResult Function()? loadingGetMultipleLocations,
+    TResult Function(List<Location> list)? successGetMultipleLocations,
+    TResult Function(dynamic err)? errorGetMultipleLocations,
+    TResult Function()? loadingGetMoreLocations,
+    TResult Function(LocationsModel list)? successGetMoreLocations,
+    TResult Function(dynamic err)? errorGetMoreLocations,
+    TResult Function()? loadingGetLocationsFilters,
+    TResult Function(List<String> types, List<String> dimension)?
+        successGetLocationsFilters,
+    TResult Function(dynamic err)? errorGetLocationsFilters,
+    required TResult orElse(),
+  }) {
+    if (errorGetLocationsFilters != null) {
+      return errorGetLocationsFilters(err);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LoadingGetLocations value) loadingGetLocations,
+    required TResult Function(_SuccessGetLocations value) successGetLocations,
+    required TResult Function(_ErrorGetLocations value) errorGetLocations,
+    required TResult Function(_LoadingGetMultipleLocations value)
+        loadingGetMultipleLocations,
+    required TResult Function(_SuccessGetMultipleocations value)
+        successGetMultipleLocations,
+    required TResult Function(_ErrorGetMultipleLocations value)
+        errorGetMultipleLocations,
+    required TResult Function(_LoadingGetMoreCharactets value)
+        loadingGetMoreLocations,
+    required TResult Function(_SuccessGetMoreLocations value)
+        successGetMoreLocations,
+    required TResult Function(_ErrorGetMoreLocations value)
+        errorGetMoreLocations,
+    required TResult Function(_LoadingGetLocationsFilters value)
+        loadingGetLocationsFilters,
+    required TResult Function(_SuccessGetLocationsFilters value)
+        successGetLocationsFilters,
+    required TResult Function(_ErrorGetLocationsFilters value)
+        errorGetLocationsFilters,
+  }) {
+    return errorGetLocationsFilters(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LoadingGetLocations value)? loadingGetLocations,
+    TResult? Function(_SuccessGetLocations value)? successGetLocations,
+    TResult? Function(_ErrorGetLocations value)? errorGetLocations,
+    TResult? Function(_LoadingGetMultipleLocations value)?
+        loadingGetMultipleLocations,
+    TResult? Function(_SuccessGetMultipleocations value)?
+        successGetMultipleLocations,
+    TResult? Function(_ErrorGetMultipleLocations value)?
+        errorGetMultipleLocations,
+    TResult? Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
+    TResult? Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
+    TResult? Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult? Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult? Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult? Function(_ErrorGetLocationsFilters value)?
+        errorGetLocationsFilters,
+  }) {
+    return errorGetLocationsFilters?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadingGetLocations value)? loadingGetLocations,
+    TResult Function(_SuccessGetLocations value)? successGetLocations,
+    TResult Function(_ErrorGetLocations value)? errorGetLocations,
+    TResult Function(_LoadingGetMultipleLocations value)?
+        loadingGetMultipleLocations,
+    TResult Function(_SuccessGetMultipleocations value)?
+        successGetMultipleLocations,
+    TResult Function(_ErrorGetMultipleLocations value)?
+        errorGetMultipleLocations,
+    TResult Function(_LoadingGetMoreCharactets value)? loadingGetMoreLocations,
+    TResult Function(_SuccessGetMoreLocations value)? successGetMoreLocations,
+    TResult Function(_ErrorGetMoreLocations value)? errorGetMoreLocations,
+    TResult Function(_LoadingGetLocationsFilters value)?
+        loadingGetLocationsFilters,
+    TResult Function(_SuccessGetLocationsFilters value)?
+        successGetLocationsFilters,
+    TResult Function(_ErrorGetLocationsFilters value)? errorGetLocationsFilters,
+    required TResult orElse(),
+  }) {
+    if (errorGetLocationsFilters != null) {
+      return errorGetLocationsFilters(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ErrorGetLocationsFilters implements LocationsState {
+  const factory _ErrorGetLocationsFilters(final dynamic err) =
+      _$ErrorGetLocationsFiltersImpl;
+
+  dynamic get err;
+
+  /// Create a copy of LocationsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ErrorGetLocationsFiltersImplCopyWith<_$ErrorGetLocationsFiltersImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

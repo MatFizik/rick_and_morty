@@ -2,15 +2,19 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rick_and_morty/constants/assets.dart';
 
+import 'package:rick_and_morty/constants/assets.dart';
+import 'package:rick_and_morty/constants/filters_model.dart';
 import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
 import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
 import 'package:rick_and_morty/logic/episodes/services/episodes_services.dart';
 import 'package:rick_and_morty/logic/locations/bloc/locations_bloc.dart';
 import 'package:rick_and_morty/logic/locations/models/locations_model.dart';
+import 'package:rick_and_morty/logic/locations/repositories/impl/locations_repository_impl.dart';
+import 'package:rick_and_morty/logic/locations/services/locations_service.dart';
 import 'package:rick_and_morty/logic/utils/logger.dart';
 import 'package:rick_and_morty/ui/locations/location_detail_screen.dart';
+import 'package:rick_and_morty/ui/locations/location_filters_screen.dart';
 import 'package:rick_and_morty/ui/widgets/custom_big_card_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_search.dart';
@@ -19,10 +23,10 @@ class LocationMainScreen extends StatefulWidget {
   const LocationMainScreen({super.key});
 
   @override
-  State<LocationMainScreen> createState() => _EpisodesMainScreenState();
+  State<LocationMainScreen> createState() => _LocationsMainScreenState();
 }
 
-class _EpisodesMainScreenState extends State<LocationMainScreen> {
+class _LocationsMainScreenState extends State<LocationMainScreen> {
   LocationsModel? locations;
   Random random = Random();
 
@@ -30,13 +34,14 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
   late String image;
   late int _maxPage;
 
+  FiltersModel filters = FiltersModel();
+
   int _currentPage = 1;
 
-  bool cardView = false;
   bool isLoadingMore = false;
   bool isSearch = false;
 
-  String? searchName;
+  String searchName = '';
 
   @override
   void initState() {
@@ -90,7 +95,7 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
     }
   }
 
-  void onSearch(String locationName) {
+  void onFilters(String locationName) {
     _currentPage = 1;
     searchName = locationName;
     isSearch = true;
@@ -98,99 +103,116 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
       LocationsEvent.getLocations(
         _currentPage,
         locationName,
-        null,
-        null,
+        filters.type,
+        filters.dimension,
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: SearchTextfield(
-            onChanged: onSearch,
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: SearchTextfield(
+          onChanged: onFilters,
+          filter: true,
+          onLeading: () => Navigator.of(context)
+              .push(
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                    create: (_) => LocationsBloc(
+                      LocationsRepositoryImpl(
+                        LocationsService(
+                          DioClient.dio,
+                        ),
+                      ),
+                    ),
+                    child: LocationFiltersScreen(
+                      filters: filters,
+                    ),
+                  ),
+                ),
+              )
+              .then((_) => onFilters(searchName)),
         ),
-        body: RefreshIndicator(
-          onRefresh: _refresh,
-          child: BlocConsumer<LocationsBloc, LocationsState>(
-            buildWhen: (previous, current) {
-              return current.maybeWhen(
-                orElse: () => true,
-                loadingGetLocations: () => locations == null,
-                loadingGetMoreLocations: () => false,
-              );
-            },
-            listener: (context, state) {
-              state.whenOrNull(
-                loadingGetLocations: () => isLoadingMore = true,
-                successGetMoreLocations: (list) {
-                  if (isLoadingMore) {
-                    locations?.results?.addAll(list.results ?? []);
-                    isLoadingMore = false;
-                  }
+      ),
+      body: RefreshIndicator(
+        onRefresh: _refresh,
+        child: BlocConsumer<LocationsBloc, LocationsState>(
+          buildWhen: (previous, current) {
+            return current.maybeWhen(
+              orElse: () => true,
+              loadingGetLocations: () => true,
+              loadingGetMoreLocations: () => false,
+            );
+          },
+          listener: (context, state) {
+            state.whenOrNull(
+              loadingGetLocations: () => true,
+              successGetMoreLocations: (list) {
+                if (isLoadingMore) {
+                  locations?.results?.addAll(list.results ?? []);
+                  isLoadingMore = false;
+                }
+              },
+              successGetLocations: (list) {
+                if (locations == null || isSearch) {
+                  locations = list;
+                  isLoadingMore = false;
+                  _maxPage = list.info!.pages!;
+                  isSearch = false;
+                }
+              },
+              errorGetLocations: (err) => isLoadingMore = false,
+            );
+          },
+          builder: (context, state) {
+            return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              child: state.maybeWhen(
+                loadingGetLocations: () {
+                  return const SingleChildScrollView(
+                    child: ShimmerBigCardsListWidget(),
+                  );
                 },
-                successGetLocations: (list) {
-                  if (locations == null || isSearch) {
-                    locations = list;
-                    isLoadingMore = false;
-                    _maxPage = list.info!.pages!;
-                    isSearch = false;
+                errorGetLocations: (err) {
+                  if (err.response.statusCode == 404) {
+                    return Center(
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 120),
+                          Image.asset(ImageAssets.searchEmpty),
+                          const SizedBox(height: 45),
+                          const Text(
+                            'Такой локации нет',
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    );
                   }
+                  return null;
                 },
-                errorGetLocations: (err) => isLoadingMore = false,
-              );
-            },
-            builder: (context, state) {
-              return AnimatedSwitcher(
-                duration: const Duration(milliseconds: 500),
-                child: state.maybeWhen(
-                  loadingGetLocations: () {
-                    return cardView
-                        ? const ShimmerGridWidget()
-                        : const ShimmerListWidget();
-                  },
-                  errorGetLocations: (err) {
-                    if (err.response.statusCode == 404) {
-                      return Center(
-                        child: Column(
+                orElse: () {
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                      top: 20,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const SizedBox(height: 120),
-                            Image.asset(ImageAssets.searchEmpty),
-                            const SizedBox(height: 45),
-                            const Text(
-                              'Такой локации нет',
-                              textAlign: TextAlign.center,
+                            Text(
+                              "Всего локаций: ${locations?.info?.count ?? ''}",
                             ),
                           ],
                         ),
-                      );
-                    }
-                    return null;
-                  },
-                  orElse: () {
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                        left: 16,
-                        right: 16,
-                        top: 20,
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Всего локаций: ${locations?.info?.count ?? ''}",
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          Expanded(
-                              child: ListView.builder(
+                        const SizedBox(height: 20),
+                        Expanded(
+                          child: ListView.builder(
                             controller: _scrollController,
                             shrinkWrap: true,
                             padding: const EdgeInsets.all(0),
@@ -211,7 +233,6 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
                                                   '',
                                           imgPath: ImageAssets.earthPicture,
                                           onTap: () {
-                                            FocusScope.of(context).unfocus();
                                             Navigator.of(context).push(
                                               MaterialPageRoute(
                                                 builder: (context) =>
@@ -239,15 +260,15 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
                                 ],
                               );
                             },
-                          )),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              );
-            },
-          ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            );
+          },
         ),
       ),
     );

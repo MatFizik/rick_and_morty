@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
-import 'package:rick_and_morty/ui/characters/characters_main.dart';
+import 'package:rick_and_morty/constants/filters_model.dart';
 import 'package:rick_and_morty/ui/widgets/custom_checkbox.dart';
 
 class CharactersFiltersScreen extends StatefulWidget {
-  final CharactersFilters filters;
+  final FiltersModel filters;
 
   const CharactersFiltersScreen({
     super.key,
