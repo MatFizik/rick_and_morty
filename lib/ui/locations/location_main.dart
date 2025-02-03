@@ -3,14 +3,18 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/assets.dart';
+import 'package:rick_and_morty/constants/filters_model.dart';
 
 import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
 import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
 import 'package:rick_and_morty/logic/episodes/services/episodes_services.dart';
 import 'package:rick_and_morty/logic/locations/bloc/locations_bloc.dart';
 import 'package:rick_and_morty/logic/locations/models/locations_model.dart';
+import 'package:rick_and_morty/logic/locations/repositories/impl/locations_repository_impl.dart';
+import 'package:rick_and_morty/logic/locations/services/locations_service.dart';
 import 'package:rick_and_morty/logic/utils/logger.dart';
 import 'package:rick_and_morty/ui/locations/location_detail_screen.dart';
+import 'package:rick_and_morty/ui/locations/location_filters_screen.dart';
 import 'package:rick_and_morty/ui/widgets/custom_big_card_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_search.dart';
@@ -19,10 +23,10 @@ class LocationMainScreen extends StatefulWidget {
   const LocationMainScreen({super.key});
 
   @override
-  State<LocationMainScreen> createState() => _EpisodesMainScreenState();
+  State<LocationMainScreen> createState() => _LocationsMainScreenState();
 }
 
-class _EpisodesMainScreenState extends State<LocationMainScreen> {
+class _LocationsMainScreenState extends State<LocationMainScreen> {
   LocationsModel? locations;
   Random random = Random();
 
@@ -30,13 +34,15 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
   late String image;
   late int _maxPage;
 
+  FiltersModel filters = FiltersModel();
+
   int _currentPage = 1;
 
   bool cardView = false;
   bool isLoadingMore = false;
   bool isSearch = false;
 
-  String? searchName;
+  String searchName = '';
 
   @override
   void initState() {
@@ -90,7 +96,7 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
     }
   }
 
-  void onSearch(String locationName) {
+  void onFilters(String locationName) {
     _currentPage = 1;
     searchName = locationName;
     isSearch = true;
@@ -98,8 +104,8 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
       LocationsEvent.getLocations(
         _currentPage,
         locationName,
-        null,
-        null,
+        filters.type,
+        filters.dimension,
       ),
     );
   }
@@ -109,7 +115,26 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
     return Scaffold(
       appBar: AppBar(
         title: SearchTextfield(
-          onChanged: onSearch,
+          onChanged: onFilters,
+          filter: true,
+          onLeading: () => Navigator.of(context)
+              .push(
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                    create: (_) => LocationsBloc(
+                      LocationsRepositoryImpl(
+                        LocationsService(
+                          DioClient.dio,
+                        ),
+                      ),
+                    ),
+                    child: LocationFiltersScreen(
+                      filters: filters,
+                    ),
+                  ),
+                ),
+              )
+              .then((_) => onFilters(searchName)),
         ),
       ),
       body: RefreshIndicator(
@@ -188,55 +213,56 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
                         ),
                         const SizedBox(height: 20),
                         Expanded(
-                            child: ListView.builder(
-                          controller: _scrollController,
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.all(0),
-                          itemCount: (locations?.results?.length ?? 0) + 1,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                index < (locations?.results?.length ?? 1)
-                                    ? CustomBigCardWidget(
-                                        title:
-                                            locations?.results?[index].name ??
-                                                '',
-                                        description: locations
-                                                ?.results?[index].dimension ??
-                                            '',
-                                        status:
-                                            locations?.results?[index].type ??
-                                                '',
-                                        imgPath: ImageAssets.earthPicture,
-                                        onTap: () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  BlocProvider(
-                                                create: (_) => EpisodesBloc(
-                                                  EpisodesRepositoryImpl(
-                                                    EpisodesServices(
-                                                      DioClient.dio,
+                          child: ListView.builder(
+                            controller: _scrollController,
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(0),
+                            itemCount: (locations?.results?.length ?? 0) + 1,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  index < (locations?.results?.length ?? 1)
+                                      ? CustomBigCardWidget(
+                                          title:
+                                              locations?.results?[index].name ??
+                                                  '',
+                                          description: locations
+                                                  ?.results?[index].dimension ??
+                                              '',
+                                          status:
+                                              locations?.results?[index].type ??
+                                                  '',
+                                          imgPath: ImageAssets.earthPicture,
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    BlocProvider(
+                                                  create: (_) => EpisodesBloc(
+                                                    EpisodesRepositoryImpl(
+                                                      EpisodesServices(
+                                                        DioClient.dio,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                child: LocationDetailScreen(
-                                                  locations: locations!
-                                                      .results?[index],
+                                                  child: LocationDetailScreen(
+                                                    locations: locations!
+                                                        .results?[index],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          );
-                                        },
-                                      )
-                                    : index < (locations?.info?.count ?? 0)
-                                        ? const ShimmerBigCardWidget()
-                                        : const SizedBox(),
-                                const SizedBox(height: 24)
-                              ],
-                            );
-                          },
-                        )),
+                                            );
+                                          },
+                                        )
+                                      : index < (locations?.info?.count ?? 0)
+                                          ? const ShimmerBigCardWidget()
+                                          : const SizedBox(),
+                                  const SizedBox(height: 24)
+                                ],
+                              );
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   );

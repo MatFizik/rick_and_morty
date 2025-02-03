@@ -9,6 +9,8 @@ class LocationsEvent with _$LocationsEvent {
     String? dimension,
   ) = _GetLocations;
 
+  const factory LocationsEvent.getLoctionsFilters() = _GetLocationsFilters;
+
   const factory LocationsEvent.getMultipleLocations(List<int>? locations) =
       _GetMultipleLocations;
 }

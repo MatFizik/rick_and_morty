@@ -4,22 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
 import 'package:rick_and_morty/constants/assets.dart';
 
-import 'package:rick_and_morty/ui/characters/characters_main.dart';
-
 class SearchTextfield extends StatefulWidget {
   final VoidCallback? onTap;
   final Function(String)? onChanged;
-  final CharactersFilters? filters;
-  final VoidCallback? onFilters;
-  final VoidCallback? onReturn;
+  final bool filter;
+  final VoidCallback? onLeading;
 
   const SearchTextfield({
     super.key,
     this.onTap,
     this.onChanged,
-    this.filters,
-    this.onFilters,
-    this.onReturn,
+    this.filter = false,
+    this.onLeading,
   });
 
   @override
@@ -53,7 +49,7 @@ class _SearchTextfieldState extends State<SearchTextfield> {
       elevation: const WidgetStatePropertyAll(0),
       backgroundColor: const WidgetStatePropertyAll(AppColors.darkBgSecondary),
       leading: const Icon(Icons.search, color: AppColors.textTertiary),
-      trailing: widget.filters != null
+      trailing: widget.filter
           ? [
               Container(
                 height: 24,
@@ -62,7 +58,7 @@ class _SearchTextfieldState extends State<SearchTextfield> {
                 margin: const EdgeInsets.symmetric(horizontal: 8),
               ),
               InkWell(
-                onTap: () => widget.onFilters?.call(),
+                onTap: () => widget.onLeading?.call(),
                 child: Image.asset(
                   ImageAssets.filterIcon,
                   width: 24,

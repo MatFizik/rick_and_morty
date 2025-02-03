@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
 import 'package:rick_and_morty/constants/assets.dart';
+import 'package:rick_and_morty/constants/filters_model.dart';
 import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/logic/characters/models/characters_all_model.dart';
 import 'package:rick_and_morty/ui/characters/character_detail.dart';
@@ -27,7 +28,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
   late int _maxPage;
   late ScrollController _scrollController;
 
-  CharactersFilters filters = CharactersFilters();
+  FiltersModel filters = FiltersModel();
 
   bool cardView = false;
   bool isLoadingMore = false;
@@ -115,8 +116,8 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
             : null,
         title: SearchTextfield(
           onChanged: onFilter,
-          filters: filters,
-          onFilters: () {
+          filter: true,
+          onLeading: () {
             Navigator.of(context)
                 .push(
               MaterialPageRoute(
@@ -364,18 +365,4 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
       ),
     );
   }
-}
-
-class CharactersFilters {
-  late String? status;
-  late String? type;
-  late String? species;
-  late String? gender;
-
-  CharactersFilters({
-    this.status,
-    this.type,
-    this.gender,
-    this.species,
-  });
 }
