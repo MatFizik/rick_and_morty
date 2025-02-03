@@ -14,6 +14,8 @@ class ImageAssets {
   static const String episodeIcon = '${_basePath}episodeIcon.png';
   static const String settingsIcon = '${_basePath}settingsIcon.png';
 
+  static const String background = '${_basePath}background.png';
+
   static const String characterGreenIcon = '${_basePath}characterGreenIcon.png';
   static const String locationGreenIcon = '${_basePath}locationGreenIcon.png';
   static const String episodeGreenIcon = '${_basePath}episodeGreenIcon.png';
