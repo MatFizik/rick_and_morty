@@ -189,7 +189,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                         : const EmptyStateWidget(
                             key: ValueKey('filterEmpty'),
                             title: 'По данным фильтра\nничего не найдено',
-                            imgPath: ImageAssets.filterEmpty,
+                            imgPath: ImageAssets.rickFlying,
                           );
                   }
                   return null;

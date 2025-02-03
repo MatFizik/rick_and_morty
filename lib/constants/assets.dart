@@ -23,7 +23,9 @@ class ImageAssets {
   static const String earthPicture = '${_basePath}earth_picture.png';
 
   static const String searchEmpty = '${_basePath}search_empty.png';
-  static const String filterEmpty = '${_basePath}rickFace.png';
+  static const String errorState = '${_basePath}rickFace.png';
+  static const String rickSad = '${_basePath}rickSad.png';
+  static const String rickFlying = '${_basePath}rickFlying.png';
 
   static const String gridCardIcon = '${_basePath}gridCard.png';
   static const String gridListIcon = '${_basePath}gridList.png';

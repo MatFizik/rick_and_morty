@@ -152,7 +152,7 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                             : const EmptyStateWidget(
                                 key: ValueKey('filterEmpty'),
                                 title: 'По данным фильтра\nничего не найдено',
-                                imgPath: ImageAssets.filterEmpty,
+                                imgPath: ImageAssets.rickSad,
                               );
                       }
                       return null;
