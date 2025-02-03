@@ -146,7 +146,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
             },
             listener: (context, state) {
               state.whenOrNull(
-                loadingGetCharacters: () => isLoadingMore = true,
+                loadingGetCharacters: () => true,
                 loadingGetMultipleCharacters: () => true,
                 successGetMoreCharacters: (list) {
                   if (isLoadingMore) {
@@ -155,11 +155,9 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                   }
                 },
                 successGetCharacters: (list) {
-                  if (characters == null || isSearch) {
+                  if (characters == null || !isLoadingMore) {
                     characters = list;
-                    isLoadingMore = false;
                     _maxPage = list.info.pages;
-                    isSearch = false;
                   }
                 },
                 errorGetCharacters: (err) => isLoadingMore = false,
@@ -182,7 +180,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                           );
                   },
                   errorGetCharacters: (err) {
-                    if (err.response.statusCode == 404) {
+                    if (err.response?.statusCode == 404) {
                       return searchName != ''
                           ? const EmptyStateWidget(
                               key: ValueKey('searchEmpty'),

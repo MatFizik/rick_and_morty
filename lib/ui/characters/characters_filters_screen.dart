@@ -45,23 +45,29 @@ class _CharactersFiltersScreenState extends State<CharactersFiltersScreen> {
             CustomCheckBox(
               value: widget.filters.status == 'Alive',
               onChange: () => setState(() {
-                widget.filters.status = 'Alive';
+                widget.filters.status == 'Alive'
+                    ? widget.filters.status = ''
+                    : widget.filters.status = 'Alive';
               }),
               title: 'Alive',
             ),
             CustomCheckBox(
               value: widget.filters.status == 'Dead',
               onChange: () => setState(() {
-                widget.filters.status = 'Dead';
+                widget.filters.status == 'Dead'
+                    ? widget.filters.status = ''
+                    : widget.filters.status = 'Dead';
               }),
               title: 'Dead',
             ),
             CustomCheckBox(
-              value: widget.filters.status == 'unknowns',
+              value: widget.filters.status == 'unknown',
               onChange: () => setState(() {
-                widget.filters.status = 'unknowns';
+                widget.filters.status == 'unknown'
+                    ? widget.filters.status = ''
+                    : widget.filters.status = 'unknown';
               }),
-              title: 'unknowns',
+              title: 'unknown',
             ),
             const SizedBox(height: 36),
             const Divider(thickness: 1),
@@ -71,28 +77,36 @@ class _CharactersFiltersScreenState extends State<CharactersFiltersScreen> {
             CustomCheckBox(
               value: widget.filters.gender == 'Male',
               onChange: () => setState(() {
-                widget.filters.gender = 'Male';
+                widget.filters.gender == 'Male'
+                    ? widget.filters.gender = ''
+                    : widget.filters.gender = 'Male';
               }),
               title: 'Male',
             ),
             CustomCheckBox(
               value: widget.filters.gender == 'Female',
               onChange: () => setState(() {
-                widget.filters.gender = 'Female';
+                widget.filters.gender == 'Female'
+                    ? widget.filters.gender = ''
+                    : widget.filters.gender = 'Female';
               }),
               title: 'Female',
             ),
             CustomCheckBox(
               value: widget.filters.gender == 'Genderless',
               onChange: () => setState(() {
-                widget.filters.gender = 'Genderless';
+                widget.filters.gender == 'Genderless'
+                    ? widget.filters.gender = ''
+                    : widget.filters.gender = 'Genderless';
               }),
               title: 'Genderless',
             ),
             CustomCheckBox(
               value: widget.filters.gender == 'unknowns',
               onChange: () => setState(() {
-                widget.filters.gender = 'unknowns';
+                widget.filters.gender == 'unknowns'
+                    ? widget.filters.gender = ''
+                    : widget.filters.gender = 'unknowns';
               }),
               title: 'unknowns',
             ),
