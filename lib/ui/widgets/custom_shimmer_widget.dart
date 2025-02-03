@@ -174,14 +174,9 @@ class ShimmerImageWidget extends StatelessWidget {
   }
 }
 
-class ShimmerBigCardWidget extends StatefulWidget {
+class ShimmerBigCardWidget extends StatelessWidget {
   const ShimmerBigCardWidget({super.key});
 
-  @override
-  State<ShimmerBigCardWidget> createState() => _ShimmerBigCardWidgetState();
-}
-
-class _ShimmerBigCardWidgetState extends State<ShimmerBigCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -206,6 +201,26 @@ class _ShimmerBigCardWidgetState extends State<ShimmerBigCardWidget> {
         const ShimmerTextWidget(
           width: 150,
         ),
+      ],
+    );
+  }
+}
+
+class ShimmerBigCardsListWidget extends StatelessWidget {
+  const ShimmerBigCardsListWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        ShimmerBigCardWidget(),
+        SizedBox(height: 24),
+        ShimmerBigCardWidget(),
+        SizedBox(height: 24),
+        ShimmerBigCardWidget(),
+        SizedBox(height: 24),
+        ShimmerBigCardWidget(),
+        SizedBox(height: 24),
       ],
     );
   }

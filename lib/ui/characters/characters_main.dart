@@ -165,6 +165,9 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
             );
           },
           builder: (context, state) {
+            final currentRoute =
+                ModalRoute.of(context)?.settings.name ?? 'Unknown route';
+            print('Current route: $currentRoute');
             return AnimatedSwitcher(
               duration: const Duration(milliseconds: 500),
               child: state.maybeWhen(

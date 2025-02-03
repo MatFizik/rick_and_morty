@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:rick_and_morty/constants/assets.dart';
 import 'package:rick_and_morty/constants/filters_model.dart';
-
 import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
 import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
 import 'package:rick_and_morty/logic/episodes/services/episodes_services.dart';
@@ -38,7 +38,6 @@ class _LocationsMainScreenState extends State<LocationMainScreen> {
 
   int _currentPage = 1;
 
-  bool cardView = false;
   bool isLoadingMore = false;
   bool isSearch = false;
 
@@ -143,13 +142,13 @@ class _LocationsMainScreenState extends State<LocationMainScreen> {
           buildWhen: (previous, current) {
             return current.maybeWhen(
               orElse: () => true,
-              loadingGetLocations: () => locations == null,
+              loadingGetLocations: () => true,
               loadingGetMoreLocations: () => false,
             );
           },
           listener: (context, state) {
             state.whenOrNull(
-              loadingGetLocations: () => isLoadingMore = true,
+              loadingGetLocations: () => true,
               successGetMoreLocations: (list) {
                 if (isLoadingMore) {
                   locations?.results?.addAll(list.results ?? []);
@@ -172,9 +171,9 @@ class _LocationsMainScreenState extends State<LocationMainScreen> {
               duration: const Duration(milliseconds: 500),
               child: state.maybeWhen(
                 loadingGetLocations: () {
-                  return cardView
-                      ? const ShimmerGridWidget()
-                      : const ShimmerListWidget();
+                  return const SingleChildScrollView(
+                    child: ShimmerBigCardsListWidget(),
+                  );
                 },
                 errorGetLocations: (err) {
                   if (err.response.statusCode == 404) {

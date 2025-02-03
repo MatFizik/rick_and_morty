@@ -23,7 +23,7 @@ class _CharactersFiltersScreenState extends State<LocationFiltersScreen> {
   @override
   void initState() {
     BlocProvider.of<LocationsBloc>(context).add(
-      const LocationsEvent.getLoctionsFilters(),
+      const LocationsEvent.getLocations(null, null, null, null),
     );
     super.initState();
   }
@@ -50,13 +50,24 @@ class _CharactersFiltersScreenState extends State<LocationFiltersScreen> {
           state.maybeWhen(
             orElse: () => true,
             errorGetLocationsFilters: (err) => true,
+            errorGetLocations: (err) => true,
             loadingGetLocationsFilters: () => true,
+            loadingGetLocations: () => true,
             successGetLocationsFilters: (types, dimension) => true,
+            successGetLocations: (list) =>
+                BlocProvider.of<LocationsBloc>(context).add(
+              LocationsEvent.getLoctionsFilters(
+                list.results!.map((e) => e.id!).toList(),
+              ),
+            ),
           );
         },
         builder: (context, state) {
           return state.maybeWhen(
             loadingGetLocationsFilters: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            loadingGetLocations: () => const Center(
               child: CircularProgressIndicator(),
             ),
             successGetLocationsFilters: (types, dimension) {

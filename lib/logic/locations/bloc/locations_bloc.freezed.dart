@@ -21,7 +21,7 @@ mixin _$LocationsEvent {
     required TResult Function(
             int? page, String? name, String? type, String? dimension)
         getLocations,
-    required TResult Function() getLoctionsFilters,
+    required TResult Function(List<int>? locations) getLoctionsFilters,
     required TResult Function(List<int>? locations) getMultipleLocations,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,7 +29,7 @@ mixin _$LocationsEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
-    TResult? Function()? getLoctionsFilters,
+    TResult? Function(List<int>? locations)? getLoctionsFilters,
     TResult? Function(List<int>? locations)? getMultipleLocations,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ mixin _$LocationsEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
-    TResult Function()? getLoctionsFilters,
+    TResult Function(List<int>? locations)? getLoctionsFilters,
     TResult Function(List<int>? locations)? getMultipleLocations,
     required TResult orElse(),
   }) =>
@@ -183,7 +183,7 @@ class _$GetLocationsImpl implements _GetLocations {
     required TResult Function(
             int? page, String? name, String? type, String? dimension)
         getLocations,
-    required TResult Function() getLoctionsFilters,
+    required TResult Function(List<int>? locations) getLoctionsFilters,
     required TResult Function(List<int>? locations) getMultipleLocations,
   }) {
     return getLocations(page, name, type, dimension);
@@ -194,7 +194,7 @@ class _$GetLocationsImpl implements _GetLocations {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
-    TResult? Function()? getLoctionsFilters,
+    TResult? Function(List<int>? locations)? getLoctionsFilters,
     TResult? Function(List<int>? locations)? getMultipleLocations,
   }) {
     return getLocations?.call(page, name, type, dimension);
@@ -205,7 +205,7 @@ class _$GetLocationsImpl implements _GetLocations {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
-    TResult Function()? getLoctionsFilters,
+    TResult Function(List<int>? locations)? getLoctionsFilters,
     TResult Function(List<int>? locations)? getMultipleLocations,
     required TResult orElse(),
   }) {
@@ -271,6 +271,8 @@ abstract class _$$GetLocationsFiltersImplCopyWith<$Res> {
   factory _$$GetLocationsFiltersImplCopyWith(_$GetLocationsFiltersImpl value,
           $Res Function(_$GetLocationsFiltersImpl) then) =
       __$$GetLocationsFiltersImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<int>? locations});
 }
 
 /// @nodoc
@@ -283,27 +285,62 @@ class __$$GetLocationsFiltersImplCopyWithImpl<$Res>
 
   /// Create a copy of LocationsEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? locations = freezed,
+  }) {
+    return _then(_$GetLocationsFiltersImpl(
+      freezed == locations
+          ? _value._locations
+          : locations // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetLocationsFiltersImpl implements _GetLocationsFilters {
-  const _$GetLocationsFiltersImpl();
+  const _$GetLocationsFiltersImpl(final List<int>? locations)
+      : _locations = locations;
+
+  final List<int>? _locations;
+  @override
+  List<int>? get locations {
+    final value = _locations;
+    if (value == null) return null;
+    if (_locations is EqualUnmodifiableListView) return _locations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'LocationsEvent.getLoctionsFilters()';
+    return 'LocationsEvent.getLoctionsFilters(locations: $locations)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetLocationsFiltersImpl);
+            other is _$GetLocationsFiltersImpl &&
+            const DeepCollectionEquality()
+                .equals(other._locations, _locations));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_locations));
+
+  /// Create a copy of LocationsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetLocationsFiltersImplCopyWith<_$GetLocationsFiltersImpl> get copyWith =>
+      __$$GetLocationsFiltersImplCopyWithImpl<_$GetLocationsFiltersImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -311,10 +348,10 @@ class _$GetLocationsFiltersImpl implements _GetLocationsFilters {
     required TResult Function(
             int? page, String? name, String? type, String? dimension)
         getLocations,
-    required TResult Function() getLoctionsFilters,
+    required TResult Function(List<int>? locations) getLoctionsFilters,
     required TResult Function(List<int>? locations) getMultipleLocations,
   }) {
-    return getLoctionsFilters();
+    return getLoctionsFilters(locations);
   }
 
   @override
@@ -322,10 +359,10 @@ class _$GetLocationsFiltersImpl implements _GetLocationsFilters {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
-    TResult? Function()? getLoctionsFilters,
+    TResult? Function(List<int>? locations)? getLoctionsFilters,
     TResult? Function(List<int>? locations)? getMultipleLocations,
   }) {
-    return getLoctionsFilters?.call();
+    return getLoctionsFilters?.call(locations);
   }
 
   @override
@@ -333,12 +370,12 @@ class _$GetLocationsFiltersImpl implements _GetLocationsFilters {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
-    TResult Function()? getLoctionsFilters,
+    TResult Function(List<int>? locations)? getLoctionsFilters,
     TResult Function(List<int>? locations)? getMultipleLocations,
     required TResult orElse(),
   }) {
     if (getLoctionsFilters != null) {
-      return getLoctionsFilters();
+      return getLoctionsFilters(locations);
     }
     return orElse();
   }
@@ -379,7 +416,16 @@ class _$GetLocationsFiltersImpl implements _GetLocationsFilters {
 }
 
 abstract class _GetLocationsFilters implements LocationsEvent {
-  const factory _GetLocationsFilters() = _$GetLocationsFiltersImpl;
+  const factory _GetLocationsFilters(final List<int>? locations) =
+      _$GetLocationsFiltersImpl;
+
+  List<int>? get locations;
+
+  /// Create a copy of LocationsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetLocationsFiltersImplCopyWith<_$GetLocationsFiltersImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -465,7 +511,7 @@ class _$GetMultipleLocationsImpl implements _GetMultipleLocations {
     required TResult Function(
             int? page, String? name, String? type, String? dimension)
         getLocations,
-    required TResult Function() getLoctionsFilters,
+    required TResult Function(List<int>? locations) getLoctionsFilters,
     required TResult Function(List<int>? locations) getMultipleLocations,
   }) {
     return getMultipleLocations(locations);
@@ -476,7 +522,7 @@ class _$GetMultipleLocationsImpl implements _GetMultipleLocations {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
-    TResult? Function()? getLoctionsFilters,
+    TResult? Function(List<int>? locations)? getLoctionsFilters,
     TResult? Function(List<int>? locations)? getMultipleLocations,
   }) {
     return getMultipleLocations?.call(locations);
@@ -487,7 +533,7 @@ class _$GetMultipleLocationsImpl implements _GetMultipleLocations {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page, String? name, String? type, String? dimension)?
         getLocations,
-    TResult Function()? getLoctionsFilters,
+    TResult Function(List<int>? locations)? getLoctionsFilters,
     TResult Function(List<int>? locations)? getMultipleLocations,
     required TResult orElse(),
   }) {

@@ -19,16 +19,16 @@ class LocationsBloc extends Bloc<LocationsEvent, LocationsState> {
 
   Future<void> _onEvent(LocationsEvent event, Emitter<LocationsState> emit) {
     return event.map(
-      getLoctionsFilters: (value) async {
+      getLoctionsFilters: (data) async {
         emit(const LocationsState.loadingGetLocationsFilters());
         try {
-          LocationsModel list =
-              await repository.getLocations(null, null, null, null);
+          List<Location> list =
+              await repository.getMultipleLocations(data.locations);
 
           final typesSet = <String>{};
           final dimensionsSet = <String>{};
 
-          for (var location in list.results!) {
+          for (var location in list) {
             if (location.type != null) {
               typesSet.add(location.type!);
             }
