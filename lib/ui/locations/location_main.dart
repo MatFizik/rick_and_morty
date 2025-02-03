@@ -106,144 +106,148 @@ class _EpisodesMainScreenState extends State<LocationMainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: SearchTextfield(
-          onChanged: onSearch,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: SearchTextfield(
+            onChanged: onSearch,
+          ),
         ),
-      ),
-      body: RefreshIndicator(
-        onRefresh: _refresh,
-        child: BlocConsumer<LocationsBloc, LocationsState>(
-          buildWhen: (previous, current) {
-            return current.maybeWhen(
-              orElse: () => true,
-              loadingGetLocations: () => locations == null,
-              loadingGetMoreLocations: () => false,
-            );
-          },
-          listener: (context, state) {
-            state.whenOrNull(
-              loadingGetLocations: () => isLoadingMore = true,
-              successGetMoreLocations: (list) {
-                if (isLoadingMore) {
-                  locations?.results?.addAll(list.results ?? []);
-                  isLoadingMore = false;
-                }
-              },
-              successGetLocations: (list) {
-                if (locations == null || isSearch) {
-                  locations = list;
-                  isLoadingMore = false;
-                  _maxPage = list.info!.pages!;
-                  isSearch = false;
-                }
-              },
-              errorGetLocations: (err) => isLoadingMore = false,
-            );
-          },
-          builder: (context, state) {
-            return AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              child: state.maybeWhen(
-                loadingGetLocations: () {
-                  return cardView
-                      ? const ShimmerGridWidget()
-                      : const ShimmerListWidget();
-                },
-                errorGetLocations: (err) {
-                  if (err.response.statusCode == 404) {
-                    return Center(
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 120),
-                          Image.asset(ImageAssets.searchEmpty),
-                          const SizedBox(height: 45),
-                          const Text(
-                            'Такой локации нет',
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    );
+        body: RefreshIndicator(
+          onRefresh: _refresh,
+          child: BlocConsumer<LocationsBloc, LocationsState>(
+            buildWhen: (previous, current) {
+              return current.maybeWhen(
+                orElse: () => true,
+                loadingGetLocations: () => locations == null,
+                loadingGetMoreLocations: () => false,
+              );
+            },
+            listener: (context, state) {
+              state.whenOrNull(
+                loadingGetLocations: () => isLoadingMore = true,
+                successGetMoreLocations: (list) {
+                  if (isLoadingMore) {
+                    locations?.results?.addAll(list.results ?? []);
+                    isLoadingMore = false;
                   }
-                  return null;
                 },
-                orElse: () {
-                  return Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16,
-                      right: 16,
-                      top: 20,
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                successGetLocations: (list) {
+                  if (locations == null || isSearch) {
+                    locations = list;
+                    isLoadingMore = false;
+                    _maxPage = list.info!.pages!;
+                    isSearch = false;
+                  }
+                },
+                errorGetLocations: (err) => isLoadingMore = false,
+              );
+            },
+            builder: (context, state) {
+              return AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                child: state.maybeWhen(
+                  loadingGetLocations: () {
+                    return cardView
+                        ? const ShimmerGridWidget()
+                        : const ShimmerListWidget();
+                  },
+                  errorGetLocations: (err) {
+                    if (err.response.statusCode == 404) {
+                      return Center(
+                        child: Column(
                           children: [
-                            Text(
-                              "Всего локаций: ${locations?.info?.count ?? ''}",
+                            const SizedBox(height: 120),
+                            Image.asset(ImageAssets.searchEmpty),
+                            const SizedBox(height: 45),
+                            const Text(
+                              'Такой локации нет',
+                              textAlign: TextAlign.center,
                             ),
                           ],
                         ),
-                        const SizedBox(height: 20),
-                        Expanded(
-                            child: ListView.builder(
-                          controller: _scrollController,
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.all(0),
-                          itemCount: (locations?.results?.length ?? 0) + 1,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                index < (locations?.results?.length ?? 1)
-                                    ? CustomBigCardWidget(
-                                        title:
-                                            locations?.results?[index].name ??
-                                                '',
-                                        description: locations
-                                                ?.results?[index].dimension ??
-                                            '',
-                                        status:
-                                            locations?.results?[index].type ??
-                                                '',
-                                        imgPath: ImageAssets.earthPicture,
-                                        onTap: () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  BlocProvider(
-                                                create: (_) => EpisodesBloc(
-                                                  EpisodesRepositoryImpl(
-                                                    EpisodesServices(
-                                                      DioClient.dio,
+                      );
+                    }
+                    return null;
+                  },
+                  orElse: () {
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                        left: 16,
+                        right: 16,
+                        top: 20,
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Всего локаций: ${locations?.info?.count ?? ''}",
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          Expanded(
+                              child: ListView.builder(
+                            controller: _scrollController,
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(0),
+                            itemCount: (locations?.results?.length ?? 0) + 1,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  index < (locations?.results?.length ?? 1)
+                                      ? CustomBigCardWidget(
+                                          title:
+                                              locations?.results?[index].name ??
+                                                  '',
+                                          description: locations
+                                                  ?.results?[index].dimension ??
+                                              '',
+                                          status:
+                                              locations?.results?[index].type ??
+                                                  '',
+                                          imgPath: ImageAssets.earthPicture,
+                                          onTap: () {
+                                            FocusScope.of(context).unfocus();
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    BlocProvider(
+                                                  create: (_) => EpisodesBloc(
+                                                    EpisodesRepositoryImpl(
+                                                      EpisodesServices(
+                                                        DioClient.dio,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                child: LocationDetailScreen(
-                                                  locations: locations!
-                                                      .results?[index],
+                                                  child: LocationDetailScreen(
+                                                    locations: locations!
+                                                        .results?[index],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          );
-                                        },
-                                      )
-                                    : index < (locations?.info?.count ?? 0)
-                                        ? const ShimmerBigCardWidget()
-                                        : const SizedBox(),
-                                const SizedBox(height: 24)
-                              ],
-                            );
-                          },
-                        )),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            );
-          },
+                                            );
+                                          },
+                                        )
+                                      : index < (locations?.info?.count ?? 0)
+                                          ? const ShimmerBigCardWidget()
+                                          : const SizedBox(),
+                                  const SizedBox(height: 24)
+                                ],
+                              );
+                            },
+                          )),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
