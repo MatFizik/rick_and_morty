@@ -6,7 +6,7 @@ import 'package:rick_and_morty/logic/characters/services/characters_service.dart
 import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
 import 'package:rick_and_morty/logic/episodes/models/episodes_all_model.dart';
 import 'package:rick_and_morty/logic/utils/logger.dart';
-import 'package:rick_and_morty/ui/episodes/episode_detail_screen.dart';
+import 'package:rick_and_morty/ui/episodes/screens/episode_detail_screen.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_tile_widget.dart';
 

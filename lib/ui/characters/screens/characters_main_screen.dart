@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
-import 'package:rick_and_morty/constants/assets.dart';
+import 'package:rick_and_morty/constants/image_assets.dart';
 import 'package:rick_and_morty/constants/filters_model.dart';
 import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/logic/characters/models/characters_all_model.dart';
-import 'package:rick_and_morty/ui/characters/character_detail.dart';
-import 'package:rick_and_morty/ui/characters/characters_filters_screen.dart';
+import 'package:rick_and_morty/ui/characters/screens/character_detail_screen.dart';
+import 'package:rick_and_morty/ui/characters/screens/characters_filters_screen.dart';
 import 'package:rick_and_morty/ui/widgets/custom_card_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_tile_widget.dart';
-import 'package:rick_and_morty/ui/widgets/custom_search.dart';
+import 'package:rick_and_morty/ui/widgets/custom_search_textfield.dart';
 import 'package:rick_and_morty/ui/widgets/empty_state_widget.dart';
 
 class CharactersMainScreen extends StatefulWidget {
@@ -116,7 +116,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                   onPressed: () => Navigator.of(context).maybePop(),
                 )
               : null,
-          title: SearchTextfield(
+          title: CustomSearchTextfield(
             onChanged: onFilter,
             filter: true,
             onLeading: () {

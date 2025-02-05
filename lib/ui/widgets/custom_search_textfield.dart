@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
-import 'package:rick_and_morty/constants/assets.dart';
+import 'package:rick_and_morty/constants/image_assets.dart';
 
-class SearchTextfield extends StatefulWidget {
+class CustomSearchTextfield extends StatefulWidget {
   final VoidCallback? onTap;
   final Function(String)? onChanged;
   final bool filter;
   final VoidCallback? onLeading;
 
-  const SearchTextfield({
+  const CustomSearchTextfield({
     super.key,
     this.onTap,
     this.onChanged,
@@ -19,10 +19,10 @@ class SearchTextfield extends StatefulWidget {
   });
 
   @override
-  State<SearchTextfield> createState() => _SearchTextfieldState();
+  State<CustomSearchTextfield> createState() => _SearchTextfieldState();
 }
 
-class _SearchTextfieldState extends State<SearchTextfield> {
+class _SearchTextfieldState extends State<CustomSearchTextfield> {
   Timer? _debounce;
 
   void _onSearchChanged(String value) {

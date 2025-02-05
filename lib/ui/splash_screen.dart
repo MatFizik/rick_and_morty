@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:rick_and_morty/constants/assets.dart';
+import 'package:rick_and_morty/constants/image_assets.dart';
 import 'package:rick_and_morty/main.dart';
 
 class SplashScreen extends StatefulWidget {

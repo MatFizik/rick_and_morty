@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vector_graphics/vector_graphics_compat.dart';
 
-class CustomSvgPicture extends StatelessWidget {
+class CustomSvgPictureWidget extends StatelessWidget {
   final String path;
   final bool isByte;
   final bool isNetwork;
@@ -11,7 +11,8 @@ class CustomSvgPicture extends StatelessWidget {
   final BoxFit fit;
   final Color? color;
   final String? loaderAsset;
-  const CustomSvgPicture({
+
+  const CustomSvgPictureWidget({
     super.key,
     required this.path,
     this.isByte = false,

@@ -3,15 +3,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
-import 'package:rick_and_morty/constants/assets.dart';
+import 'package:rick_and_morty/constants/image_assets.dart';
 import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/logic/characters/repositories/impl/characters_repository_impl.dart';
 import 'package:rick_and_morty/logic/characters/services/characters_service.dart';
 import 'package:rick_and_morty/logic/episodes/models/episodes_all_model.dart';
 import 'package:rick_and_morty/logic/utils/logger.dart';
-import 'package:rick_and_morty/ui/characters/characters_in_episode.dart';
-import 'package:rick_and_morty/ui/characters/characters_main.dart';
-import 'package:rick_and_morty/ui/widgets/custom_mini_tile.dart';
+import 'package:rick_and_morty/ui/characters/widgets/characters_in_episode_widget.dart';
+import 'package:rick_and_morty/ui/characters/screens/characters_main_screen.dart';
+import 'package:rick_and_morty/ui/widgets/custom_mini_tile_widget.dart';
 
 class EpisodeDetailScreen extends StatefulWidget {
   final Episode episode;

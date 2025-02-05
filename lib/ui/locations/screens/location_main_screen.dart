@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:rick_and_morty/constants/assets.dart';
+import 'package:rick_and_morty/constants/image_assets.dart';
 import 'package:rick_and_morty/constants/filters_model.dart';
 import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
 import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
@@ -13,11 +13,11 @@ import 'package:rick_and_morty/logic/locations/models/locations_model.dart';
 import 'package:rick_and_morty/logic/locations/repositories/impl/locations_repository_impl.dart';
 import 'package:rick_and_morty/logic/locations/services/locations_service.dart';
 import 'package:rick_and_morty/logic/utils/logger.dart';
-import 'package:rick_and_morty/ui/locations/location_detail_screen.dart';
-import 'package:rick_and_morty/ui/locations/location_filters_screen.dart';
+import 'package:rick_and_morty/ui/locations/screens/location_detail_screen.dart';
+import 'package:rick_and_morty/ui/locations/screens/location_filters_screen.dart';
 import 'package:rick_and_morty/ui/widgets/custom_big_card_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
-import 'package:rick_and_morty/ui/widgets/custom_search.dart';
+import 'package:rick_and_morty/ui/widgets/custom_search_textfield.dart';
 
 class LocationMainScreen extends StatefulWidget {
   const LocationMainScreen({super.key});
@@ -115,7 +115,7 @@ class _LocationsMainScreenState extends State<LocationMainScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: SearchTextfield(
+          title: CustomSearchTextfield(
             onChanged: onFilters,
             filter: true,
             onLeading: () => Navigator.of(context)

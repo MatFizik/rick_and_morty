@@ -12,10 +12,10 @@ import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_reposit
 import 'package:rick_and_morty/logic/episodes/services/episodes_services.dart';
 import 'package:rick_and_morty/logic/locations/bloc/locations_bloc.dart';
 import 'package:rick_and_morty/logic/utils/logger.dart';
-import 'package:rick_and_morty/ui/episodes/episode_with_character.dart';
-import 'package:rick_and_morty/ui/episodes/episodes_main.dart';
-import 'package:rick_and_morty/ui/locations/location_detail_screen.dart';
-import 'package:rick_and_morty/ui/widgets/custom_mini_tile.dart';
+import 'package:rick_and_morty/ui/episodes/widgets/episode_with_character_widget.dart';
+import 'package:rick_and_morty/ui/episodes/screens/episodes_main_screen.dart';
+import 'package:rick_and_morty/ui/locations/screens/location_detail_screen.dart';
+import 'package:rick_and_morty/ui/widgets/custom_mini_tile_widget.dart';
 
 class CharacterDetailScreen extends StatefulWidget {
   final Character character;
