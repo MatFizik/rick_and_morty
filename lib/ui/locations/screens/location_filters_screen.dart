@@ -49,8 +49,6 @@ class _CharactersFiltersScreenState extends State<LocationFiltersScreen> {
         listener: (context, state) {
           state.maybeWhen(
             orElse: () => true,
-            errorGetLocationsFilters: (err) => true,
-            errorGetLocations: (err) => true,
             loadingGetLocationsFilters: () => true,
             loadingGetLocations: () => true,
             successGetLocationsFilters: (types, dimension) => true,

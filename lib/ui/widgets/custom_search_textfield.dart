@@ -5,14 +5,12 @@ import 'package:rick_and_morty/constants/app_colors.dart';
 import 'package:rick_and_morty/constants/image_assets.dart';
 
 class CustomSearchTextfield extends StatefulWidget {
-  final VoidCallback? onTap;
   final Function(String)? onChanged;
   final bool filter;
   final VoidCallback? onLeading;
 
   const CustomSearchTextfield({
     super.key,
-    this.onTap,
     this.onChanged,
     this.filter = false,
     this.onLeading,
@@ -37,10 +35,9 @@ class _SearchTextfieldState extends State<CustomSearchTextfield> {
   Widget build(BuildContext context) {
     return SearchBar(
       onChanged: (value) => _onSearchChanged(value),
-      onTap: () => widget.onTap?.call(),
       hintText: 'Search...',
       padding: const WidgetStatePropertyAll(
-        EdgeInsets.symmetric(horizontal: 14),
+        EdgeInsets.only(left: 14),
       ),
       hintStyle: const WidgetStatePropertyAll(
         TextStyle(color: AppColors.textTertiary),
@@ -57,14 +54,16 @@ class _SearchTextfieldState extends State<CustomSearchTextfield> {
                 color: Colors.white.withOpacity(0.1),
                 margin: const EdgeInsets.symmetric(horizontal: 8),
               ),
-              InkWell(
-                onTap: () => widget.onLeading?.call(),
-                child: Image.asset(
+              IconButton(
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.only(right: 24),
+                onPressed: () => widget.onLeading?.call(),
+                icon: Image.asset(
                   ImageAssets.filterIcon,
                   width: 24,
                   height: 24,
                 ),
-              )
+              ),
             ]
           : null,
     );

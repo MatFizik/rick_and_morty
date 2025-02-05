@@ -29,6 +29,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
   late ScrollController _scrollController;
 
   FiltersModel filters = FiltersModel();
+  FiltersModel localFilters = FiltersModel();
 
   bool cardView = false;
   bool isLoadingMore = false;
@@ -87,10 +88,14 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
     }
   }
 
-  void onFilter(String characterName) {
-    _currentPage = 1;
+  void onSearch(String characterName) {
+    localFilters = FiltersModel(
+      status: filters.status,
+      gender: filters.gender,
+    );
     searchName = characterName;
-    isSearch = characterName != '';
+    _currentPage = 1;
+    isSearch = true;
     BlocProvider.of<CharactersBloc>(context).add(
       CharactersEvent.getCharacters(
         _currentPage,
@@ -101,6 +106,28 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
         filters.gender,
       ),
     );
+  }
+
+  void onFilter() {
+    if (localFilters.gender != filters.gender ||
+        localFilters.status != filters.status) {
+      localFilters = FiltersModel(
+        status: filters.status,
+        gender: filters.gender,
+      );
+      _currentPage = 1;
+      isSearch = true;
+      BlocProvider.of<CharactersBloc>(context).add(
+        CharactersEvent.getCharacters(
+          _currentPage,
+          searchName,
+          filters.status,
+          filters.species,
+          filters.type,
+          filters.gender,
+        ),
+      );
+    }
   }
 
   @override
@@ -117,7 +144,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                 )
               : null,
           title: CustomSearchTextfield(
-            onChanged: onFilter,
+            onChanged: onSearch,
             filter: true,
             onLeading: () {
               Navigator.of(context)
@@ -129,7 +156,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                 ),
               )
                   .then((_) {
-                onFilter(searchName);
+                onFilter();
               });
             },
           ),
@@ -137,17 +164,9 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
         body: RefreshIndicator(
           onRefresh: _refreshCharacters,
           child: BlocConsumer<CharactersBloc, CharactersState>(
-            buildWhen: (previous, current) {
-              return current.maybeWhen(
-                orElse: () => true,
-                loadingGetCharacters: () => characters == null,
-                loadingGetMoreCharacters: () => false,
-              );
-            },
             listener: (context, state) {
               state.whenOrNull(
                 loadingGetCharacters: () => true,
-                loadingGetMultipleCharacters: () => true,
                 successGetMoreCharacters: (list) {
                   if (isLoadingMore) {
                     characters?.characters.addAll(list.characters);
@@ -161,7 +180,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                   }
                 },
                 errorGetCharacters: (err) => isLoadingMore = false,
-                errorGetMultipleCharacters: (err) => false,
+                errorGetMultipleCharacters: (err) => true,
               );
             },
             builder: (context, state) {
@@ -210,17 +229,39 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                               Text(
                                 "Всего персонажей: ${characters?.info.count ?? ''}",
                               ),
-                              InkWell(
-                                onTap: () {
-                                  FocusScope.of(context).unfocus();
-                                  setState(() {
-                                    cardView = !cardView;
-                                  });
-                                },
-                                child: !cardView
-                                    ? Image.asset(ImageAssets.gridCardIcon)
-                                    : Image.asset(ImageAssets.gridListIcon),
-                              )
+                              Row(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      FocusScope.of(context).unfocus();
+                                      setState(() {
+                                        cardView = !cardView;
+                                      });
+                                    },
+                                    child: !cardView
+                                        ? Image.asset(ImageAssets.gridCardIcon)
+                                        : Image.asset(ImageAssets.gridListIcon),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 24,
+                                    ),
+                                    child: InkWell(
+                                      onTap: () {
+                                        FocusScope.of(context).unfocus();
+                                        setState(() {
+                                          filters = FiltersModel();
+                                        });
+                                        onFilter();
+                                      },
+                                      child: Image.asset(
+                                        width: 30,
+                                        ImageAssets.removeFiltersIcon,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                           const SizedBox(height: 20),
