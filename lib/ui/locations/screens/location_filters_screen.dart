@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
 import 'package:rick_and_morty/constants/image_assets.dart';
 import 'package:rick_and_morty/constants/filters_model.dart';
-import 'package:rick_and_morty/logic/locations/bloc/locations_bloc.dart';
+import 'package:rick_and_morty/ui/locations/logic/bloc/locations_bloc.dart';
 import 'package:rick_and_morty/ui/widgets/custom_checkbox.dart';
 import 'package:rick_and_morty/ui/widgets/empty_state_widget.dart';
 

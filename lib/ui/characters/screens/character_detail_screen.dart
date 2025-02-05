@@ -6,12 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
 
-import 'package:rick_and_morty/logic/characters/models/characters_all_model.dart';
-import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
-import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
-import 'package:rick_and_morty/logic/episodes/services/episodes_services.dart';
-import 'package:rick_and_morty/logic/locations/bloc/locations_bloc.dart';
-import 'package:rick_and_morty/logic/utils/logger.dart';
+import 'package:rick_and_morty/ui/characters/logic/models/characters_all_model.dart';
+import 'package:rick_and_morty/ui/episodes/logic/bloc/episodes_bloc.dart';
+import 'package:rick_and_morty/ui/episodes/logic/repositories/impl/episodes_repository_impl.dart';
+import 'package:rick_and_morty/ui/episodes/logic/services/episodes_services.dart';
+import 'package:rick_and_morty/ui/locations/logic/bloc/locations_bloc.dart';
+import 'package:rick_and_morty/utils/logger.dart';
 import 'package:rick_and_morty/ui/episodes/widgets/episode_with_character_widget.dart';
 import 'package:rick_and_morty/ui/episodes/screens/episodes_main_screen.dart';
 import 'package:rick_and_morty/ui/locations/screens/location_detail_screen.dart';

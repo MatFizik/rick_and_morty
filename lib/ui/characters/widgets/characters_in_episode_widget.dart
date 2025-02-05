@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/image_assets.dart';
-import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
-import 'package:rick_and_morty/logic/episodes/bloc/episodes_bloc.dart';
-import 'package:rick_and_morty/logic/episodes/repositories/impl/episodes_repository_impl.dart';
-import 'package:rick_and_morty/logic/episodes/services/episodes_services.dart';
-import 'package:rick_and_morty/logic/utils/logger.dart';
+import 'package:rick_and_morty/ui/characters/logic/bloc/characters_bloc.dart';
+import 'package:rick_and_morty/ui/episodes/logic/bloc/episodes_bloc.dart';
+import 'package:rick_and_morty/ui/episodes/logic/repositories/impl/episodes_repository_impl.dart';
+import 'package:rick_and_morty/ui/episodes/logic/services/episodes_services.dart';
+import 'package:rick_and_morty/utils/logger.dart';
 import 'package:rick_and_morty/ui/characters/screens/character_detail_screen.dart';
 import 'package:rick_and_morty/ui/widgets/custom_shimmer_widget.dart';
 import 'package:rick_and_morty/ui/widgets/custom_tile_widget.dart';

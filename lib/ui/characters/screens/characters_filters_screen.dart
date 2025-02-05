@@ -102,13 +102,13 @@ class _CharactersFiltersScreenState extends State<CharactersFiltersScreen> {
               title: 'Genderless',
             ),
             CustomCheckBox(
-              value: widget.filters.gender == 'unknowns',
+              value: widget.filters.gender == 'unknown',
               onChange: () => setState(() {
-                widget.filters.gender == 'unknowns'
+                widget.filters.gender == 'unknown'
                     ? widget.filters.gender = ''
-                    : widget.filters.gender = 'unknowns';
+                    : widget.filters.gender = 'unknown';
               }),
-              title: 'unknowns',
+              title: 'unknown',
             ),
             const SizedBox(height: 36),
             const Divider(thickness: 1)

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/constants/app_colors.dart';
 import 'package:rick_and_morty/constants/image_assets.dart';
 import 'package:rick_and_morty/constants/filters_model.dart';
-import 'package:rick_and_morty/logic/characters/bloc/characters_bloc.dart';
-import 'package:rick_and_morty/logic/characters/models/characters_all_model.dart';
+import 'package:rick_and_morty/ui/characters/logic/bloc/characters_bloc.dart';
+import 'package:rick_and_morty/ui/characters/logic/models/characters_all_model.dart';
 import 'package:rick_and_morty/ui/characters/screens/character_detail_screen.dart';
 import 'package:rick_and_morty/ui/characters/screens/characters_filters_screen.dart';
 import 'package:rick_and_morty/ui/widgets/custom_card_widget.dart';
@@ -242,24 +242,27 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
                                         ? Image.asset(ImageAssets.gridCardIcon)
                                         : Image.asset(ImageAssets.gridListIcon),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 24,
-                                    ),
-                                    child: InkWell(
-                                      onTap: () {
-                                        FocusScope.of(context).unfocus();
-                                        setState(() {
-                                          filters = FiltersModel();
-                                        });
-                                        onFilter();
-                                      },
-                                      child: Image.asset(
-                                        width: 30,
-                                        ImageAssets.removeFiltersIcon,
-                                      ),
-                                    ),
-                                  ),
+                                  filters.gender != null ||
+                                          filters.status != null
+                                      ? Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 24,
+                                          ),
+                                          child: InkWell(
+                                            onTap: () {
+                                              FocusScope.of(context).unfocus();
+                                              setState(() {
+                                                filters = FiltersModel();
+                                              });
+                                              onFilter();
+                                            },
+                                            child: Image.asset(
+                                              width: 30,
+                                              ImageAssets.removeFiltersIcon,
+                                            ),
+                                          ),
+                                        )
+                                      : const SizedBox(),
                                 ],
                               ),
                             ],
