@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:rick_and_morty/constants/image_assets.dart';
-import 'package:rick_and_morty/main.dart';
+import 'package:rick_and_morty/common/image_assets.dart';
+import 'package:rick_and_morty/main_navigation.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen>
         if (mounted) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const MainWrap()),
+            MaterialPageRoute(builder: (context) => const MainNavigation()),
           );
         }
       });
