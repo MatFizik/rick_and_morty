@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/common/theme/app_colors.dart';
-import 'package:rick_and_morty/common/image_assets.dart';
+import 'package:rick_and_morty/common/constants/image_assets.dart';
 import 'package:rick_and_morty/features/characters/presentation/logic/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/features/characters/domain/repositories/impl/characters_repository_impl.dart';
 import 'package:rick_and_morty/features/characters/data/services/characters_service.dart';

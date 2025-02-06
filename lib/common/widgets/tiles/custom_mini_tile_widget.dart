@@ -5,12 +5,14 @@ class CustomMiniTileWidget extends StatefulWidget {
   final String title;
   final String subtitle;
   final VoidCallback? onTap;
+  final Widget? trailing;
 
   const CustomMiniTileWidget({
     super.key,
     required this.title,
     required this.subtitle,
     this.onTap,
+    this.trailing,
   });
 
   @override
@@ -30,18 +32,27 @@ class _CustomMiniTileWidgetState extends State<CustomMiniTileWidget> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
             children: [
-              Text(
-                widget.title,
-                style: const TextStyle(
-                    fontSize: 12, color: AppColors.textTertiary),
-              ),
-              Text(
-                widget.subtitle,
-                style: const TextStyle(fontSize: 14, color: Colors.white),
+              if (widget.trailing != null)
+                Padding(
+                  padding: const EdgeInsets.only(right: 5),
+                  child: widget.trailing!,
+                ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.title,
+                    style: const TextStyle(
+                        fontSize: 12, color: AppColors.textTertiary),
+                  ),
+                  Text(
+                    widget.subtitle,
+                    style: const TextStyle(fontSize: 14, color: Colors.white),
+                  ),
+                ],
               ),
             ],
           ),

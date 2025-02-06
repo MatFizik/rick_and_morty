@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/common/image_assets.dart';
+import 'package:rick_and_morty/common/constants/image_assets.dart';
 
 class EmptyStateWidget extends StatefulWidget {
   final String? title;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/common/theme/app_colors.dart';
-import 'package:rick_and_morty/common/image_assets.dart';
+import 'package:rick_and_morty/common/constants/image_assets.dart';
 import 'package:rick_and_morty/common/models/filters_model.dart';
 import 'package:rick_and_morty/features/locations/presentation/logic/bloc/locations_bloc.dart';
 import 'package:rick_and_morty/common/widgets/custom_checkbox.dart';

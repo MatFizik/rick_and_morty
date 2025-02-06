@@ -8,7 +8,7 @@ import 'package:rick_and_morty/features/episodes/data/models/episodes_all_model.
 import 'package:rick_and_morty/server/dio_client.dart';
 import 'package:rick_and_morty/features/episodes/presentation/screens/episode_detail_screen.dart';
 import 'package:rick_and_morty/common/widgets/custom_shimmer_widget.dart';
-import 'package:rick_and_morty/common/widgets/custom_tile_widget.dart';
+import 'package:rick_and_morty/common/widgets/tiles/custom_tile_widget.dart';
 
 class EpisodesWithCharactersWidget extends StatefulWidget {
   final int characterId;

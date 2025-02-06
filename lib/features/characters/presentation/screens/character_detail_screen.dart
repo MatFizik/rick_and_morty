@@ -15,7 +15,7 @@ import 'package:rick_and_morty/server/dio_client.dart';
 import 'package:rick_and_morty/features/episodes/presentation/widgets/episode_with_character_widget.dart';
 import 'package:rick_and_morty/features/episodes/presentation/screens/episodes_main_screen.dart';
 import 'package:rick_and_morty/features/locations/presentation/screens/location_detail_screen.dart';
-import 'package:rick_and_morty/common/widgets/custom_mini_tile_widget.dart';
+import 'package:rick_and_morty/common/widgets/tiles/custom_mini_tile_widget.dart';
 
 class CharacterDetailScreen extends StatefulWidget {
   final Character character;

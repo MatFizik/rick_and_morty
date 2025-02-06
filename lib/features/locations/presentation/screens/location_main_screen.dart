@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:rick_and_morty/common/image_assets.dart';
+import 'package:rick_and_morty/common/constants/image_assets.dart';
 import 'package:rick_and_morty/common/models/filters_model.dart';
 import 'package:rick_and_morty/features/episodes/presentation/logic/bloc/episodes_bloc.dart';
 import 'package:rick_and_morty/features/episodes/domain/repositories/impl/episodes_repository_impl.dart';
@@ -15,7 +15,7 @@ import 'package:rick_and_morty/features/locations/data/services/locations_servic
 import 'package:rick_and_morty/server/dio_client.dart';
 import 'package:rick_and_morty/features/locations/presentation/screens/location_detail_screen.dart';
 import 'package:rick_and_morty/features/locations/presentation/screens/location_filters_screen.dart';
-import 'package:rick_and_morty/common/widgets/custom_big_card_widget.dart';
+import 'package:rick_and_morty/common/widgets/cards/custom_big_card_widget.dart';
 import 'package:rick_and_morty/common/widgets/custom_shimmer_widget.dart';
 import 'package:rick_and_morty/common/widgets/custom_search_textfield.dart';
 

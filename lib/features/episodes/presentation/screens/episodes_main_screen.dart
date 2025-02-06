@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/common/theme/app_colors.dart';
-import 'package:rick_and_morty/common/image_assets.dart';
+import 'package:rick_and_morty/common/constants/image_assets.dart';
 import 'package:rick_and_morty/features/characters/presentation/logic/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/features/characters/domain/repositories/impl/characters_repository_impl.dart';
 import 'package:rick_and_morty/features/characters/data/services/characters_service.dart';
@@ -13,9 +13,9 @@ import 'package:rick_and_morty/features/episodes/domain/repositories/impl/episod
 import 'package:rick_and_morty/features/episodes/data/services/episodes_services.dart';
 import 'package:rick_and_morty/server/dio_client.dart';
 import 'package:rick_and_morty/features/episodes/presentation/screens/episode_detail_screen.dart';
-import 'package:rick_and_morty/common/widgets/custom_card_widget.dart';
+import 'package:rick_and_morty/common/widgets/cards/custom_card_widget.dart';
 import 'package:rick_and_morty/common/widgets/custom_shimmer_widget.dart';
-import 'package:rick_and_morty/common/widgets/custom_tile_widget.dart';
+import 'package:rick_and_morty/common/widgets/tiles/custom_tile_widget.dart';
 import 'package:rick_and_morty/common/widgets/custom_search_textfield.dart';
 import 'package:rick_and_morty/common/widgets/empty_state_widget.dart';
 

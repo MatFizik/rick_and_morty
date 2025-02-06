@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/common/image_assets.dart';
+import 'package:rick_and_morty/common/constants/image_assets.dart';
 import 'package:rick_and_morty/features/characters/presentation/screens/characters_main_screen.dart';
 import 'package:rick_and_morty/features/episodes/presentation/screens/episodes_main_screen.dart';
 import 'package:rick_and_morty/features/locations/presentation/screens/location_main_screen.dart';
