@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:rick_and_morty/common/theme/app_colors.dart';
 
 class CustomCardWidget extends StatefulWidget {
@@ -61,10 +60,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
             Text(
               widget.title,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 16,
-                color: AppColors.textPrimary,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge,
               overflow: TextOverflow.ellipsis,
             ),
             Row(
@@ -74,9 +70,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                   child: Text(
                     textAlign: TextAlign.center,
                     widget.description,
-                    style: const TextStyle(
-                      color: AppColors.textTertiary,
-                    ),
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
               ],

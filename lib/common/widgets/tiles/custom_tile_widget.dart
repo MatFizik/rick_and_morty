@@ -93,16 +93,11 @@ class _CustomTileWidgetState extends State<CustomTileWidget> {
                         ),
                         Text(
                           widget.title,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: AppColors.textPrimary,
-                          ),
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                         Text(
                           widget.description,
-                          style: const TextStyle(
-                            color: AppColors.textTertiary,
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall,
                         )
                       ],
                     ),

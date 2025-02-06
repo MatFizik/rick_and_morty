@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/common/theme/app_colors.dart';
 import 'package:rick_and_morty/common/models/filters_model.dart';
 import 'package:rick_and_morty/common/widgets/custom_checkbox.dart';
 
@@ -21,16 +20,11 @@ class _CharactersFiltersScreenState extends State<CharactersFiltersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.darkBgSecondary,
-        title: const Text(
-          'Filters',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text('Filters'),
         leading: InkWell(
           onTap: () => Navigator.of(context).pop(),
           child: const Icon(
             Icons.arrow_back,
-            color: Colors.white,
           ),
         ),
       ),

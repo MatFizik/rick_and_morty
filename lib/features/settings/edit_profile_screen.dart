@@ -18,15 +18,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         leading: Navigator.of(context).canPop()
             ? IconButton(
                 icon: const Icon(Icons.arrow_back),
-                color: Colors.white,
                 onPressed: () => Navigator.of(context).maybePop(),
               )
             : null,
         title: const Text(
           'Edit Profile',
-          style: TextStyle(
-            color: AppColors.textPrimary,
-          ),
         ),
       ),
       body: Padding(
@@ -58,8 +54,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
             const SizedBox(height: 36),
             const Divider(
-              color: AppColors.darkBgSecondary,
-              thickness: 1,
+              thickness: 2,
             ),
             const SizedBox(height: 36),
             const Align(

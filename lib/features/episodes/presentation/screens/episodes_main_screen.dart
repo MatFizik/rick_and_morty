@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rick_and_morty/common/theme/app_colors.dart';
 import 'package:rick_and_morty/common/constants/image_assets.dart';
 import 'package:rick_and_morty/features/characters/presentation/logic/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/features/characters/domain/repositories/impl/characters_repository_impl.dart';
@@ -190,12 +189,6 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                                 ? TabBar(
                                     isScrollable: true,
                                     tabAlignment: TabAlignment.start,
-                                    labelColor: AppColors.textPrimary,
-                                    indicatorColor: AppColors.textPrimary,
-                                    unselectedLabelColor:
-                                        AppColors.textTertiary,
-                                    overlayColor: WidgetStateProperty.all(
-                                        AppColors.textPrimary.withOpacity(0.1)),
                                     dividerHeight: 0,
                                     labelPadding: const EdgeInsets.only(
                                         bottom: 5, right: 18),

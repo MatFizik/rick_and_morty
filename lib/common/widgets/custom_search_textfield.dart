@@ -39,19 +39,13 @@ class _SearchTextfieldState extends State<CustomSearchTextfield> {
       padding: const WidgetStatePropertyAll(
         EdgeInsets.only(left: 14),
       ),
-      hintStyle: const WidgetStatePropertyAll(
-        TextStyle(color: AppColors.textTertiary),
-      ),
-      shadowColor: null,
-      elevation: const WidgetStatePropertyAll(0),
-      backgroundColor: const WidgetStatePropertyAll(AppColors.darkBgSecondary),
       leading: const Icon(Icons.search, color: AppColors.textTertiary),
       trailing: widget.filter
           ? [
               Container(
                 height: 24,
                 width: 1,
-                color: Colors.white.withOpacity(0.1),
+                color: Theme.of(context).dividerColor,
                 margin: const EdgeInsets.symmetric(horizontal: 8),
               ),
               IconButton(

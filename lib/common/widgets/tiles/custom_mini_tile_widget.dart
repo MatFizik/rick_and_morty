@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/common/theme/app_colors.dart';
 
 class CustomMiniTileWidget extends StatefulWidget {
   final String title;
@@ -45,12 +44,11 @@ class _CustomMiniTileWidgetState extends State<CustomMiniTileWidget> {
                 children: [
                   Text(
                     widget.title,
-                    style: const TextStyle(
-                        fontSize: 12, color: AppColors.textTertiary),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Text(
                     widget.subtitle,
-                    style: const TextStyle(fontSize: 14, color: Colors.white),
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ],
               ),
