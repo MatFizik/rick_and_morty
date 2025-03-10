@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rick_and_morty/common/theme/app_theme.dart';
-import 'package:rick_and_morty/common/theme/bloc/cubit/theme_cubit.dart';
+import 'package:rick_and_morty/bloc/cubit/theme_cubit.dart';
 import 'package:rick_and_morty/features/characters/presentation/logic/bloc/characters_bloc.dart';
 import 'package:rick_and_morty/features/characters/domain/repositories/impl/characters_repository_impl.dart';
 import 'package:rick_and_morty/features/characters/data/services/characters_service.dart';
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => ThemeCubit(),
-        )
+        ),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {

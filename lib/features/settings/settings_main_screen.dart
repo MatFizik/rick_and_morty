@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/common/constants/image_assets.dart';
-import 'package:rick_and_morty/common/theme/bloc/cubit/theme_cubit.dart';
+import 'package:rick_and_morty/bloc/cubit/theme_cubit.dart';
 import 'package:rick_and_morty/common/widgets/tiles/custom_mini_tile_widget.dart';
 import 'package:rick_and_morty/common/widgets/outline_button_widget.dart';
 import 'package:rick_and_morty/features/settings/edit_profile_screen.dart';
