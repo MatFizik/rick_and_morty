@@ -9,6 +9,8 @@ class ImageAssets {
   static const String filterIcon = '${_basePath}filter.png';
   static const String removeFiltersIcon = '${_basePath}removeFilters.png';
   static const String searchIcon = '${_basePath}searchIcon.png';
+  static const String paletteDarkIcon = '${_basePath}paletteDarkIcon.png';
+  static const String paletteWhiteIcon = '${_basePath}paletteWhiteIcon.png';
 
   static const String characterIcon = '${_basePath}characterIcon.png';
   static const String locationIcon = '${_basePath}locationIcon.png';

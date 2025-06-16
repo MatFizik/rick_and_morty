@@ -22,6 +22,9 @@ class _CustomMiniTileWidgetState extends State<CustomMiniTileWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
       onTap: () {
         if (widget.onTap != null) {
           widget.onTap!.call();
@@ -35,7 +38,7 @@ class _CustomMiniTileWidgetState extends State<CustomMiniTileWidget> {
             children: [
               if (widget.trailing != null)
                 Padding(
-                  padding: const EdgeInsets.only(right: 5),
+                  padding: const EdgeInsets.only(right: 16),
                   child: widget.trailing!,
                 ),
               Column(

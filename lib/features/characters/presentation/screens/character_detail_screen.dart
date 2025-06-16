@@ -169,10 +169,13 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                       ),
                       const SizedBox(height: 24),
                       CustomMiniTileWidget(
-                          title: 'Location',
-                          subtitle: widget.character.location.name,
-                          onTap: () => goToLocation(
-                              context, widget.character.location.url)),
+                        title: 'Location',
+                        subtitle: widget.character.location.name,
+                        onTap: () => goToLocation(
+                          context,
+                          widget.character.location.url,
+                        ),
+                      ),
                       const SizedBox(height: 36),
                       const Divider(thickness: 1),
                       const SizedBox(height: 36),

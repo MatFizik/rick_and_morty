@@ -4,11 +4,13 @@ import 'package:rick_and_morty/common/theme/app_colors.dart';
 class OutlineButtonWidget extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
+  final OutlineButtonType type;
 
   const OutlineButtonWidget({
     super.key,
     required this.title,
     required this.onPressed,
+    this.type = OutlineButtonType.primary,
   });
 
   @override
@@ -24,17 +26,28 @@ class OutlineButtonWidget extends StatelessWidget {
             ),
           ),
           side: WidgetStateProperty.all(
-            const BorderSide(color: AppColors.blue),
+            BorderSide(
+              color: type == OutlineButtonType.primary
+                  ? AppColors.blue
+                  : AppColors.red.withOpacity(0.7),
+            ),
           ),
         ),
         child: Text(
           title,
-          style: const TextStyle(
-            color: AppColors.blue,
+          style: TextStyle(
+            color: type == OutlineButtonType.primary
+                ? AppColors.blue
+                : AppColors.red.withOpacity(0.7),
             fontSize: 16.0,
           ),
         ),
       ),
     );
   }
+}
+
+enum OutlineButtonType {
+  primary,
+  alert,
 }

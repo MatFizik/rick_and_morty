@@ -82,6 +82,11 @@ class _SettingsMainScreenState extends State<SettingsMainScreen> {
                 CustomMiniTileWidget(
                   title: 'Тема оформления',
                   subtitle: isDarkTheme ? 'Темная тема' : 'Светлая тема',
+                  trailing: Image.asset(
+                    isDarkTheme
+                        ? ImageAssets.paletteWhiteIcon
+                        : ImageAssets.paletteDarkIcon,
+                  ),
                   onTap: () {
                     context.read<ThemeCubit>().toggleTheme(isDarkTheme);
                   },
