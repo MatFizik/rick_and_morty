@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty/common/theme/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
 
+Color getColor(BuildContext context, bool isPrimary) {
+  if (isPrimary) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? AppColors.darkBgPrimary
+        : AppColors.lightBgPrimary;
+  } else {
+    return Theme.of(context).brightness == Brightness.dark
+        ? AppColors.darkBgSecondary
+        : AppColors.textSecondary.withOpacity(0.1);
+  }
+}
+
 class ShimmerGridWidget extends StatelessWidget {
   const ShimmerGridWidget({super.key});
 
@@ -129,8 +141,8 @@ class ShimmerTextWidget extends StatelessWidget {
     return Column(
       children: [
         Shimmer.fromColors(
-          baseColor: AppColors.darkBgPrimary,
-          highlightColor: AppColors.darkBgSecondary,
+          baseColor: getColor(context, true),
+          highlightColor: getColor(context, false),
           child: Container(
             height: height,
             width: width,
@@ -160,8 +172,8 @@ class ShimmerImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: AppColors.darkBgPrimary,
-      highlightColor: AppColors.darkBgSecondary,
+      baseColor: getColor(context, true),
+      highlightColor: getColor(context, false),
       child: Container(
         height: height,
         width: width,
@@ -184,8 +196,8 @@ class ShimmerBigCardWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Shimmer.fromColors(
-          baseColor: AppColors.darkBgPrimary,
-          highlightColor: AppColors.darkBgSecondary,
+          baseColor: getColor(context, true),
+          highlightColor: getColor(context, false),
           child: Container(
             height: 150,
             decoration: BoxDecoration(
