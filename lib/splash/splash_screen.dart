@@ -49,23 +49,21 @@ class _SplashScreenState extends State<SplashScreen>
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          /// **Фон на весь экран**
           Positioned.fill(
             child: Image.asset(
               ImageAssets.background,
-              fit: BoxFit.cover, // Обрезает и заполняет весь экран
+              fit: BoxFit.cover,
             ),
           ),
-
-          /// **Анимация на весь экран**
           Positioned.fill(
+            top: 200,
             child: Center(
               child: Lottie.asset(
                 'assets/splash_anim.json',
                 controller: _controller,
                 width: double.infinity,
                 height: double.infinity,
-                fit: BoxFit.contain, // Анимация центрируется
+                fit: BoxFit.contain,
               ),
             ),
           ),

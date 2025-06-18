@@ -31,10 +31,14 @@ class CustomTileWidget extends StatefulWidget {
 
 class _CustomTileWidgetState extends State<CustomTileWidget> {
   bool _isNetworkImage(String path) {
-    Uri? uri = Uri.tryParse(path);
-    return uri != null &&
-        uri.hasScheme &&
-        (uri.scheme == 'http' || uri.scheme == 'https');
+    try {
+      Uri? uri = Uri.tryParse(path);
+      return uri != null &&
+          uri.hasScheme &&
+          (uri.scheme == 'http' || uri.scheme == 'https');
+    } catch (e) {
+      return false;
+    }
   }
 
   @override
@@ -55,24 +59,29 @@ class _CustomTileWidgetState extends State<CustomTileWidget> {
                   borderRadius: widget.imageCircle
                       ? BorderRadius.circular(100)
                       : BorderRadius.circular(10),
-                  child: _isNetworkImage(widget.imgPath)
-                      ? CachedNetworkImage(
-                          imageUrl: widget.imgPath,
+                  child: widget.imgPath != ''
+                      ? _isNetworkImage(widget.imgPath)
+                          ? CachedNetworkImage(
+                              imageUrl: widget.imgPath,
+                              width: 74,
+                              height: 74,
+                              placeholder: (context, url) =>
+                                  const ShimmerImageWidget(
+                                width: 74,
+                                height: 74,
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            )
+                          : Image.asset(
+                              widget.imgPath,
+                              width: 74,
+                              height: 74,
+                              fit: BoxFit.cover,
+                            )
+                      : const ShimmerImageWidget(
                           width: 74,
                           height: 74,
-                          placeholder: (context, url) =>
-                              const ShimmerImageWidget(
-                            width: 74,
-                            height: 74,
-                          ),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                        )
-                      : Image.asset(
-                          widget.imgPath,
-                          width: 74,
-                          height: 74,
-                          fit: BoxFit.cover,
                         ),
                 ),
                 Flexible(
