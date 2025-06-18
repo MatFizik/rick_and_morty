@@ -4,10 +4,13 @@ class AppColors {
   // Светлая тема
   static const lightBgPrimary = Color(0xFFFCFCFC);
   static const lightBgSecondary = Color(0xFFFFFFFF);
+  static const lightBgThird = Color(0xFFF2F2F2);
 
   static const textPrimaryLight = Color(0xFF000000);
   static const textSecondaryLight = Color(0xFF0B1E2D);
   static const textTertiaryLight = Color(0xFF828282);
+
+  static const lightDividerColor = Color(0xFFBDBDBD);
 
   // Темная тема
   static const darkBgPrimary = Color(0xFF0B1E2D);

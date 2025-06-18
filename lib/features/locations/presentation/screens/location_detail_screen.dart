@@ -82,7 +82,10 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                     Text(
                       textAlign: TextAlign.left,
                       widget.locations?.name ?? '',
-                      style: const TextStyle(fontSize: 34, color: Colors.white),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(fontSize: 34),
                     ),
                     Text(
                       '${widget.locations?.type} * ${widget.locations?.dimension}',
@@ -91,10 +94,10 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    const Text(
+                    Text(
                       'Зигерионцы помещают Джерри и Рика в симуляцию, чтобы узнать секрет изготовления концен-трирован- ной темной материи.',
                       textAlign: TextAlign.left,
-                      style: TextStyle(fontSize: 13, color: Colors.white),
+                      style: Theme.of(context).textTheme.labelLarge,
                     ),
                     const SizedBox(height: 36),
                     const Divider(thickness: 1),
@@ -102,12 +105,9 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'Characters',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                          ),
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                         InkWell(
                           onTap: () {

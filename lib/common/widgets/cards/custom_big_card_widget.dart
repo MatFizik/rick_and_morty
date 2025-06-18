@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/common/theme/app_colors.dart';
 
 class CustomBigCardWidget extends StatefulWidget {
   final String title;
@@ -45,7 +44,7 @@ class _CustomBigCardWidgetState extends State<CustomBigCardWidget> {
         }
       },
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(12),
         child: Container(
           height: 218,
           decoration: BoxDecoration(
@@ -59,8 +58,10 @@ class _CustomBigCardWidgetState extends State<CustomBigCardWidget> {
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).highlightColor,
+              ),
               width: double.infinity,
-              color: AppColors.darkBgSecondary,
               height: 68,
               child: Padding(
                 padding: const EdgeInsets.only(top: 12, left: 16),
@@ -70,10 +71,7 @@ class _CustomBigCardWidgetState extends State<CustomBigCardWidget> {
                   children: [
                     Text(
                       widget.title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge,
                       textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
                     ),

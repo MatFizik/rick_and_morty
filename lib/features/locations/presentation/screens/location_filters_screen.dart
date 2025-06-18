@@ -32,16 +32,13 @@ class _CharactersFiltersScreenState extends State<LocationFiltersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.darkBgSecondary,
         title: const Text(
           'Filters',
-          style: TextStyle(color: Colors.white),
         ),
         leading: InkWell(
           onTap: () => Navigator.of(context).pop(),
           child: const Icon(
             Icons.arrow_back,
-            color: Colors.white,
           ),
         ),
       ),

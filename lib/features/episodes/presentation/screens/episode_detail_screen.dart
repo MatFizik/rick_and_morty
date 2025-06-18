@@ -98,7 +98,9 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
               Text(
                 textAlign: TextAlign.center,
                 widget.episode.name ?? '',
-                style: const TextStyle(fontSize: 34, color: Colors.white),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontSize: 34,
+                    ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -121,12 +123,12 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
                 ],
               ),
               const SizedBox(height: 24),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
                   'Зигерионцы помещают Джерри и Рика в симуляцию, чтобы узнать секрет изготовления концен-трирован- ной темной материи.',
                   textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 13, color: Colors.white),
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ),
               const SizedBox(height: 30),
@@ -144,12 +146,9 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'Characters',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                          ),
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                         InkWell(
                           onTap: () {

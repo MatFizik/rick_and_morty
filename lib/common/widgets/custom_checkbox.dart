@@ -43,7 +43,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
           ),
           Text(
             widget.title,
-            style: const TextStyle(color: AppColors.textPrimary, fontSize: 16),
+            style: Theme.of(context).textTheme.bodyLarge,
           )
         ],
       ),

@@ -136,7 +136,7 @@ class _CharactersMainScreenState extends State<CharactersMainScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          leading: Navigator.of(context).canPop()
+          leading: !(ModalRoute.of(context)?.isFirst ?? true)
               ? IconButton(
                   icon: const Icon(Icons.arrow_back),
                   color: Colors.white,

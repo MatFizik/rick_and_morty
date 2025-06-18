@@ -161,7 +161,7 @@ class _LocationsMainScreenState extends State<LocationMainScreen> {
                   if (locations == null || isSearch) {
                     locations = list;
                     isLoadingMore = false;
-                    _maxPage = list.info!.pages!;
+                    _maxPage = list.info?.pages ?? 1;
                     isSearch = false;
                   }
                 },
@@ -178,7 +178,7 @@ class _LocationsMainScreenState extends State<LocationMainScreen> {
                     );
                   },
                   errorGetLocations: (err) {
-                    if (err.response.statusCode == 404) {
+                    if (err.response?.statusCode == 404) {
                       return Center(
                         child: Column(
                           children: [

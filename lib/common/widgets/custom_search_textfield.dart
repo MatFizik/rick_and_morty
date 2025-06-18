@@ -22,19 +22,27 @@ class CustomSearchTextfield extends StatefulWidget {
 
 class _SearchTextfieldState extends State<CustomSearchTextfield> {
   Timer? _debounce;
+  final FocusNode _focusNode = FocusNode();
 
   void _onSearchChanged(String value) {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
-
     _debounce = Timer(const Duration(milliseconds: 300), () {
-      widget.onChanged!(value);
+      widget.onChanged?.call(value);
     });
+  }
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return SearchBar(
-      onChanged: (value) => _onSearchChanged(value),
+      focusNode: _focusNode,
+      onChanged: _onSearchChanged,
       hintText: 'Search...',
       padding: const WidgetStatePropertyAll(
         EdgeInsets.only(left: 14),
@@ -51,7 +59,10 @@ class _SearchTextfieldState extends State<CustomSearchTextfield> {
               IconButton(
                 alignment: Alignment.centerRight,
                 padding: const EdgeInsets.only(right: 24),
-                onPressed: () => widget.onLeading?.call(),
+                onPressed: () {
+                  _focusNode.unfocus();
+                  widget.onLeading?.call();
+                },
                 icon: Image.asset(
                   ImageAssets.filterIcon,
                   width: 24,

@@ -36,10 +36,10 @@ class AppTheme {
       iconTheme: IconThemeData(color: AppColors.textPrimaryLight),
       surfaceTintColor: Colors.transparent,
     ),
-    dividerColor: AppColors.lightBgPrimary,
+    dividerColor: AppColors.lightDividerColor,
     dividerTheme: const DividerThemeData(
-      color: AppColors.lightBgPrimary,
-      thickness: 2,
+      color: AppColors.lightDividerColor,
+      thickness: 1,
     ),
     tabBarTheme: TabBarTheme(
       labelColor: AppColors.textPrimaryLight,
@@ -55,8 +55,7 @@ class AppTheme {
       ),
       shadowColor: null,
       elevation: WidgetStatePropertyAll(0),
-      backgroundColor: WidgetStatePropertyAll(AppColors.lightBgSecondary),
-      //leading: Icon(Icons.search, color: AppColors.textTertiaryLight),
+      backgroundColor: WidgetStatePropertyAll(AppColors.lightBgThird),
     ),
   );
 
@@ -91,9 +90,9 @@ class AppTheme {
       titleTextStyle: TextStyle(color: AppColors.textPrimary, fontSize: 20),
       iconTheme: IconThemeData(color: AppColors.textPrimary),
     ),
-    dividerColor: AppColors.darkBgSecondary,
-    dividerTheme: const DividerThemeData(
-      color: AppColors.darkBgSecondary,
+    dividerColor: AppColors.lightBgPrimary.withOpacity(0.1),
+    dividerTheme: DividerThemeData(
+      color: AppColors.lightBgPrimary.withOpacity(0.1),
       thickness: 1,
     ),
     tabBarTheme: TabBarTheme(

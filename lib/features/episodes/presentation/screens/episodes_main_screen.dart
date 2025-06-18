@@ -190,6 +190,8 @@ class _EpisodesMainScreenState extends State<EpisodesMainScreen> {
                                     isScrollable: true,
                                     tabAlignment: TabAlignment.start,
                                     dividerHeight: 0,
+                                    overlayColor: const WidgetStatePropertyAll(
+                                        Colors.transparent),
                                     labelPadding: const EdgeInsets.only(
                                         bottom: 5, right: 18),
                                     onTap: (value) {

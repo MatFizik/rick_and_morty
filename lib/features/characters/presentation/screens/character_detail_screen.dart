@@ -120,7 +120,10 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                 Text(
                   textAlign: TextAlign.center,
                   widget.character.name,
-                  style: const TextStyle(fontSize: 34, color: Colors.white),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontSize: 34),
                 ),
                 Text(
                   widget.character.status.toUpperCase(),
@@ -132,12 +135,12 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
                     'Описание какой этот персонаж мощный либо просто пару слов о его жизни',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 13, color: Colors.white),
+                    style: Theme.of(context).textTheme.labelLarge,
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -182,12 +185,9 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             'Episodes',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                            ),
+                            style: Theme.of(context).textTheme.titleLarge,
                           ),
                           InkWell(
                             onTap: () => Navigator.of(context).push(
@@ -202,12 +202,9 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                                 ),
                               ),
                             ),
-                            child: const Text(
+                            child: Text(
                               'All episodes',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: AppColors.textTertiary,
-                              ),
+                              style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ),
                         ],
