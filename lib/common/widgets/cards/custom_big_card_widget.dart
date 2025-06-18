@@ -43,48 +43,60 @@ class _CustomBigCardWidgetState extends State<CustomBigCardWidget> {
           widget.onTap!.call();
         }
       },
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Container(
-          height: 218,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: _isNetworkImage(widget.imgPath)
-                  ? CachedNetworkImageProvider(widget.imgPath)
-                  : AssetImage(widget.imgPath),
-              fit: BoxFit.cover,
-            ),
+      child: Container(
+        height: 218,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: Theme.of(context).dividerColor,
           ),
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).highlightColor,
-              ),
-              width: double.infinity,
-              height: 68,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 12, left: 16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.title,
-                      style: Theme.of(context).textTheme.titleLarge,
-                      textAlign: TextAlign.start,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      '${widget.status}, ${widget.description}',
-                      style: const TextStyle(fontSize: 12),
-                      textAlign: TextAlign.start,
-                      overflow: TextOverflow.ellipsis,
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              _isNetworkImage(widget.imgPath)
+                  ? CachedNetworkImage(
+                      imageUrl: widget.imgPath,
+                      fit: BoxFit.cover,
                     )
-                  ],
+                  : Image.asset(
+                      widget.imgPath,
+                      fit: BoxFit.cover,
+                    ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).highlightColor,
+                  ),
+                  width: double.infinity,
+                  height: 68,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 12, left: 16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.title,
+                          style: Theme.of(context).textTheme.titleLarge,
+                          textAlign: TextAlign.start,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Text(
+                          '${widget.status}, ${widget.description}',
+                          style: const TextStyle(fontSize: 12),
+                          textAlign: TextAlign.start,
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
         ),
       ),
