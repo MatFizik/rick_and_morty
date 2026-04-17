@@ -1,16 +1,76 @@
-# rick_and_morty
+# Rick and Morty Flutter App
 
-A new Flutter project.
+Flutter-приложение по вселенной **Rick and Morty**, использующее публичное **Rick and Morty API** для получения информации о персонажах, локациях и эпизодах.
 
-## Getting Started
+## О проекте
 
-This project is a starting point for a Flutter application.
+Это pet-project, созданный для демонстрации современной Flutter-архитектуры и работы с REST API.  
+Приложение позволяет просматривать данные по основным сущностям вселенной Rick and Morty:
 
-A few resources to get you started if this is your first Flutter project:
+- Персонажи
+- Локации
+- Эпизоды
+- Настройки приложения
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+В качестве источника данных используется [Rick and Morty API](https://rickandmortyapi.com).
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Возможности
+
+- Просмотр списка персонажей
+- Просмотр списка локаций
+- Просмотр списка эпизодов
+- Навигация через `BottomNavigationBar`
+- Светлая и тёмная тема
+- Загрузка данных с сервера
+- Отображение состояний загрузки
+- Масштабируемая feature-based архитектура
+
+## Стек технологий
+
+Проект построен с использованием следующих технологий:
+
+### Основной стек
+- **Flutter**
+- **Dart**
+
+### State Management
+- **BLoC / Cubit**
+- **flutter_bloc**
+
+### Сетевой слой
+- **Dio**
+- **Retrofit**
+- **json_serializable**
+- **json_annotation**
+
+### Генерация кода
+- **Freezed**
+- **build_runner**
+- **injectable / injectable_generator**
+
+### UI / UX
+- **cached_network_image**
+- **flutter_svg**
+- **shimmer**
+- **lottie**
+- **loader_overlay**
+
+## Архитектура
+
+Проект организован по feature-based подходу.  
+Каждая функциональность вынесена в отдельный модуль, что упрощает поддержку и расширение приложения.
+
+Примерно структура выглядит так:
+
+```bash
+lib/
+├── common/                 # Общие компоненты, тема, константы
+├── features/
+│   ├── characters/         # Персонажи
+│   ├── episodes/           # Эпизоды
+│   ├── locations/          # Локации
+│   └── settings/           # Настройки
+├── server/                 # Dio client / сетевой слой
+├── splash/                 # Splash screen
+├── main.dart
+└── main_navigation.dart
